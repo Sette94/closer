@@ -4,8 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-
-[dev-packages]
+Faker = "*"
+ipdb = "0.13.9"
+flask = "*"
+flask-sqlalchemy = "*"
+Werkzeug = "2.2.2"
+flask-migrate = "*"
+sqlalchemy-serializer = "*"
+flask-restful = "*"
+flask-cors = "*"
 
 [requires]
-python_version = "3.8"
+python_full_version = "3.8.13"
