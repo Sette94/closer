@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from sqlalchemy_serializer import SerializerMixin
+from sqlalchemy.orm import validates
 from sqlalchemy.dialects.postgresql import JSON
 
 
@@ -23,6 +24,13 @@ class Users(db.Model, SerializerMixin):
 
     serialize_rules = ('-attended_games.users', )
 
+    @validates('username', 'password')
+    def non_null(self, key, value):
+        if value:
+            return value
+        else:
+            raise ValueError
+
     def __repr__(self):
         return f'<User Info {self.user_id}, {self.username}, {self.password}, {self.first_year}>'
 
@@ -40,6 +48,13 @@ class Games(db.Model, SerializerMixin):
 
     serialize_rules = ('-attended_games.games', '-venues.games')
 
+    @validates('date', 'venue_id', 'game_data')
+    def non_null(self, key, value):
+        if value:
+            return value
+        else:
+            raise ValueError
+
     def __repr__(self):
         return f'<Game Info {self.gamePk}, {self.user_ids}, {self.game_data}>'
 
@@ -56,6 +71,13 @@ class UserGames(db.Model, SerializerMixin):
 
     serialize_rules = ('-users.attended_games', '-games.attended_games',)
 
+    @validates('gamePk', 'user_id')
+    def non_null(self, key, value):
+        if value:
+            return value
+        else:
+            raise ValueError
+
 
 class Ballparks(db.Model, SerializerMixin):
     __tablename__ = "ballparks"
@@ -67,3 +89,10 @@ class Ballparks(db.Model, SerializerMixin):
     games = db.relationship('Games', back_populates="venues")
 
     serialize_rules = ('-games.venues', )
+
+    @validates('venue_id', 'venue_name')
+    def non_null(self, key, value):
+        if value:
+            return value
+        else:
+            raise ValueError
