@@ -16591,7 +16591,6 @@ if __name__ == "__main__":
             game_9, game_10, game_11])
         db.session.commit()
 
-
         print("Creating attended game")
 
         attended_game_1 = UserGames(
@@ -16648,8 +16647,6 @@ if __name__ == "__main__":
             gamePk=718610,
             user_id=1
         )
-
-
 
         db.session.add_all([
             attended_game_1, attended_game_2, attended_game_3, attended_game_4, attended_game_5, attended_game_6, attended_game_7, attended_game_8,

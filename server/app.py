@@ -27,103 +27,88 @@ def index():
 
 
 @app.route("/users", methods=['GET', 'POST'])
-def users():
-    all_users = Users.query.all()
-    if all_users:
-        if request.method == 'GET':
-            response = make_response(
-
-                [user.to_dict(rules=('-attended_games',))
-                 for user in all_users]
-            )
-        elif request.method == 'POST':
-            try:
-                form_data = request.get_json()
-
-                new_user = Users(
-                    username=form_data.get('username'),
-                    password=form_data.get('password')
-                )
-
-                db.session.add(new_user)
-                db.session.commit()
-
-                response = make_response(
-                    {'response': "New User Created"},
-                    201
-                )
-
-            except:
-                response = make_response(
-                    {'response': "Failed to create new user"},
-                    404
-                )
-    else:
-        response = make_response(
-            {'response': "No users to be found"},
-            404
-        )
-
-    return response
-
-
 @app.route("/users/<int:id>", methods=['GET', 'DELETE', 'PATCH'])
-def user(id):
-    focus_user = Users.query.filter(Users.user_id == id).first()
-    if focus_user:
-        if request.method == 'GET':
-            response = make_response(
-                focus_user.to_dict()
+def users(id=None):
+    if request.method == 'GET':
+        if id is None:
+            # Handle GET for all users
+            all_users = Users.query.all()
+            response_data = [user.to_dict(
+                rules=('-attended_games',)) for user in all_users]
+        else:
+            # Handle GET for a specific user
+            focus_user = Users.query.filter(Users.user_id == id).first()
+            response_data = focus_user.to_dict(rules=('-attended_games',)) if focus_user else {
+                'response': "User not found"}
+    elif request.method == 'POST':
+        # Handle POST for creating a new user
+        try:
+            form_data = request.get_json()
+
+            new_user = Users(
+                username=form_data.get('username'),
+                password=form_data.get('password')
             )
-        elif request.method == 'DELETE':
-            try:
-                associated_games = UserGames.query.filter(
-                    UserGames.user_id == id).all()
 
-                for delete_asset in associated_games:
-                    db.session.delete(delete_asset)
+            db.session.add(new_user)
+            db.session.commit()
 
-                db.session.delete(focus_user)
-                db.session.commit()
+            response_data = {'response': "New User Created"}
+        except:
+            response_data = {'response': "Failed to create new user"}
+    elif request.method == 'DELETE':
+        # Handle DELETE for deleting a user
+        try:
+            focus_user = Users.query.filter(Users.user_id == id).first()
+            associated_games = UserGames.query.filter(
+                UserGames.user_id == id).all()
 
-                response = make_response(
-                    {'response': "User Delete"},
-                    201
-                )
+            for delete_asset in associated_games:
+                db.session.delete(delete_asset)
 
-            except:
-                response = make_response(
-                    {'response': "Failed to delete user"},
-                    404
-                )
+            db.session.delete(focus_user)
+            db.session.commit()
 
-        elif request.method == 'PATCH':
-            try:
-                form_data = request.get_json()
+            response_data = {'response': "User Deleted"}
+        except:
+            response_data = {'response': "Failed to delete user"}
+    elif request.method == 'PATCH':
+        # Handle PATCH for updating user information
+        try:
+            focus_user = Users.query.filter(Users.user_id == id).first()
+            form_data = request.get_json()
 
-                for attr in form_data:
-                    setattr(focus_user, attr, form_data[attr])
+            for attr in form_data:
+                setattr(focus_user, attr, form_data[attr])
 
-                db.session.add(focus_user)
-                db.session.commit()
+            db.session.add(focus_user)
+            db.session.commit()
 
-                response = make_response(
-                    {'response': "User Information Updated"},
-                    201
-                )
+            response_data = {'response': "User Information Updated"}
+        except:
+            response_data = {'response': "Failed to update user information"}
 
-            except:
-                response = make_response(
-                    {'response': "Failed to patch user"},
-                    404
-                )
     else:
-        response = make_response(
-            {'response': "No users to be found"},
-            404
-        )
+        response_data = {'response': "Invalid HTTP method"}
 
-    return response
+    return make_response(response_data)
+
+
+@app.route("/users/<int:id>/games", methods=['GET'])
+def user_games(id):
+    user_info = Users.query.filter(Users.user_id == id).first()
+
+    if user_info:
+        if request.method == 'GET':
+
+            response_data = user_info.to_dict(
+                only=('attended_games.games.game_data.dates.games.homeRuns.matchup',
+                      '-attended_games.games.game_data.dates.games.homeRuns.matchup.batter.stats'))
+
+    else:
+        response_data = {'response': "User not found"}
+
+    return make_response(response_data)
 
 
 if __name__ == '__main__':

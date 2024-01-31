@@ -32,7 +32,7 @@ class Users(db.Model, SerializerMixin):
             raise ValueError
 
     def __repr__(self):
-        return f'<User Info {self.user_id}, {self.username}, {self.password}, {self.first_year}>'
+        return f'<User  {self.attended_games}, {self.user_id}, {self.username}, {self.password}, {self.first_year}>'
 
 
 class Games(db.Model, SerializerMixin):
