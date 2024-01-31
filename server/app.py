@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_migrate import Migrate
 from flask import Flask, make_response, request
-
+from config import Helpers
 
 from models import db, Users, Games, UserGames, Ballparks
 
@@ -94,16 +94,60 @@ def users(id=None):
     return make_response(response_data)
 
 
-@app.route("/users/<int:id>/games", methods=['GET'])
-def user_games(id):
+@app.route("/users/<int:id>/homeruns", methods=['GET'])
+@app.route("/users/<int:id>/homeruns/top/<int:top_number>", methods=['GET'])
+def user_homeruns(id, top_number=None):
     user_info = Users.query.filter(Users.user_id == id).first()
 
     if user_info:
         if request.method == 'GET':
 
-            response_data = user_info.to_dict(
-                only=('attended_games.games.game_data.dates.games.homeRuns.matchup',
-                      '-attended_games.games.game_data.dates.games.homeRuns.matchup.batter.stats'))
+            # # only is used to pull specific, cut down
+            # homerun_dict = user_info.to_dict(
+            #     only=('attended_games.games.game_data.dates.games.homeRuns.matchup',
+            #           '-attended_games.games.game_data.dates.games.homeRuns.matchup.batter.stats'))["attended_games"]
+
+            homerun_hitters = []
+            for items in user_info.to_dict()["attended_games"]:
+                homerun_list = (items['games']['game_data']['dates']
+                                [0]['games'][0]['homeRuns'])
+                for homeruns in homerun_list:
+                    homerun_hitters.append(
+                        homeruns['matchup']['batter']['fullName'])
+
+            if top_number:
+                response_data = Helpers.top_filter(homerun_hitters, top_number)
+            else:
+                response_data = Helpers.count_occurrences(homerun_hitters)
+
+    else:
+        response_data = {'response': "User not found"}
+
+    return make_response(response_data)
+
+
+@app.route("/users/<int:id>/players", methods=['GET'])
+@app.route("/users/<int:id>/players/top/<int:top_number>", methods=['GET'])
+def user_players(id, top_number=None):
+    user_info = Users.query.filter(Users.user_id == id).first()
+    if user_info:
+        if request.method == 'GET':
+            players_seen = []
+
+            for items in user_info.to_dict()["attended_games"]:
+                lineups = (items['games']['game_data']['dates']
+                           [0]['games'][0]['lineups'])
+
+                for players in lineups['homePlayers']:
+                    players_seen.append(players['fullName'])
+
+                for players in lineups['awayPlayers']:
+                    players_seen.append(players['fullName'])
+
+            if top_number:
+                response_data = Helpers.top_filter(players_seen, top_number)
+            else:
+                response_data = Helpers.count_occurrences(players_seen)
 
     else:
         response_data = {'response': "User not found"}
