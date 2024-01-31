@@ -10,7 +10,7 @@ An app to summarize your time at the ballpark. View your favorite players, bigge
 
 ## Wireframe
 ![Alt text](games.png) 
-![Alt text](closer.png)
+![Alt text](image.png)
 ## Kanban Board
 https://trello.com/b/iA31bF8b/mlb-wrapped-closer
 
@@ -29,6 +29,10 @@ https://trello.com/b/iA31bF8b/mlb-wrapped-closer
 | GET    | /userId/year/ballparks | Ballparks Component | Returns all ballpark information for a specific season- a subset of /games           |
 | GET    | /userId/year/facts     | Facts Component     |                                                                                      |
 | GET    | /userId/closingfacts   | Closing Component   | Returns closing notes for the specific user                                          |
+
+
+## Schema
+![Alt text](image.png)
 
 ## New Technology
 React iframes to render MLB assets in app 

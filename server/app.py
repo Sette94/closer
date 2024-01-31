@@ -38,7 +38,7 @@ def users(id=None):
         else:
             # Handle GET for a specific user
             focus_user = Users.query.filter(Users.user_id == id).first()
-            response_data = focus_user.to_dict(rules=('-attended_games',)) if focus_user else {
+            response_data = focus_user.to_dict() if focus_user else {
                 'response': "User not found"}
     elif request.method == 'POST':
         # Handle POST for creating a new user
@@ -94,6 +94,7 @@ def users(id=None):
     return make_response(response_data)
 
 
+# Aggregate Routes
 @app.route("/users/<int:id>/homeruns", methods=['GET'])
 @app.route("/users/<int:id>/homeruns/top/<int:top_number>", methods=['GET'])
 def user_homeruns(id, top_number=None):
