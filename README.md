@@ -10,7 +10,7 @@ An app to summarize your time at the ballpark. View your favorite players, bigge
 
 ## Wireframe
 ![Alt text](games.png) 
-![Alt text](image.png)
+![Alt text](closer.png)
 ## Kanban Board
 https://trello.com/b/iA31bF8b/mlb-wrapped-closer
 

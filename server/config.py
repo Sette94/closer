@@ -57,26 +57,46 @@ class Helpers():
 
         return month_name
 
-    def formatted_game_return(focus_user, season):
-        return sorted(
-            (ug.to_dict(only=(
-                'games.date',
-                'games.game_data.dates.games.dayNight',
-                'games.game_data.dates.games.gameDate',
-                'games.game_data.dates.games.gameInfo',
-                'games.game_data.dates.games.gameType',
-                'games.game_data.dates.games.gamePk',
-                'games.game_data.dates.games.gamesInSeries',
-                'games.game_data.dates.games.homeRuns',
-                '-games.game_data.dates.games.homeRuns.matchup.batter.stats',
-                'games.game_data.dates.games.lineups',
-                'games.game_data.dates.games.scoringPlays',
-                'games.game_data.dates.games.story',
-                'games.game_data.dates.games.teams',
-                'games.game_data.dates.games.venue',
-                'games.game_data.dates.games.weather',
-            ))
-                for ug in focus_user.attended_games if ug.games and ug.games.season == season),
-            key=lambda x: x.get("games", {}).get("date", ""),
-            reverse=False
-        )
+    def formatted_game_return_refactor(games):
+
+        return games.to_dict(only=(
+            'games.date',
+            'games.game_data.dates.games.dayNight',
+            'games.game_data.dates.games.gameDate',
+            'games.game_data.dates.games.gameInfo',
+            'games.game_data.dates.games.gameType',
+            'games.game_data.dates.games.gamePk',
+            'games.game_data.dates.games.gamesInSeries',
+            'games.game_data.dates.games.homeRuns',
+            '-games.game_data.dates.games.homeRuns.matchup.batter.stats',
+            'games.game_data.dates.games.lineups',
+            'games.game_data.dates.games.scoringPlays',
+            'games.game_data.dates.games.story',
+            'games.game_data.dates.games.teams',
+            'games.game_data.dates.games.venue',
+            'games.game_data.dates.games.weather',
+        ))
+
+    # def formatted_game_return(focus_user, season):
+    #     return sorted(
+    #         (ug.to_dict(only=(
+    #             'games.date',
+    #             'games.game_data.dates.games.dayNight',
+    #             'games.game_data.dates.games.gameDate',
+    #             'games.game_data.dates.games.gameInfo',
+    #             'games.game_data.dates.games.gameType',
+    #             'games.game_data.dates.games.gamePk',
+    #             'games.game_data.dates.games.gamesInSeries',
+    #             'games.game_data.dates.games.homeRuns',
+    #             '-games.game_data.dates.games.homeRuns.matchup.batter.stats',
+    #             'games.game_data.dates.games.lineups',
+    #             'games.game_data.dates.games.scoringPlays',
+    #             'games.game_data.dates.games.story',
+    #             'games.game_data.dates.games.teams',
+    #             'games.game_data.dates.games.venue',
+    #             'games.game_data.dates.games.weather',
+    #         ))
+    #             for ug in focus_user.attended_games if ug.games and ug.games.season == season),
+    #         key=lambda x: x.get("games", {}).get("date", ""),
+    #         reverse=False
+    #     )

@@ -102,19 +102,20 @@ def users(id=None):
 
 @app.route("/users/<int:id>/games", methods=['GET'])
 def user_games_attended(id):
-    focus_user = Users.query.filter(Users.user_id == id).first()
+    # focus_user = Users.query.filter(Users.user_id == id).first()
+    season = request.args.get(
+        'season', type=int, default=Helpers.current_year())
+    game_number = request.args.get('game_number', type=int, default=None)
 
-    if focus_user:
-        season = request.args.get(
-            'season', type=int, default=Helpers.current_year())
-        game_number = request.args.get('game_number', type=int, default=None)
+    user_games_list = [Helpers.formatted_game_return_refactor(ug)
+                       for ug in UserGames.query.filter(UserGames.user_id == id).all() if ug.games.season == season]
 
-        user_games_list = Helpers.formatted_game_return(focus_user, season)
-
+    number_of_game = len(user_games_list)
+    if request.method == 'GET':
         if game_number:
-            if game_number <= len(user_games_list):
+            if game_number <= number_of_game:
                 response_data = {"attended_games": user_games_list}[
-                    'attended_games'][game_number-1]
+                    'attended_games'][number_of_game-game_number]
                 return response_data
             else:
                 response_data = make_response(
@@ -137,97 +138,101 @@ def user_games_attended(id):
 # Aggregate Routes
 @app.route("/users/<int:id>/homeruns", methods=['GET'])
 def user_homeruns(id):
-    focus_user = Users.query.filter(Users.user_id == id).first()
-
-    if not focus_user:
-        return make_response({'response': "User not found"})
+    season = request.args.get(
+        'season', type=int, default=Helpers.current_year())
 
     if request.method == 'GET':
         homerun_hitters = []
-        season = request.args.get(
-            'season', type=int, default=Helpers.current_year())
+        try:
+            for items in [Helpers.formatted_game_return_refactor(ug)
+                          for ug in UserGames.query.filter(UserGames.user_id == id).all() if ug.games.season == season]:
+                homeruns = items['games']['game_data']['dates'][0]['games'][0]['homeRuns']
 
-        for items in Helpers.formatted_game_return(focus_user, season):
-            homeruns = items['games']['game_data']['dates'][0]['games'][0]['homeRuns']
+                for players in homeruns:
+                    homerun_hitters.append({
+                        "name": players['matchup']['batter']['fullName'],
+                        "id": players['matchup']['batter']['id']
+                    })
 
-            for players in homeruns:
-                homerun_hitters.append({
-                    "name": players['matchup']['batter']['fullName'],
-                    "id": players['matchup']['batter']['id']
-                })
+                top_number = request.args.get('top')
+                if top_number:
+                    response_data = {"home_hitters": Helpers.top_filter(
+                        homerun_hitters, int(top_number))}
 
-            top_number = request.args.get('top')
-            if top_number:
-                response_data = {"home_hitters": Helpers.top_filter(
-                    homerun_hitters, int(top_number))}
-            else:
-                response_data = {
-                    "home_hitters": Helpers.count_occurrences(homerun_hitters)}
+                else:
+                    response_data = {
+                        "home_hitters": Helpers.count_occurrences(homerun_hitters)}
 
-        return make_response(response_data)
+            return make_response(response_data)
+
+        except:
+            return make_response({'response': "No homerun information for user"})
 
 
 @app.route("/users/<int:id>/players", methods=['GET'])
 def user_players(id):
-    focus_user = Users.query.filter(Users.user_id == id).first()
-
-    if not focus_user:
-        return make_response({'response': "User not found"})
+    season = request.args.get(
+        'season', type=int, default=Helpers.current_year())
 
     if request.method == 'GET':
-        season = request.args.get(
-            'season', type=int, default=Helpers.current_year())
         players_seen = []
         starting_pitchers = []
+        try:
+            for items in [Helpers.formatted_game_return_refactor(ug)
+                          for ug in UserGames.query.filter(UserGames.user_id == id).all() if ug.games.season == season]:
+                lineups = (items['games']['game_data']
+                           ['dates'][0]['games'][0]['lineups'])
+                team_info = items['games']['game_data']['dates'][0]['games'][0]['teams']
 
-        for items in Helpers.formatted_game_return(focus_user, season):
-            lineups = (items['games']['game_data']
-                       ['dates'][0]['games'][0]['lineups'])
-            team_info = items['games']['game_data']['dates'][0]['games'][0]['teams']
+                for players in lineups['homePlayers'] + lineups['awayPlayers']:
+                    players_seen.append({
+                        "name": players['fullName'],
+                        "id": players['id']
+                    })
 
-            for players in lineups['homePlayers'] + lineups['awayPlayers']:
-                players_seen.append({
-                    "name": players['fullName'],
-                    "id": players['id']
-                })
+                for teams in team_info:
+                    starting_pitchers.append({
+                        "name": team_info[teams]['probablePitcher']['fullName'],
+                        "id": team_info[teams]['probablePitcher']['id']
+                    })
 
-            for teams in team_info:
-                starting_pitchers.append({
-                    "name": team_info[teams]['probablePitcher']['fullName'],
-                    "id": team_info[teams]['probablePitcher']['id']
-                })
+                top_number = request.args.get('top')
+                if top_number:
+                    response_data = {"all_players": Helpers.top_filter(
+                        players_seen, int(top_number)),
+                        "starting_pitchers": Helpers.top_filter(starting_pitchers, int(top_number))}
+                else:
+                    response_data = {
+                        "all_players": Helpers.count_occurrences(players_seen),
+                        "starting_pitchers": Helpers.count_occurrences(starting_pitchers)}
 
-            top_number = request.args.get('top')
-            if top_number:
-                response_data = {"all_players": Helpers.top_filter(
-                    players_seen, int(top_number)),
-                    "starting_pitchers": Helpers.top_filter(starting_pitchers, int(top_number))}
-            else:
-                response_data = {
-                    "all_players": Helpers.count_occurrences(players_seen),
-                    "starting_pitchers": Helpers.count_occurrences(starting_pitchers)}
+            return make_response(response_data)
 
-        return make_response(response_data)
+        except:
+            return make_response({'response': "No player information for user"})
+
+# Compiling user information and return stats based on user and season
 
 
 @app.route("/users/<int:id>/userinfo", methods=['GET'])
 def userinfo(id):
-    focus_user = Users.query.filter(Users.user_id == id).first()
+    season = request.args.get(
+        'season', type=int, default=Helpers.current_year())
 
-    if focus_user:
-        season = request.args.get(
-            'season', type=int, default=Helpers.current_year())
-        if request.method == 'GET':
-            minutes_list = []
-            day_night_list = []
-            weather_condition_list = []
-            temperature_list = []
-            venue_list = []
-            home_win_list = []
-            teams_seen = []
-            dates_list = []
+    if request.method == 'GET':
+        minutes_list = []
+        day_night_list = []
+        weather_condition_list = []
+        temperature_list = []
+        venue_list = []
+        home_win_list = []
+        teams_seen = []
+        dates_list = []
 
-            for items in Helpers.formatted_game_return(focus_user, season):
+        try:
+            for items in [Helpers.formatted_game_return_refactor(ug)
+                          for ug in UserGames.query.filter(UserGames.user_id == id).all()
+                          if ug.games.season == season]:
                 game_data = items['games']['game_data']['dates'][0]['games'][0]
                 game_info = items['games']['game_data']['dates'][0]['games'][0]['gameInfo']
                 home_team_info = items['games']['game_data']['dates'][0]['games'][0]['teams']['home']
@@ -261,10 +266,10 @@ def userinfo(id):
                 "teams_seen": Helpers.count_info(teams_seen),
                 "months": Helpers.count_info(dates_list)
             }
-    else:
-        response_data = {'response': "User not found"}
+            return make_response(response_data)
 
-    return make_response(response_data)
+        except:
+            return make_response({'response': "No user information for user"})
 
 
 if __name__ == '__main__':
