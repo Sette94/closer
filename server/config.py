@@ -3,7 +3,7 @@ from datetime import datetime, date
 
 
 class Helpers():
-    def count_occurrences(names_list):
+    def count_info(names_list):
         name_counts = {}
 
         for name in names_list:
@@ -11,14 +11,35 @@ class Helpers():
 
         return name_counts
 
-    def top_filter(names_list, number):
+    def count_occurrences(players_list):
+        names_list = [player['name'] for player in players_list]
+
         player_counts = Counter(names_list)
 
-        # Get the top 10 players
-        top_10_players = player_counts.most_common(number)
+        result = []
+        for player_name, occurrences in player_counts.items():
+            player = next(
+                item for item in players_list if item['name'] == player_name)
+            result.append(
+                {'name': player_name, 'id': player['id'], 'times_seen': occurrences})
 
-        # Convert to a dictionary
-        return dict(top_10_players)
+        return sorted(result, key=lambda x: x['times_seen'], reverse=True)
+
+    def top_filter(players_list, number):
+        names_list = [player['name'] for player in players_list]
+
+        player_counts = Counter(names_list)
+
+        top_5_players = player_counts.most_common(number)
+
+        result = []
+        for player_name, occurrences in top_5_players:
+            player = next(
+                item for item in players_list if item['name'] == player_name)
+            result.append(
+                {'name': player_name, 'id': player['id'], 'times_seen': occurrences})
+
+        return sorted(result, key=lambda x: x['times_seen'], reverse=True)
 
     def current_year():
         today = date.today()

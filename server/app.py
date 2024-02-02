@@ -136,57 +136,78 @@ def user_games_attended(id):
 
 # Aggregate Routes
 @app.route("/users/<int:id>/homeruns", methods=['GET'])
-@app.route("/users/<int:id>/homeruns/top/<int:top_number>", methods=['GET'])
-def user_homeruns(id, top_number=None):
-    user_info = Users.query.filter(Users.user_id == id).first()
-    if user_info:
-        if request.method == 'GET':
-            homerun_hitters = []
-            for items in user_info.to_dict()["attended_games"]:
-                homerun_list = (items['games']['game_data']['dates']
-                                [0]['games'][0]['homeRuns'])
-                for homeruns in homerun_list:
-                    homerun_hitters.append(
-                        homeruns['matchup']['batter']['fullName'])
+def user_homeruns(id):
+    focus_user = Users.query.filter(Users.user_id == id).first()
 
+    if not focus_user:
+        return make_response({'response': "User not found"})
+
+    if request.method == 'GET':
+        homerun_hitters = []
+        season = request.args.get(
+            'season', type=int, default=Helpers.current_year())
+
+        for items in Helpers.formatted_game_return(focus_user, season):
+            homeruns = items['games']['game_data']['dates'][0]['games'][0]['homeRuns']
+
+            for players in homeruns:
+                homerun_hitters.append({
+                    "name": players['matchup']['batter']['fullName'],
+                    "id": players['matchup']['batter']['id']
+                })
+
+            top_number = request.args.get('top')
             if top_number:
-                response_data = Helpers.top_filter(homerun_hitters, top_number)
+                response_data = {"home_hitters": Helpers.top_filter(
+                    homerun_hitters, int(top_number))}
             else:
-                response_data = Helpers.count_occurrences(homerun_hitters)
+                response_data = {
+                    "home_hitters": Helpers.count_occurrences(homerun_hitters)}
 
-    else:
-        response_data = {'response': "User not found"}
-
-    return make_response(response_data)
+        return make_response(response_data)
 
 
 @app.route("/users/<int:id>/players", methods=['GET'])
-@app.route("/users/<int:id>/players/top/<int:top_number>", methods=['GET'])
-def user_players(id, top_number=None):
-    user_info = Users.query.filter(Users.user_id == id).first()
-    if user_info:
-        if request.method == 'GET':
-            players_seen = []
+def user_players(id):
+    focus_user = Users.query.filter(Users.user_id == id).first()
 
-            for items in user_info.to_dict()["attended_games"]:
-                lineups = (items['games']['game_data']['dates']
-                           [0]['games'][0]['lineups'])
+    if not focus_user:
+        return make_response({'response': "User not found"})
 
-                for players in lineups['homePlayers']:
-                    players_seen.append(players['fullName'])
+    if request.method == 'GET':
+        season = request.args.get(
+            'season', type=int, default=Helpers.current_year())
+        players_seen = []
+        starting_pitchers = []
 
-                for players in lineups['awayPlayers']:
-                    players_seen.append(players['fullName'])
+        for items in Helpers.formatted_game_return(focus_user, season):
+            lineups = (items['games']['game_data']
+                       ['dates'][0]['games'][0]['lineups'])
+            team_info = items['games']['game_data']['dates'][0]['games'][0]['teams']
 
+            for players in lineups['homePlayers'] + lineups['awayPlayers']:
+                players_seen.append({
+                    "name": players['fullName'],
+                    "id": players['id']
+                })
+
+            for teams in team_info:
+                starting_pitchers.append({
+                    "name": team_info[teams]['probablePitcher']['fullName'],
+                    "id": team_info[teams]['probablePitcher']['id']
+                })
+
+            top_number = request.args.get('top')
             if top_number:
-                response_data = Helpers.top_filter(players_seen, top_number)
+                response_data = {"all_players": Helpers.top_filter(
+                    players_seen, int(top_number)),
+                    "starting_pitchers": Helpers.top_filter(starting_pitchers, int(top_number))}
             else:
-                response_data = Helpers.count_occurrences(players_seen)
+                response_data = {
+                    "all_players": Helpers.count_occurrences(players_seen),
+                    "starting_pitchers": Helpers.count_occurrences(starting_pitchers)}
 
-    else:
-        response_data = {'response': "User not found"}
-
-    return make_response(response_data)
+        return make_response(response_data)
 
 
 @app.route("/users/<int:id>/userinfo", methods=['GET'])
@@ -223,19 +244,19 @@ def userinfo(id):
                 teams_seen.append(away_team_info['team']['name'])
                 dates_list.append(Helpers.month(game_data['gameDate']))
 
-            day_night_object = Helpers.count_occurrences(day_night_list)
+            day_night_object = Helpers.count_info(day_night_list)
 
             response_data = {
                 "minutes_at_games": sum(minutes_list),
                 "hours_at_games": round(sum(minutes_list) / 60, 0),
                 "day_games": day_night_object.get('day'),
                 "night_games": day_night_object.get('night'),
-                "weather_condition": Helpers.count_occurrences(weather_condition_list),
+                "weather_condition": Helpers.count_info(weather_condition_list),
                 "avgerage_temp": round(mean(temperature_list), 0),
-                "ballparks": Helpers.count_occurrences(venue_list),
-                "record_wins": Helpers.count_occurrences(home_win_list),
-                "teams_seen": Helpers.count_occurrences(teams_seen),
-                "months": Helpers.count_occurrences(dates_list)
+                "ballparks": Helpers.count_info(venue_list),
+                "record_wins": Helpers.count_info(home_win_list),
+                "teams_seen": Helpers.count_info(teams_seen),
+                "months": Helpers.count_info(dates_list)
             }
     else:
         response_data = {'response': "User not found"}

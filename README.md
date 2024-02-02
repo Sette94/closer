@@ -18,17 +18,22 @@ https://trello.com/b/iA31bF8b/mlb-wrapped-closer
 ![Alt text](drawio.png)
 
 ## API Routes used in React
-| Call   | Route                  | Where               | Info                                                                                 |
-|--------|------------------------|---------------------|--------------------------------------------------------------------------------------|
-| GET    | /users                 | Welcome Component   | Returns user information to access profile and game information                      |
-| GET    | /userId/year/games     | User Component      | Returns all games for a specific user for a specific season                          |
-| POST   | /userId/games          | User Component      | Adds a new game(s) for the specific user for a specific season, adding to the review |
-| DELETE | /userId/games/gamePk   | User Component      | Removes a game for the specific user                                                 |
-| PATCH  | /userId/games/gamePk   | User Component      | Updates a game for the specific user                                                 |
-| GET    | /userId/year/games     | Games Component     | Returns all game information for a given user for a specific season                  |
-| GET    | /userId/year/ballparks | Ballparks Component | Returns all ballpark information for a specific season- a subset of /games           |
-| GET    | /userId/year/facts     | Facts Component     |                                                                                      |
-| GET    | /userId/closingfacts   | Closing Component   | Returns closing notes for the specific user                                          |
+| Method | Route                             | Description                                                                 |
+|--------|-----------------------------------|-----------------------------------------------------------------------------|
+| GET    | /users                            | Retrieve user information for accessing profiles and game data              |
+| POST   | /users                            | Create a new user                                                           |
+| GET    | /users/id                         | Retrieve user information for accessing profiles and game data for a user   |
+| DELETE | /users/id                         | Delete a user                                                               |
+| PATCH  | /users/id                         | Update user information                                                     |
+| GET    | /users/id/games                   | Retrieve all game information for a given user                              |
+| GET    | /users/id/games?season            | Retrieve all game information for a given user in a specific season         |
+| GET    | /user/id/games?season&game_number | Retrieve information for a single game played by the user in a given season |
+| GET    | /user/id/homeruns                 | Retrieve all players who have hit home runs in the user's games             |
+| GET    | /user/id/homeruns?season          | Retrieve all home runs in a given season for the user                       |
+| GET    | /user/id/players                  | Retrieve all players that the user has encountered                          |
+| GET    | /user/id/players?season           | Retrieve all players that the user has encountered in a specific season     |
+| GET    | /users/id/userinfo                | Retrieve game information for a given user                                  |
+| GET    | /users/id/userinfo?season         | Retrieve game information for a given user in a specific season             |
 
 
 ## Schema
