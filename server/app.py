@@ -1,8 +1,10 @@
 from flask import Flask
 from flask_migrate import Migrate
-from flask import Flask, make_response, request
+from flask import Flask, jsonify, request
 from flask import Flask, redirect, url_for
 from statistics import mean
+from flask_cors import CORS
+from flask import jsonify
 
 
 from config import Helpers
@@ -11,6 +13,8 @@ from models import db, Users, Games, UserGames, Ballparks
 
 # create a Flask application object
 app = Flask(__name__)
+CORS(app)
+
 
 # configure a database connection to the local file app.db
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -95,7 +99,7 @@ def users(id=None):
     else:
         response_data = {'response': "Invalid HTTP method"}
 
-    return make_response(response_data)
+    return jsonify(response_data)
 
 # Individual Game Route
 
@@ -118,17 +122,17 @@ def user_games_attended(id):
                     'attended_games'][number_of_game-game_number]
                 return response_data
             else:
-                response_data = make_response(
+                response_data = jsonify(
                     {'error': 'Game number does not exist for user'}
                 )
                 return response_data
 
-        response_data = make_response(
+        response_data = jsonify(
             user_games_list
         )
 
     else:
-        response_data = make_response(
+        response_data = jsonify(
             {'response': "No user found"}
         )
 
@@ -163,10 +167,10 @@ def user_homeruns(id):
                     response_data = {
                         "home_hitters": Helpers.count_occurrences(homerun_hitters)}
 
-            return make_response(response_data)
+            return jsonify(response_data)
 
         except:
-            return make_response({'response': "No homerun information for user"})
+            return jsonify({'response': "No homerun information for user"})
 
 
 @app.route("/users/<int:id>/players", methods=['GET'])
@@ -206,10 +210,10 @@ def user_players(id):
                         "all_players": Helpers.count_occurrences(players_seen),
                         "starting_pitchers": Helpers.count_occurrences(starting_pitchers)}
 
-            return make_response(response_data)
+            return jsonify(response_data)
 
         except:
-            return make_response({'response': "No player information for user"})
+            return jsonify({'response': "No player information for user"})
 
 # Compiling user information and return stats based on user and season
 
@@ -266,10 +270,10 @@ def userinfo(id):
                 "teams_seen": Helpers.count_info(teams_seen),
                 "months": Helpers.count_info(dates_list)
             }
-            return make_response(response_data)
+            return jsonify(response_data)
 
         except:
-            return make_response({'response': "No user information for user"})
+            return jsonify({'response': "No user information for user"})
 
 
 if __name__ == '__main__':
