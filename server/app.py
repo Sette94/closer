@@ -1,6 +1,10 @@
 from flask import Flask
 from flask_migrate import Migrate
 from flask import Flask, make_response, request
+from flask import Flask, redirect, url_for
+from statistics import mean
+
+
 from config import Helpers
 
 from models import db, Users, Games, UserGames, Ballparks
@@ -38,7 +42,7 @@ def users(id=None):
         else:
             # Handle GET for a specific user
             focus_user = Users.query.filter(Users.user_id == id).first()
-            response_data = focus_user.to_dict() if focus_user else {
+            response_data = focus_user.to_dict(rules=('-attended_games',)) if focus_user else {
                 'response': "User not found"}
     elif request.method == 'POST':
         # Handle POST for creating a new user
@@ -93,21 +97,50 @@ def users(id=None):
 
     return make_response(response_data)
 
+# Individual Game Route
+
+
+@app.route("/users/<int:id>/games", methods=['GET'])
+def user_games_attended(id):
+    focus_user = Users.query.filter(Users.user_id == id).first()
+
+    if focus_user:
+        season = request.args.get(
+            'season', type=int, default=Helpers.current_year())
+        game_number = request.args.get('game_number', type=int, default=None)
+
+        user_games_list = Helpers.formatted_game_return(focus_user, season)
+
+        if game_number:
+            if game_number <= len(user_games_list):
+                response_data = {"attended_games": user_games_list}[
+                    'attended_games'][game_number-1]
+                return response_data
+            else:
+                response_data = make_response(
+                    {'error': 'Game number does not exist for user'}
+                )
+                return response_data
+
+        response_data = make_response(
+            user_games_list
+        )
+
+    else:
+        response_data = make_response(
+            {'response': "No user found"}
+        )
+
+    return response_data
+
 
 # Aggregate Routes
 @app.route("/users/<int:id>/homeruns", methods=['GET'])
 @app.route("/users/<int:id>/homeruns/top/<int:top_number>", methods=['GET'])
 def user_homeruns(id, top_number=None):
     user_info = Users.query.filter(Users.user_id == id).first()
-
     if user_info:
         if request.method == 'GET':
-
-            # # only is used to pull specific, cut down
-            # homerun_dict = user_info.to_dict(
-            #     only=('attended_games.games.game_data.dates.games.homeRuns.matchup',
-            #           '-attended_games.games.game_data.dates.games.homeRuns.matchup.batter.stats'))["attended_games"]
-
             homerun_hitters = []
             for items in user_info.to_dict()["attended_games"]:
                 homerun_list = (items['games']['game_data']['dates']
@@ -150,6 +183,60 @@ def user_players(id, top_number=None):
             else:
                 response_data = Helpers.count_occurrences(players_seen)
 
+    else:
+        response_data = {'response': "User not found"}
+
+    return make_response(response_data)
+
+
+@app.route("/users/<int:id>/userinfo", methods=['GET'])
+def userinfo(id):
+    focus_user = Users.query.filter(Users.user_id == id).first()
+
+    if focus_user:
+        season = request.args.get(
+            'season', type=int, default=Helpers.current_year())
+        if request.method == 'GET':
+            minutes_list = []
+            day_night_list = []
+            weather_condition_list = []
+            temperature_list = []
+            venue_list = []
+            home_win_list = []
+            teams_seen = []
+            dates_list = []
+
+            for items in Helpers.formatted_game_return(focus_user, season):
+                game_data = items['games']['game_data']['dates'][0]['games'][0]
+                game_info = items['games']['game_data']['dates'][0]['games'][0]['gameInfo']
+                home_team_info = items['games']['game_data']['dates'][0]['games'][0]['teams']['home']
+                away_team_info = items['games']['game_data']['dates'][0]['games'][0]['teams']['away']
+
+                minutes_list.append(game_info['gameDurationMinutes'])
+                day_night_list.append(game_data['dayNight'])
+                weather_condition_list.append(
+                    game_data['weather']['condition'])
+                temperature_list.append(int(game_data['weather']['temp']))
+                venue_list.append(game_data['venue']['name'])
+                home_win_list.append(home_team_info['isWinner'])
+                teams_seen.append(home_team_info['team']['name'])
+                teams_seen.append(away_team_info['team']['name'])
+                dates_list.append(Helpers.month(game_data['gameDate']))
+
+            day_night_object = Helpers.count_occurrences(day_night_list)
+
+            response_data = {
+                "minutes_at_games": sum(minutes_list),
+                "hours_at_games": round(sum(minutes_list) / 60, 0),
+                "day_games": day_night_object.get('day'),
+                "night_games": day_night_object.get('night'),
+                "weather_condition": Helpers.count_occurrences(weather_condition_list),
+                "avgerage_temp": round(mean(temperature_list), 0),
+                "ballparks": Helpers.count_occurrences(venue_list),
+                "record_wins": Helpers.count_occurrences(home_win_list),
+                "teams_seen": Helpers.count_occurrences(teams_seen),
+                "months": Helpers.count_occurrences(dates_list)
+            }
     else:
         response_data = {'response': "User not found"}
 

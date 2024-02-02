@@ -40,6 +40,7 @@ class Games(db.Model, SerializerMixin):
 
     gamePk = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.String)
+    season = db.Column(db.Integer)
     venue_id = db.Column(db.String, db.ForeignKey("ballparks.venue_id"))
     game_data = db.Column(JSON, nullable=True)
 
