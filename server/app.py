@@ -238,7 +238,10 @@ def userinfo(id):
                 weather_condition_list.append(
                     game_data['weather']['condition'])
                 temperature_list.append(int(game_data['weather']['temp']))
-                venue_list.append(game_data['venue']['name'])
+                venue_list.append(
+                    {"name": game_data['venue']['name'],
+                     "id": game_data['venue']['id']})
+
                 home_win_list.append(home_team_info['isWinner'])
                 teams_seen.append(home_team_info['team']['name'])
                 teams_seen.append(away_team_info['team']['name'])
@@ -253,7 +256,7 @@ def userinfo(id):
                 "night_games": day_night_object.get('night'),
                 "weather_condition": Helpers.count_info(weather_condition_list),
                 "avgerage_temp": round(mean(temperature_list), 0),
-                "ballparks": Helpers.count_info(venue_list),
+                "ballparks": Helpers.count_occurrences(venue_list),
                 "record_wins": Helpers.count_info(home_win_list),
                 "teams_seen": Helpers.count_info(teams_seen),
                 "months": Helpers.count_info(dates_list)

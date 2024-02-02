@@ -37,7 +37,7 @@ https://trello.com/b/iA31bF8b/mlb-wrapped-closer
 
 
 ## Schema
-![Alt text](image.png)
+![Alt text](schema.PNG)
 
 ## New Technology
 React iframes to render MLB assets in app 
