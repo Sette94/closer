@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios'
-import { useLocation } from 'react-router-dom';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
-
-
-function HomeContainer() {
+const ConsolidatedHomeContainer = () => {
+    const navigate = useNavigate();
     const { state } = useLocation();
-    const user = state?.currentUser;  // Assuming currentUser is part of the state
+
+    console.log(state)
+
+    const isAuthenticated = useSelector((state) => state.isAuthenticated);
+    const user = useSelector((state) => state.user);
 
 
+    console.log(isAuthenticated)
 
-    console.log(user)
 
     return (
         <div>
-            <div className="home">
-                <h1>{user.username}</h1>
-                <button> Add New Game </button>
-                <button> MLB Closer </button>
+            <div className="landingpage">
+                {isAuthenticated ? (
+                    <h1>{user.username}</h1>
+                ) : (
+                    <p>Please log in.</p>
+                )}
+                <button >Add New Game</button>
+                <button>MLB Closer</button>
             </div>
-
-
         </div>
+    );
+};
 
-    )
-
-
-
-}
-
-
-export default HomeContainer
+export default ConsolidatedHomeContainer;

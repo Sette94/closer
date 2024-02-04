@@ -10,7 +10,7 @@ function Header() {
             <PrimeReactProvider>
                 <nav className='nav'>
                     <NavLink
-                        to="/welcome"
+                        to="/home"
                         className="nav-link"
                     >
                         Home

@@ -1,6 +1,7 @@
 import App from "./App";
-import WelcomeContainer from "./components/Home";
+import HomeContainer from "./components/Home";
 import Login from "./components/Login/LoginComponent";
+import UserGamesComponent from "./components/UserInfo/UserGamesComponent"
 
 const routes = [
     {
@@ -8,7 +9,9 @@ const routes = [
         element: <App />,
         children: [
             { path: "/", element: <Login /> },
-            { path: "/welcome", element: <WelcomeContainer /> }
+            { path: "/home", element: <HomeContainer /> },
+            { path: "/mygames", element: <UserGamesComponent /> }
+
 
         ],
     },

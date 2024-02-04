@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
-import LoginForm from "./LoginForm";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import LoginHandler from './LoginForm'; // Import the LoginHandler
 
-function Login() {
+const LoginComponent = () => {
+    const dispatch = useDispatch();
+
+
     return (
-        <div clasName="main-content">
-            <LoginForm />
+        <div className="main-content">
+            <LoginHandler />
         </div>
     );
-}
+};
 
-export default Login;
+export default LoginComponent;
