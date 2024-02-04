@@ -10,6 +10,7 @@ function LoginHandler() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+
     const formSchema = yup.object().shape({
         password: yup.string().required("Must enter a password"),
         username: yup.string().required("Must enter a username"),
@@ -50,6 +51,8 @@ function LoginHandler() {
             }
         },
     });
+
+
 
     return (
         <div className="login">

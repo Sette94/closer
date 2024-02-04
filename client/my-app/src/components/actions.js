@@ -11,6 +11,11 @@ export const loginSuccess = (user) => {
     };
 };
 
-export const logout = () => ({
-    type: LOGOUT,
-});
+export const logout = () => {
+    localStorage.removeItem('user');
+
+    return {
+        type: LOGOUT
+    }
+
+};

@@ -11,7 +11,7 @@ import { loginSuccess } from './components/actions'; // Adjust the path based on
 
 // Check if there is a stored user in localStorage
 const storedUser = localStorage.getItem('user');
-console.log(storedUser)
+console.log(store)
 if (storedUser) {
     const user = JSON.parse(storedUser);
     // Dispatch the loginSuccess action with the stored user information
