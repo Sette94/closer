@@ -57,7 +57,7 @@ class Games(db.Model, SerializerMixin):
             raise ValueError
 
     def __repr__(self):
-        return f'<Game Info {self.gamePk}, {self.user_ids}, {self.game_data}>'
+        return f'<Game Info {self.gamePk}, {self.game_data}>'
 
 
 class UserGames(db.Model, SerializerMixin):

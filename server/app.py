@@ -34,6 +34,51 @@ def index():
     return "<h1> Server </h1>"
 
 
+@app.route("/usergames/<int:id>", methods=['POST', 'PATCH', 'DELETE'])
+def user_games(id):
+
+    if request.method == "POST":
+        try:
+            # Will take in date and venue name
+            form_data = request.get_json()
+
+            ballpark = Ballparks.query.filter(
+                Ballparks.venue_name == form_data.get('venue')).first()
+
+            ballpark_id = ballpark.venue_id
+
+            game = Games.query.filter(Games.date == form_data.get(
+                'date') and Games.venue_id == ballpark_id).first()
+
+            new_attended = UserGames(
+                gamePk=game.gamePk,
+                user_id=id
+            )
+
+            db.session.add(new_attended)
+            db.session.commit()
+
+            response_data = {'response': "New game created for user"}
+        except:
+            response_data = {'response': "Failed to create game for user"}
+    elif request.method == "DELETE":
+
+        try:
+            form_data = request.get_json()
+
+            game_to_delete = UserGames.query.filter(UserGames.user_id == id and UserGames.gamePk == form_data.get(
+                'gamePk')).first()
+
+            db.session.delete(game_to_delete)
+            db.session.commit()
+            response_data = {'response': "Game for user deleted"}
+        except Exception as e:
+            print(e)
+            response_data = {'response': "Failed to delete game for user"}
+
+    return response_data
+
+
 @app.route("/users", methods=['GET', 'POST'])
 @app.route("/users/<int:id>", methods=['GET', 'DELETE', 'PATCH'])
 def users(id=None):
@@ -105,7 +150,7 @@ def users(id=None):
 
 
 @app.route("/users/<int:id>/games", methods=['GET'])
-def user_games_attended(id):
+def user_games_attended_info(id):
     # focus_user = Users.query.filter(Users.user_id == id).first()
     season = request.args.get(
         'season', type=int, default=Helpers.current_year())
