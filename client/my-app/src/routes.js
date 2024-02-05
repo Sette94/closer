@@ -1,8 +1,8 @@
 import App from "./App";
 import HomeContainer from "./components/Home";
 import Login from "./components/Login/LoginComponent";
-import UserGamesComponent from "./components/UserInfo/UserGamesComponent"
-import LoginRoute from "./components/Login/LoginRoute"
+import UserInfoComponent from "./components/UserInfo/UserInfoComponent"
+import UserGamesComponent from "./components/UserGames/UserGamesComponent";
 
 
 
@@ -14,7 +14,9 @@ const routes = [
         children: [
             { path: "/", element: <Login /> },
             { path: "/home", element: <HomeContainer /> },
+            { path: "/userinfo", element: <UserInfoComponent /> },
             { path: "/mygames", element: <UserGamesComponent /> }
+
 
 
         ],

@@ -3,17 +3,10 @@ import { useSelector } from 'react-redux';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 const ConsolidatedHomeContainer = () => {
-    const navigate = useNavigate();
-    const { state } = useLocation();
-
-    console.log(state)
+    const navigate = useNavigate()
 
     const isAuthenticated = useSelector((state) => state.isAuthenticated);
     const user = useSelector((state) => state.user);
-
-
-    console.log(isAuthenticated)
-
 
     return (
         <div>
@@ -23,10 +16,13 @@ const ConsolidatedHomeContainer = () => {
                 ) : (
                     <p>Please log in.</p>
                 )}
-                <button >Add New Game</button>
+                <button
+                    onClick={() => { navigate('/mygames') }}
+
+                >Add New Game</button>
                 <button>MLB Closer</button>
             </div>
-        </div>
+        </div >
     );
 };
 

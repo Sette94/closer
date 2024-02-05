@@ -52,8 +52,6 @@ function LoginHandler() {
         },
     });
 
-
-
     return (
         <div className="login">
             <form onSubmit={formik.handleSubmit}>
