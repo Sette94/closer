@@ -1,0 +1,40 @@
+/* Center the date at the top */
+h2 {
+    text-align: center;
+}
+
+/* Center the gameContainer */
+.gameContainer {
+    display: flex;
+    justify-content: center;
+}
+
+/* Style the gameContainer's child elements */
+.gameContainer>div {
+    display: flex;
+    align-items: center;
+}
+
+/* Align the gameContainer's child elements horizontally */
+
+/* Style the mainContainer */
+.mainContainer {
+    display: flex;
+}
+
+/* Style the gameStory container */
+.gameStory {
+    flex-basis: 50%;
+}
+
+/* Style the gameInfo container */
+.gameinfo {
+    flex-basis: 50%;
+    display: flex;
+}
+
+/* Style the weather and homerun sub-containers */
+.weather,
+.homerun {
+    flex-basis: 50%;
+}

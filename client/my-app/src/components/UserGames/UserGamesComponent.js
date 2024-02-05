@@ -8,10 +8,8 @@ import UserGames from './UserGames';
 
 function UserGameContainer() {
     const navigate = useNavigate();
-
     const isAuthenticated = useSelector((state) => state.isAuthenticated);
     const user = useSelector((state) => state.user);
-
     const [userGames, setuserGames] = useState([]);
 
     useEffect(() => {
@@ -38,14 +36,9 @@ function UserGameContainer() {
                     <p>Please log in.</p>
                 )}
             </div>
-            {userGames.map((game) => {
-                return <UserGames game={game} />;
+            {userGames.map((game, index) => {
+                return <UserGames user_id={user.user_id} game={game} index={index} />;
             })}
-            <div>
-
-
-            </div>
-
         </div>
 
     )
