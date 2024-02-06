@@ -1,11 +1,14 @@
 import { useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';  // Import useParams
-import styles from "./styles/IndividualGames.css"
+import "./styles/IndividualGames.css"
+import 'react-tooltip/dist/react-tooltip.css'
+import Tooltip from '@mui/material/Tooltip';
+import Button from '@mui/material/Button';
+
 
 
 import axios from 'axios';
-import { object } from 'yup';
 
 function IndividualGame() {
     const user = useSelector((state) => state.user);
@@ -66,15 +69,25 @@ function IndividualGame() {
             return game_object.homeRuns.map((homerun) => {
                 const headshot = `https://img.mlbstatic.com/mlb/images/players/head_shot/${homerun.matchup.batter.id}.jpg`;
                 const description = homerun.result.description;
+                const name = homerun.matchup.batter.fullName;
 
                 return (
-                    <span key={homerun.matchup.batter.id} className="homerun-container">
-                        <img className='homerunheadshot' src={headshot} alt={`headshot`} /> <p>{description}</p>
-                    </span>
+
+
+
+                    <Tooltip title={name} placement="bottom">
+                        <span className="homerunitems" key={homerun.matchup.batter.id}>
+                            <a href={`https://www.mlb.com/player/${homerun.matchup.batter.id}`} target="_blank">
+                                <img className='homerunheadshot' src={headshot} alt={`headshot`} />
+                            </a>
+                        </span>
+                    </Tooltip>
+
 
                 );
             });
         }
+
 
         function gameData() {
             const dayNight = game_object.dayNight == "night" ? <span style={{ fontSize: '2em' }}>🌇</span> : <span style={{ fontSize: '2em' }}>☀️</span>;
@@ -107,25 +120,41 @@ function IndividualGame() {
                     <img src={away_team_logo} alt={`Away Team Logo`} /><p>{away_team_score}</p>
                     <img src={home_team_logo} alt={`Home Team Logo`} /> <p>{home_team_score}</p>
 
-
                 </div>
-
-
                 <div className="mainContainer">
                     <div className="gameStory">
                         <iframe src={`https://${game_object.story.link}`} />
                     </div>
 
-                    <div className='individualGameInfo'>
-                        <h3>Weather</h3>
-                        {weatherData()}
-                        <h3>Game Info</h3>
-                        {gameData()}
-                    </div>
+                    <div className='individualInfo'>
+                        <div className='nongameData'>
+                            <div className='weather'>
+                                <h3>Weather</h3>
+                                {weatherData()}
+                            </div>
 
-                    <div>
-                        <h3>Homeruns</h3>
-                        {homerunData()}
+                            <div className='gameInfo'>
+                                <h3>Game Info</h3>
+                                {gameData()}
+                            </div>
+
+                        </div>
+
+                        <div className='gameData'>
+                            <h3>Homeruns</h3>
+
+                            <div className='homeruns'>
+                                {homerunData()}
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+
 
                     </div>
 
