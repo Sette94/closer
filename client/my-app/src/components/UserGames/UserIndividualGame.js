@@ -84,7 +84,7 @@ function IndividualGame() {
 
                                 <ReactRoundedImage
                                     image={headshot}
-                                    roundedColor="#FF0000"
+                                    roundedColor="#66A5CC"
                                     imageWidth="120"
                                     imageHeight="165"
                                     roundedSize="8"
@@ -143,12 +143,12 @@ function IndividualGame() {
                             <a href={`https://www.mlb.com/player/${awayPitcher.id}`} target="_blank">
                                 <ReactRoundedImage
                                     image={`https://img.mlbstatic.com/mlb/images/players/head_shot/${awayPitcher.id}.jpg`}
-                                    roundedColor="#66A5CC"
+                                    roundedColor="#FF0000"
                                     imageWidth="120"
                                     imageHeight="165"
                                     roundedSize="8"
                                     borderRadius="15"
-                                    hoverColor="#DD1144"
+                                    hoverColor="#66A5CC"
                                 />
 
                             </a>
@@ -164,12 +164,12 @@ function IndividualGame() {
 
                                 <ReactRoundedImage
                                     image={`https://img.mlbstatic.com/mlb/images/players/head_shot/${homePitcher.id}.jpg`}
-                                    roundedColor="#66A5CC"
+                                    roundedColor="#FF0000"
                                     imageWidth="120"
                                     imageHeight="165"
                                     roundedSize="8"
                                     borderRadius="15"
-                                    hoverColor="#DD1144"
+                                    hoverColor="#66A5CC"
                                 />
                             </a>
 
@@ -206,7 +206,7 @@ function IndividualGame() {
 
 
                             <div>
-                                <h3>Homeruns</h3>
+                                <h3>Homerun Hitters</h3>
                                 <div className='homeruns'>
                                     {homerunData()}
                                 </div>
