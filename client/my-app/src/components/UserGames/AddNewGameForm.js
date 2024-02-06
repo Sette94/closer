@@ -45,7 +45,6 @@ function NewGameHandler({ handleNewGame }) {
         },
     });
     useEffect(() => {
-        // This will log the response data whenever it changes
         if (response !== null) {
             console.log(response);
         }

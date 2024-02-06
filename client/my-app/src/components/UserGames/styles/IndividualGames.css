@@ -3,38 +3,61 @@ h2 {
     text-align: center;
 }
 
-/* Center the gameContainer */
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    height: 70vh;
+    /* Set the height to 100% of the viewport height */
+}
+
+.item {
+    flex: 1;
+    /* Let items grow to fill available space */
+}
+
 .gameContainer {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex: 1;
+    /* Let the container expand to fill available space */
+
 }
 
-/* Style the gameContainer's child elements */
-.gameContainer>div {
+
+.gameContainer img {
+    max-width: 10%;
+    height: auto;
+}
+
+
+.gameStory {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+/* Style the iframe to fill its container */
+.gameStory iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.individualGameInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.homerun-container {
     display: flex;
     align-items: center;
 }
 
-/* Align the gameContainer's child elements horizontally */
+.homerunheadshot {
+    width: 5vw;
 
-/* Style the mainContainer */
-.mainContainer {
-    display: flex;
-}
-
-/* Style the gameStory container */
-.gameStory {
-    flex-basis: 50%;
-}
-
-/* Style the gameInfo container */
-.gameinfo {
-    flex-basis: 50%;
-    display: flex;
-}
-
-/* Style the weather and homerun sub-containers */
-.weather,
-.homerun {
-    flex-basis: 50%;
 }
