@@ -28,18 +28,17 @@ function NewGameHandler({ handleNewGame }) {
                         "date": formik.values.date
                     }
                 });
-                console.log(response.status)
+                console.log(response)
                 if (response.status == 200) {
                     setResponse(response.data.response);
                     handleNewGame(response.data.gamePk, user.user_id)
                     formik.resetForm();
 
-                } return;
-
-
-
+                }
             }
             catch (error) {
+                formik.resetForm();
+                setResponse(error.response.data.response);
                 console.error("Response error:", error.response.data);
                 console.error("Status code:", error.response.status);
             }
@@ -81,7 +80,7 @@ function NewGameHandler({ handleNewGame }) {
                             <p className="error">{formik.errors.venue}</p>
                         )}
                         <div className="button-container">
-                            <button type="submit">Add Game</button>
+                            <button type="submit">Submit</button>
                         </div>
                     </div>
                 </form>

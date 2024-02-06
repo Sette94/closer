@@ -12,6 +12,8 @@ function UserGameContainer() {
     const isAuthenticated = useSelector((state) => state.isAuthenticated);
     const user = useSelector((state) => state.user);
     const [userGames, setuserGames] = useState([]);
+    const [open, setOpen] = React.useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -58,6 +60,9 @@ function UserGameContainer() {
         fetchData();
     }
 
+    const handleOpen = () => {
+        setOpen(!open);
+    };
 
 
     return (
@@ -69,8 +74,11 @@ function UserGameContainer() {
                     <p>Please log in.</p>
                 )}
             </div>
-            <div className="addNewGame">
-                <AddNewGameForm handleNewGame={handleNewGame} />
+
+
+            <div>
+                <button onClick={handleOpen}>Add New Game Form</button>
+                {open ? <div><AddNewGameForm handleNewGame={handleNewGame} /> </div> : <div></div>}
             </div>
 
             {userGames && userGames.length > 0 && (

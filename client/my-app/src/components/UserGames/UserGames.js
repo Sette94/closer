@@ -9,10 +9,6 @@ function UserGames({ user_id, game, handleDelete }) {
 
     const navigate = useNavigate();
 
-    // if (game === undefined) {
-    //     return <div style={{ color: 'black' }}>Loading...</div>;
-    // }
-
     const game_object = game.games.game_data.dates[0].games[0]
     const date = game.games.date
     const home_team_score = game_object.teams.home.score
