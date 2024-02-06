@@ -34,21 +34,20 @@ def index():
     return "<h1> Server </h1>"
 
 
-@app.route("/usergames/<int:id>", methods=['POST', 'PATCH', 'DELETE'])
+@app.route("/usergames/<int:id>", methods=['POST', 'DELETE'])
 def user_games(id):
 
     if request.method == "POST":
         try:
             # Will take in date and venue name
             form_data = request.get_json()
-
             ballpark = Ballparks.query.filter(
-                Ballparks.venue_name == form_data.get('venue')).first()
+                Ballparks.venue_name == form_data.get('data').get('venue')).first()
 
             ballpark_id = ballpark.venue_id
 
-            game = Games.query.filter(Games.date == form_data.get(
-                'date') and Games.venue_id == ballpark_id).first()
+            game = Games.query.filter(Games.date == form_data.get('data').get(
+                'date'), Games.venue_id == ballpark_id).first()
 
             new_attended = UserGames(
                 gamePk=game.gamePk,
@@ -58,25 +57,43 @@ def user_games(id):
             db.session.add(new_attended)
             db.session.commit()
 
-            response_data = {'response': "New game created for user"}
+            response_data = {
+                'response': f"New game at {ballpark.venue_name} on {form_data.get('data').get('date')} created!",
+                'gamePk': game.gamePk}
+            return jsonify(response_data), 200
         except:
-            response_data = {'response': "Failed to create game for user"}
+            response_data = {'response': "Failed to create game for user",
+                             'gamePk': "No GamePk for this game"}
+            return jsonify(response_data), 404
     elif request.method == "DELETE":
 
         try:
             form_data = request.get_json()
 
-            game_to_delete = UserGames.query.filter(UserGames.user_id == id and UserGames.gamePk == form_data.get(
+            game_to_delete = UserGames.query.filter(UserGames.user_id == id, UserGames.gamePk == form_data.get(
                 'gamePk')).first()
 
             db.session.delete(game_to_delete)
             db.session.commit()
             response_data = {'response': "Game for user deleted"}
-        except Exception as e:
-            print(e)
-            response_data = {'response': "Failed to delete game for user"}
+            return jsonify(response_data), 200
 
-    return response_data
+        except Exception as e:
+            response_data = {'response': "Failed to delete game for user"}
+            return jsonify(response_data), 404
+
+
+@app.route("/games", methods=['GET'])
+def games():
+    if request.method == 'GET':
+        gamepks = UserGames.query.with_entities(UserGames.gamePk).all()
+        gamepks_list = [gamepk[0] for gamepk in gamepks]
+
+        return jsonify({'gamepks': gamepks_list}), 200
+
+    else:
+        response_data = {'error': "No games availiable"}
+        return jsonify(response_data), 404
 
 
 @app.route("/users", methods=['GET', 'POST'])
@@ -88,6 +105,8 @@ def users(id=None):
             all_users = Users.query.all()
             response_data = [user.to_dict(
                 rules=('-attended_games',)) for user in all_users]
+            return jsonify(response_data), 200
+
         else:
             # Handle GET for a specific user
             focus_user = Users.query.filter(Users.user_id == id).first()
@@ -107,8 +126,12 @@ def users(id=None):
             db.session.commit()
 
             response_data = {'response': "New User Created"}
+            return jsonify(response_data), 200
+
         except:
             response_data = {'response': "Failed to create new user"}
+            return jsonify(response_data), 404
+
     elif request.method == 'DELETE':
         # Handle DELETE for deleting a user
         try:
@@ -123,8 +146,12 @@ def users(id=None):
             db.session.commit()
 
             response_data = {'response': "User Deleted"}
+            return jsonify(response_data), 200
+
         except:
             response_data = {'response': "Failed to delete user"}
+            return jsonify(response_data), 404
+
     elif request.method == 'PATCH':
         # Handle PATCH for updating user information
         try:
@@ -138,13 +165,17 @@ def users(id=None):
             db.session.commit()
 
             response_data = {'response': "User Information Updated"}
+            return jsonify(response_data), 200
+
         except:
             response_data = {'response': "Failed to update user information"}
+            return jsonify(response_data), 404
 
     else:
         response_data = {'response': "Invalid HTTP method"}
+        return jsonify(response_data), 404
 
-    return jsonify(response_data)
+    return jsonify(response_data), 200
 
 # Individual Game Route
 
@@ -167,12 +198,14 @@ def user_games_attended_info(id):
                 response_data = {"attended_games": one_game}[
                     'attended_games']
 
-                return response_data
+                return jsonify(response_data), 200
+
             except:
                 response_data = jsonify(
                     {'error': 'Game does not exist for user'}
                 )
-                return response_data
+                return jsonify(response_data), 404
+
         else:
             response_data = jsonify(
                 user_games_list
@@ -182,6 +215,7 @@ def user_games_attended_info(id):
         response_data = jsonify(
             {'response': "No user found"}
         )
+        return jsonify(response_data), 404
 
     return response_data
 
@@ -214,10 +248,10 @@ def user_homeruns(id):
                     response_data = {
                         "home_hitters": Helpers.count_occurrences(homerun_hitters)}
 
-            return jsonify(response_data)
+            return jsonify(response_data), 200
 
         except:
-            return jsonify({'response': "No homerun information for user"})
+            return jsonify({'response': "No homerun information for user"}), 404
 
 
 @app.route("/users/<int:id>/players", methods=['GET'])
@@ -257,10 +291,10 @@ def user_players(id):
                         "all_players": Helpers.count_occurrences(players_seen),
                         "starting_pitchers": Helpers.count_occurrences(starting_pitchers)}
 
-            return jsonify(response_data)
+            return jsonify(response_data), 200
 
         except:
-            return jsonify({'response': "No player information for user"})
+            return jsonify({'response': "No player information for user"}), 404
 
 # Compiling user information and return stats based on user and season
 
@@ -317,10 +351,10 @@ def userinfo(id):
                 "teams_seen": Helpers.count_info(teams_seen),
                 "months": Helpers.count_info(dates_list)
             }
-            return jsonify(response_data)
+            return jsonify(response_data), 200
 
         except:
-            return jsonify({'response': "No user information for user"})
+            return jsonify({'response': "No user information for user"}), 404
 
 
 if __name__ == '__main__':

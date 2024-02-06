@@ -73,11 +73,22 @@ class UserGames(db.Model, SerializerMixin):
     serialize_rules = ('-users.attended_games', '-games.attended_games',)
 
     @validates('gamePk', 'user_id')
-    def non_null(self, key, value):
-        if value:
-            return value
+    def validate_unique_entry(self, key, value):
+        if key == 'user_id':
+            user_id = value
+            gamePk = self.gamePk
+        elif key == 'gamePk':
+            user_id = self.user_id
+            gamePk = value
+
+        existing_entry = UserGames.query.filter(
+            UserGames.user_id == user_id, UserGames.gamePk == gamePk).first()
+
+        if existing_entry:
+            raise ValueError(
+                f'Duplicate entry for user_id={user_id} and gamePk={gamePk}')
         else:
-            raise ValueError
+            return value
 
 
 class Ballparks(db.Model, SerializerMixin):

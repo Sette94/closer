@@ -5,7 +5,13 @@ import { useNavigate } from 'react-router-dom';
 
 function UserGames({ user_id, game, handleDelete }) {
 
+
+
     const navigate = useNavigate();
+
+    // if (game === undefined) {
+    //     return <div style={{ color: 'black' }}>Loading...</div>;
+    // }
 
     const game_object = game.games.game_data.dates[0].games[0]
     const date = game.games.date
@@ -21,19 +27,22 @@ function UserGames({ user_id, game, handleDelete }) {
 
 
     return (
-        <div className="boxScoreContainer">
-            <button onClick={() => { navigate(`/games/${user_id}?gamePk=${game_object.gamePk}`) }}>{date}&nbsp;</button>
-            <div className="teamInfo">
-                <img className="teamLogo" src={away_team_logo} alt={`Away Team Logo`} /><p>{away_team_score}</p>
-            </div>
-            <div className="teamInfo">
-                <img className="teamLogo" src={home_team_logo} alt={`Home Team Logo`} />
-                <p>{home_team_score}</p>
+        <div>
 
-                <p>&nbsp;&nbsp;{win}</p>
-            </div>
-            <button onClick={() => handleDelete(game_object.gamePk, user_id)}>Delete</button>
+            <div className="boxScoreContainer">
+                <button onClick={() => { navigate(`/games/${user_id}?gamePk=${game_object.gamePk}`) }}>{date}&nbsp;</button>
+                <div className="teamInfo">
+                    <img className="teamLogo" src={away_team_logo} alt={`Away Team Logo`} /><p>{away_team_score}</p>
+                </div>
+                <div className="teamInfo">
+                    <img className="teamLogo" src={home_team_logo} alt={`Home Team Logo`} />
+                    <p>{home_team_score}</p>
 
+                    <p>&nbsp;&nbsp;{win}</p>
+                </div>
+                <button onClick={() => handleDelete(game_object.gamePk, user_id)}>Delete</button>
+
+            </div>
         </div>
     )
 }

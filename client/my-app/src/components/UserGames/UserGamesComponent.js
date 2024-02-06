@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import UserGames from './UserGames';
+import AddNewGameForm from './AddNewGameForm'
 
 
 
@@ -26,15 +27,37 @@ function UserGameContainer() {
     }, []);
 
     function handleDelete(gamePk, user_id) {
-        axios.delete(`http://localhost:5555/usergames/${user_id}`, {
-            data: {
-                "gamePk": gamePk
-            }
-        });
+        try {
+            axios.delete(`http://localhost:5555/usergames/${user_id}`, {
+                data: {
+                    "gamePk": gamePk
+                }
+            });
+        }
+        catch (error) {
+            console.error("Response error:", error.response.data);
+            console.error("Status code:", error.response.status);
+        }
         setuserGames(userGames.filter(game =>
             game.games.game_data.dates[0].games[0].gamePk !== gamePk))
 
     }
+
+    function handleNewGame(gamePk, user_id) {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5555/users/${user_id}/games?gamePk=${gamePk}`);
+                setuserGames((prevUserGames) => [
+                    ...prevUserGames,
+                    response.data // Assuming the data property contains the new game
+                ]);
+            } catch (error) {
+                console.error('Error fetching user games:', error);
+            }
+        };
+        fetchData();
+    }
+
 
 
     return (
@@ -46,9 +69,17 @@ function UserGameContainer() {
                     <p>Please log in.</p>
                 )}
             </div>
-            {userGames.map((game) => {
-                return <UserGames user_id={user.user_id} game={game} handleDelete={handleDelete} />;
-            })}
+            <div className="addNewGame">
+                <AddNewGameForm handleNewGame={handleNewGame} />
+            </div>
+
+            {userGames && userGames.length > 0 && (
+                userGames
+                    .sort((a, b) => new Date(b.games.date) - new Date(a.games.date))
+                    .map((game) => (
+                        <UserGames user_id={user.user_id} game={game} handleDelete={handleDelete} />
+                    ))
+            )}
         </div>
 
     )
