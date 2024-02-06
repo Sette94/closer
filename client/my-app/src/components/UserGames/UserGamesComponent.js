@@ -25,7 +25,17 @@ function UserGameContainer() {
         fetchData();
     }, []);
 
-    console.log(userGames)
+    function handleDelete(gamePk, user_id) {
+        axios.delete(`http://localhost:5555/usergames/${user_id}`, {
+            data: {
+                "gamePk": gamePk
+            }
+        });
+        setuserGames(userGames.filter(game =>
+            game.games.game_data.dates[0].games[0].gamePk !== gamePk))
+
+    }
+
 
     return (
         <div>
@@ -36,8 +46,8 @@ function UserGameContainer() {
                     <p>Please log in.</p>
                 )}
             </div>
-            {userGames.map((game, index) => {
-                return <UserGames user_id={user.user_id} game={game} index={index} />;
+            {userGames.map((game) => {
+                return <UserGames user_id={user.user_id} game={game} handleDelete={handleDelete} />;
             })}
         </div>
 

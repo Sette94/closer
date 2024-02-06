@@ -151,30 +151,32 @@ def users(id=None):
 
 @app.route("/users/<int:id>/games", methods=['GET'])
 def user_games_attended_info(id):
-    # focus_user = Users.query.filter(Users.user_id == id).first()
     season = request.args.get(
         'season', type=int, default=Helpers.current_year())
-    game_number = request.args.get('game_number', type=int, default=None)
+    gamePk = request.args.get('gamePk', type=int, default=None)
 
     user_games_list = [Helpers.formatted_game_return_refactor(ug)
                        for ug in UserGames.query.filter(UserGames.user_id == id).all() if ug.games.season == season]
 
-    number_of_game = len(user_games_list)
     if request.method == 'GET':
-        if game_number:
-            if game_number <= number_of_game:
-                response_data = {"attended_games": user_games_list}[
-                    'attended_games'][number_of_game-game_number]
+        if gamePk:
+            try:
+                one_game = Helpers.formatted_game_return_refactor(UserGames.query.filter(
+                    UserGames.user_id == id, UserGames.gamePk == gamePk).first())
+
+                response_data = {"attended_games": one_game}[
+                    'attended_games']
+
                 return response_data
-            else:
+            except:
                 response_data = jsonify(
-                    {'error': 'Game number does not exist for user'}
+                    {'error': 'Game does not exist for user'}
                 )
                 return response_data
-
-        response_data = jsonify(
-            user_games_list
-        )
+        else:
+            response_data = jsonify(
+                user_games_list
+            )
 
     else:
         response_data = jsonify(

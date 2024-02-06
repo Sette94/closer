@@ -1,8 +1,9 @@
+import UserInfo from "../UserInfo/UserInfo";
 import "./styles/UserGames.css"
 import { useNavigate } from 'react-router-dom';
 
 
-function UserGames({ user_id, game, index }) {
+function UserGames({ user_id, game, handleDelete }) {
 
     const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ function UserGames({ user_id, game, index }) {
 
     return (
         <div className="boxScoreContainer">
-            <button onClick={() => { navigate(`/games/${user_id}?game_number=${index + 1}`) }}>{date}&nbsp;</button>
+            <button onClick={() => { navigate(`/games/${user_id}?gamePk=${game_object.gamePk}`) }}>{date}&nbsp;</button>
             <div className="teamInfo">
                 <img className="teamLogo" src={away_team_logo} alt={`Away Team Logo`} /><p>{away_team_score}</p>
             </div>
@@ -31,6 +32,8 @@ function UserGames({ user_id, game, index }) {
 
                 <p>&nbsp;&nbsp;{win}</p>
             </div>
+            <button onClick={() => handleDelete(game_object.gamePk, user_id)}>Delete</button>
+
         </div>
     )
 }

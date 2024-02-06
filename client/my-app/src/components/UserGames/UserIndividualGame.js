@@ -14,14 +14,14 @@ function IndividualGame() {
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const game_number = searchParams.get('game_number');
+    const gamePk = searchParams.get('gamePk');
 
     useEffect(() => {
         const fetchData = async () => {
             setIsLoading(true);
 
             try {
-                const response = await axios.get(`http://localhost:5555/users/${user.user_id}/games?game_number=${game_number}`);
+                const response = await axios.get(`http://localhost:5555/users/${user.user_id}/games?gamePk=${gamePk}`);
                 setGame(response.data);
             } catch (error) {
                 console.error('Error fetching user games:', error);
@@ -32,7 +32,7 @@ function IndividualGame() {
         };
 
         fetchData();
-    }, [game_number]);
+    }, [gamePk]);
 
     if (isLoading) {
         return <div style={{ color: 'black' }}>Loading...</div>;
