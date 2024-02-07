@@ -19,7 +19,10 @@ const ConsolidatedHomeContainer = () => {
                 onClick={() => { navigate('/mygames') }}
 
             >Add New Game</button>
-            <button>MLB Closer</button>
+            <button
+                onClick={() => { navigate('/closer') }}
+
+            >MLB Closer</button>
         </div>
     );
 };

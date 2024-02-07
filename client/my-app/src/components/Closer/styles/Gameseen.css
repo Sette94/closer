@@ -1,0 +1,85 @@
+.closer-container {
+    text-align: center;
+}
+
+.closer-container p {
+    font-family: 'Josefin Slab', sans-serif;
+    font-size: 48px;
+
+}
+
+.greeting-open {
+    opacity: 0;
+    /* Start with opacity 0 to hide */
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 1s;
+
+    /* Fade-in animation */
+}
+
+.greeting-seen {
+    opacity: 0;
+    /* Start with opacity 0 to hide */
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 3s;
+
+    /* Fade-in animation */
+}
+
+.greeting-exact {
+    opacity: 0;
+    /* Start with opacity 0 to hide */
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 5s;
+
+    /* Fade-in animation */
+}
+
+.greeting-close {
+    opacity: 0;
+    /* Start with opacity 0 to hide */
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 9.5s;
+
+    /* Fade-in animation */
+}
+
+
+
+.counter {
+    font-size: 48px;
+    font-weight: bold;
+    color: #007bff;
+    /* You can adjust the color as needed */
+    opacity: 0;
+    /* Start with opacity 0 to hide */
+    animation: countUp 1s ease forwards;
+    animation-delay: 0;
+    /* Delay the start of the animation by 4 seconds */
+}
+
+/* Count-up animation */
+@keyframes countUp {
+    0% {
+        opacity: 0;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
