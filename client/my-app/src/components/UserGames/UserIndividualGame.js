@@ -13,39 +13,47 @@ import moment from "moment-timezone";
 
 import axios from 'axios';
 
-function IndividualGame() {
+function IndividualGame({ game }) {
     const user = useSelector((state) => state.user);
-    const [game, setGame] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const location = useLocation();
+    const currentGame = game !== undefined ? game : location.state.games;
 
-    const searchParams = new URLSearchParams(useLocation().search);
-    const gamePk = searchParams.get('gamePk');
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setIsLoading(true);
+    // Changing this block of code to accept state through the navigate link 
 
-            try {
-                const response = await axios.get(`http://localhost:5555/users/${user.user_id}/games?gamePk=${gamePk}`);
-                setGame(response.data);
-            } catch (error) {
-                console.error('Error fetching user games:', error);
-            } finally {
-                setIsLoading(false);
+    // const [game, setGame] = useState(null);
+    //  const [isLoading, setIsLoading] = useState(false);
 
-            }
-        };
+    // const searchParams = new URLSearchParams(useLocation().search);
+    // const gamePk = searchParams.get('gamePk');
 
-        fetchData();
-    }, [gamePk]);
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         setIsLoading(true);
 
-    if (isLoading) {
-        return <div style={{ color: 'black' }}>Loading...</div>;
-    }
+    //         try {
+    //             const response = await axios.get(`http://localhost:5555/users/${user.user_id}/games?gamePk=${gamePk}`);
+    //             setGame(response.data);
+    //         } catch (error) {
+    //             console.error('Error fetching user games:', error);
+    //         } finally {
+    //             setIsLoading(false);
 
-    if (game) {
-        const game_object = game.games.game_data.dates[0].games[0];
-        const date = game.games.date
+    //         }
+    //     };
+
+    //     fetchData();
+    // }, [gamePk]);
+
+    // if (isLoading) {
+    //     return <div style={{ color: 'black' }}>Loading...</div>;
+    // }
+
+
+
+    if (currentGame) {
+        const game_object = currentGame.games.game_data.dates[0].games[0];
+        const date = currentGame.games.date
 
         // Team Data
         const home_team_score = game_object.teams.home.score

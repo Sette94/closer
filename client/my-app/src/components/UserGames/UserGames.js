@@ -26,7 +26,14 @@ function UserGames({ user_id, game, handleDelete }) {
         <div>
 
             <div className="boxScoreContainer">
-                <button onClick={() => { navigate(`/games/${user_id}?gamePk=${game_object.gamePk}`) }}>{date}&nbsp;</button>
+
+
+                {/* <button onClick={() => { navigate(`/games/${user_id}?gamePk=${game_object.gamePk}`) }}>{date}&nbsp;</button> */}
+
+                <button onClick={() => { navigate(`/games/${user_id}?gamePk=${game_object.gamePk}`, { state: { games: game } }) }}>{date}&nbsp;</button>
+
+
+
                 <div className="teamInfo">
                     <img className="teamLogo" src={away_team_logo} alt={`Away Team Logo`} /><p>{away_team_score}</p>
                 </div>

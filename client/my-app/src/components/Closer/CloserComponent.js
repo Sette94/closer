@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import './styles/Gameseen.css';
+import './styles/CloserLanding.css';
 
 function CloserComponent() {
+    const navigate = useNavigate();
+
     const user = useSelector((state) => state.user);
     const [userGames, setuserGames] = useState([]);
     const [countedGames, setCountedGames] = useState(0);
     const [delayPassed, setDelayPassed] = useState(false);
+    const [randomGames, setRandomGames] = useState([])
 
 
 
@@ -22,9 +26,9 @@ function CloserComponent() {
         };
 
         fetchData();
+
     }, []);
 
-    // Increment the counter every 100 milliseconds until it reaches the final value
 
     useEffect(() => {
         if (!delayPassed) {
@@ -42,6 +46,12 @@ function CloserComponent() {
     useEffect(() => {
         let timer;
         if (delayPassed && countedGames < userGames.length) {
+
+            const shuffledList = userGames.sort(() => Math.random() - 0.5);
+            const randomSubset = shuffledList.slice(0, (shuffledList.length / 2));
+            setRandomGames(randomSubset);
+
+
             timer = setInterval(() => {
                 setCountedGames(prevCount => Math.min(prevCount + 1, userGames.length));
             }, 100);
@@ -51,7 +61,7 @@ function CloserComponent() {
 
     let message;
 
-    switch (countedGames > 0) {
+    switch (countedGames >= 0) {
         case countedGames < 10:
             message = <p className="greeting-close">Let's take a look at those games</p>;
             break;
@@ -75,6 +85,10 @@ function CloserComponent() {
             {countedGames == 0 ? "" : <span className="counter">{countedGames}</span>}
             <br></br> <br></br>
             {message}
+            <br></br>
+            {/* <button className="greeting-close" onClick={() => { navigate(`/games/${user.user_id}?gamePk=716595`) }}>Games</button> */}
+            <button className="greeting-close" onClick={() => { navigate(`/closer/${user.user_id}`, { state: { games: randomGames } }) }}>Games</button>
+
 
         </div>
     );
