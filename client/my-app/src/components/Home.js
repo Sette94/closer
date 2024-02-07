@@ -9,20 +9,18 @@ const ConsolidatedHomeContainer = () => {
     const user = useSelector((state) => state.user);
 
     return (
-        <div>
-            <div className="landingpage">
-                {isAuthenticated ? (
-                    <h1>{user.username}</h1>
-                ) : (
-                    <p>Please log in.</p>
-                )}
-                <button
-                    onClick={() => { navigate('/mygames') }}
+        <div className="landingpage">
+            {isAuthenticated ? (
+                <h1>Welcome {user.username}</h1>
+            ) : (
+                <p>Please log in.</p>
+            )}
+            <button
+                onClick={() => { navigate('/mygames') }}
 
-                >Add New Game</button>
-                <button>MLB Closer</button>
-            </div>
-        </div >
+            >Add New Game</button>
+            <button>MLB Closer</button>
+        </div>
     );
 };
 

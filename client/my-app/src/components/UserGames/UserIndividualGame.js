@@ -6,6 +6,7 @@ import 'react-tooltip/dist/react-tooltip.css'
 import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
 import ReactRoundedImage from "react-rounded-image"
+import moment from "moment-timezone";
 
 
 
@@ -59,6 +60,16 @@ function IndividualGame() {
         const awayPitcher = game_object.teams.away.probablePitcher;
         const win = game_object.teams.home.isWinner == "true" ? "W" : "L"
 
+        const firstPitch = game_object.gameInfo.firstPitch
+        const dayNight = game_object.dayNight == "night" ? <div >First Pitch: {UTCtimeconverter(firstPitch)} 🌇</div> : <div >First Pitch: {UTCtimeconverter(firstPitch)} ☀️</div>;
+
+
+
+        function UTCtimeconverter(utcTimeStr) {
+            return moment.utc(utcTimeStr).tz("America/New_York").format("h:mm A");
+
+        }
+
 
         function weatherData() {
             return Object.entries(game_object.weather).map(([key, value], index) => (
@@ -81,7 +92,6 @@ function IndividualGame() {
                         <div className="homerunitems" key={homerun.matchup.batter.id}>
                             <a href={`https://www.mlb.com/player/${homerun.matchup.batter.id}`} target="_blank">
                                 {/* <img className='homerunheadshot' src={headshot} alt={`headshot`} /> */}
-
                                 <ReactRoundedImage
                                     image={headshot}
                                     roundedColor="#66A5CC"
@@ -102,16 +112,18 @@ function IndividualGame() {
 
 
         function gameData() {
-            const dayNight = game_object.dayNight == "night" ? <div style={{ fontSize: '2em' }}>🌇</div> : <div style={{ fontSize: '2em' }}>☀️</div>;
             const attendance = game_object.gameInfo.attendance
             const time = `${Math.floor(game_object.gameInfo.gameDurationMinutes / 60)}:${game_object.gameInfo.gameDurationMinutes % 60}`
+            const series = game_object.gamesInSeries
+
 
             return (
                 <div>
-                    <p>{dayNight}</p>
                     <i><b>Attendance</b>: {attendance}</i>
                     <br />
-                    <i><b>Time</b>: {time}</i>
+                    <i><b>Time of Game</b>: {time}</i>
+                    <br />
+                    <i><b>Game In Series</b>: {series}</i>
 
                 </div>
             )
@@ -121,68 +133,19 @@ function IndividualGame() {
 
         return (
             <div>
-                <h1>{date}</h1>
+                <h2>{game_object.venue.name} {date} {dayNight}</h2>
 
                 <div className="scoreContainer">
                     <div className='awayTeamLogo'>
                         <img src={away_team_logo} alt={`Away Team Logo`} />
                         <p>{away_team_score}</p>
                     </div>
-
                     <div className='homeTeamLogo'>
                         <img src={home_team_logo} alt={`Home Team Logo`} /> <p>{home_team_score}</p>
 
                     </div>
                 </div>
-                <h2> Starting Pitchers</h2>
 
-                <div className="pitchersContainer">
-                    <div className='awayTeamPitcher'>
-                        {/* <h4>{game_object.teams.away.team.name}</h4> */}
-                        <Tooltip title={awayPitcher.fullName} placement="bottom">
-                            <a href={`https://www.mlb.com/player/${awayPitcher.id}`} target="_blank">
-                                <ReactRoundedImage
-                                    image={`https://img.mlbstatic.com/mlb/images/players/head_shot/${awayPitcher.id}.jpg`}
-                                    roundedColor="#FF0000"
-                                    imageWidth="120"
-                                    imageHeight="165"
-                                    roundedSize="8"
-                                    borderRadius="15"
-                                    hoverColor="#66A5CC"
-                                />
-
-                            </a>
-                        </Tooltip>
-                    </div>
-                    <div>
-                        VS
-                    </div>
-                    <div className='homeTeamPitcher'>
-                        {/* <h4>{game_object.teams.home.team.name}</h4> */}
-                        <Tooltip title={homePitcher.fullName} placement="bottom">
-                            <a href={`https://www.mlb.com/player/${homePitcher.id}`} target="_blank">
-
-                                <ReactRoundedImage
-                                    image={`https://img.mlbstatic.com/mlb/images/players/head_shot/${homePitcher.id}.jpg`}
-                                    roundedColor="#FF0000"
-                                    imageWidth="120"
-                                    imageHeight="165"
-                                    roundedSize="8"
-                                    borderRadius="15"
-                                    hoverColor="#66A5CC"
-                                />
-                            </a>
-
-
-                        </Tooltip>
-
-
-                    </div>
-
-
-
-
-                </div>
                 <div className="mainContainer">
                     <div className="gameStory">
                         <iframe src={`https://${game_object.story.link}`} />
@@ -203,19 +166,61 @@ function IndividualGame() {
                         </div>
 
                         <div className='gameData'>
-
-
                             <div>
-                                <h3>Homerun Hitters</h3>
-                                <div className='homeruns'>
-                                    {homerunData()}
-                                </div>
+                                <h3>Starting Pitchers</h3>
+                                <div className="pitchersContainer">
+                                    <div className='awayTeamPitcher'>
+                                        {/* <h4>{game_object.teams.away.team.name}</h4> */}
+                                        <Tooltip title={awayPitcher.fullName} placement="bottom">
+                                            <a href={`https://www.mlb.com/player/${awayPitcher.id}`} target="_blank">
+                                                <ReactRoundedImage
+                                                    image={`https://img.mlbstatic.com/mlb/images/players/head_shot/${awayPitcher.id}.jpg`}
+                                                    roundedColor="#FF0000"
+                                                    imageWidth="120"
+                                                    imageHeight="165"
+                                                    roundedSize="8"
+                                                    borderRadius="15"
+                                                    hoverColor="#66A5CC"
+                                                />
 
+                                            </a>
+                                        </Tooltip>
+                                    </div>
+                                    <div>
+                                        VS
+                                    </div>
+                                    <div className='homeTeamPitcher'>
+                                        {/* <h4>{game_object.teams.home.team.name}</h4> */}
+                                        <Tooltip title={homePitcher.fullName} placement="bottom">
+                                            <a href={`https://www.mlb.com/player/${homePitcher.id}`} target="_blank">
+
+                                                <ReactRoundedImage
+                                                    image={`https://img.mlbstatic.com/mlb/images/players/head_shot/${homePitcher.id}.jpg`}
+                                                    roundedColor="#FF0000"
+                                                    imageWidth="120"
+                                                    imageHeight="165"
+                                                    roundedSize="8"
+                                                    borderRadius="15"
+                                                    hoverColor="#66A5CC"
+                                                />
+                                            </a>
+
+
+                                        </Tooltip>
+                                    </div>
+                                </div>
                             </div>
+
 
                         </div>
 
+                        <div>
+                            <h3>Homerun Hitters</h3>
+                            <div className='homeruns'>
+                                {homerunData()}
+                            </div>
 
+                        </div>
 
 
                     </div>

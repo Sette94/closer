@@ -8,9 +8,23 @@ body {
   height: 100vh;
   /* Set the height to 100% of the viewport height */
 
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  margin-right: 10px;
 }

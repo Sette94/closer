@@ -5,6 +5,7 @@ import '../index.css';
 import { logout } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import "../nav.css"
 
 function Header() {
     const isAuthenticated = useSelector((state) => state.isAuthenticated);
@@ -18,28 +19,38 @@ function Header() {
     };
 
     return (
-        <div>
-            <h1 className="header">Header: MLB Closer</h1>
+        <div class="container">
             <PrimeReactProvider>
-                <nav className='nav'>
-                    <NavLink
-                        to="/home"
-                        className="nav-link"
-                    >
-                        Home
-                    </NavLink>
-                    <br></br>
-                    {isAuthenticated && (
-                        <NavLink
-                            to="/"
-                            className="nav-link"
-                            onClick={handleLogout}
-                        >
-                            Logout
-                        </NavLink>
-                    )}
+
+                <nav class="navbar">
+                    <h2 className='title'>Closer</h2>
+                    <ul class="nav--list">
+                        <li class="item"> <NavLink to="/home" className="nav-link">Home</NavLink></li>
+                        <li class="item">  {isAuthenticated && (<NavLink to="/" className="nav-link" onClick={handleLogout}> Logout</NavLink>)}</li>
+                    </ul>
+                    {/* 
+                        <nav className='nav'>
+                            <NavLink
+                                to="/home"
+                                className="nav-link"
+                            >
+                                Home
+                            </NavLink>
+                            <br></br>
+                            {isAuthenticated && (
+                                <NavLink
+                                    to="/"
+                                    className="nav-link"
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </NavLink>
+                            )}
+                        </nav> */}
+
                 </nav>
             </PrimeReactProvider>
+
         </div>
     );
 }
