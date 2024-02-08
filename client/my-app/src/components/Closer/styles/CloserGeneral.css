@@ -20,7 +20,7 @@
 
 
 .temperatureguage canvas {
-    width: 400px;
+    width: 300px;
     /* Adjust the width value as needed */
     height: auto;
     /* Maintain aspect ratio */

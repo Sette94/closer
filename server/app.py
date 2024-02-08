@@ -34,6 +34,22 @@ def index():
     return "<h1> Server </h1>"
 
 
+@app.route("/ballparks/", methods=['GET'])
+def ballparks():
+    if request.method == "GET":
+        try:
+            ballparks = Ballparks.query.all()
+            response_data = [
+                ballpark.venue_name for ballpark in Ballparks.query.all()]
+
+            return jsonify(response_data), 200
+
+        except Exception as e:
+            print(e)
+            response_data = {'response': "Failed to get parks"}
+            return jsonify(response_data), 404
+
+
 @app.route("/usergames/<int:id>", methods=['POST', 'DELETE'])
 def user_games(id):
 
@@ -45,9 +61,12 @@ def user_games(id):
                 Ballparks.venue_name == form_data.get('data').get('venue')).first()
 
             ballpark_id = ballpark.venue_id
+            print(ballpark_id)
 
             game = Games.query.filter(Games.date == form_data.get('data').get(
                 'date'), Games.venue_id == ballpark_id).all()
+
+            print(game)
 
             new_attended = UserGames(
                 gamePk=game[0].gamePk,

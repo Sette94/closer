@@ -1,4 +1,3 @@
-import UserInfo from "../UserInfo/UserInfo";
 import "./styles/UserGames.css"
 import { useNavigate } from 'react-router-dom';
 

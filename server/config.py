@@ -18,8 +18,6 @@ class Helpers():
                       "7", "8", "9", "10", "11"]
 
         result = {month: 0 for month in all_months}
-        print(result)
-        print(month_counts)
         result.update(month_counts)
 
         return result

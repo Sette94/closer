@@ -1,13 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import { useFormik } from "formik";
+import { form, useField, useFormik } from "formik";
 import * as yup from "yup";
 import { useSelector } from 'react-redux';
 import axios from "axios";
 
-function NewGameHandler({ handleNewGame }) {
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import es from 'date-fns/locale/es';
+
+registerLocale('es', es)
+
+
+function NewGameHandler({ handleNewGame, ballparks }) {
     const user = useSelector((state) => state.user);
     const [response, setResponse] = useState(null);
+    const [startdate, setStartDate] = useState('2023-01-01');
 
+    function handleDate(date) {
+        const dateObject = new Date(date);
+        dateObject.setDate(dateObject.getDate() + 1); // Add a day to the date
+
+        const year = dateObject.getFullYear();
+        const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
+        const day = dateObject.getDate().toString().padStart(2, "0");
+
+        const formattedDate = `${year}-${month}-${day}`;
+        setStartDate(formattedDate)
+        handleForm(formattedDate)
+
+    }
+
+    function handleForm(formDate) {
+        const dateObject = new Date(formDate);
+        dateObject.setDate(dateObject.getDate()); // Add a day to the date
+
+        const year = dateObject.getFullYear();
+        const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
+        const day = dateObject.getDate().toString().padStart(2, "0");
+
+        const formattedformDate = `${year}-${month}-${day}`;
+        formik.setFieldValue('date', formattedformDate); // Update formik values
+
+    }
 
     const formSchema = yup.object().shape({
         venue: yup.string().required("Must enter a MLB Ballpark"),
@@ -17,7 +52,7 @@ function NewGameHandler({ handleNewGame }) {
     const formik = useFormik({
         initialValues: {
             venue: "",
-            date: "",
+            date: startdate,
         },
         validationSchema: formSchema,
         onSubmit: async () => {
@@ -50,31 +85,39 @@ function NewGameHandler({ handleNewGame }) {
         }
     }, [response]);
 
+
+
     return (
         <div>
             <p>{response}</p>
             <div className="login">
                 <form onSubmit={formik.handleSubmit}>
                     <div className="input-group">
-                        <input
-                            id="date"
-                            name="date"
-                            placeholder="Enter a date yyyy-mm-dd"
-                            onChange={formik.handleChange}
-                            value={formik.values.date}
-                        />
+
+
+                        <form>
+                            <DatePicker
+                                selected={startdate}
+                                onChange={(date) => handleDate(date)}
+
+                            />
+                        </form>
                         {formik.errors.date && (
                             <p className="error">{formik.errors.date}</p>
                         )}
                     </div>
                     <div className="input-group">
-                        <input
+                        <select
                             id="venue"
                             name="venue"
-                            placeholder="Enter MLB Ballpark"
                             onChange={formik.handleChange}
-                            value={formik.values.venue}
-                        />
+                            value={formik.values.venue}>
+                            <option value="">Select MLB Ballpark</option>
+                            {Object.values(ballparks).map((ballpark, index) => (
+                                <option key={index} value={ballpark}>{ballpark}</option>
+                            ))}
+                        </select>
+
                         {formik.errors.venue && (
                             <p className="error">{formik.errors.venue}</p>
                         )}

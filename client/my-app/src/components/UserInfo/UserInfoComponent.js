@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import UserInfo from './UserInfo';
 
 
 
@@ -37,11 +36,6 @@ function UserGameContainer() {
                 ) : (
                     <p>Please log in.</p>
                 )}
-            </div>
-            {<UserInfo info={gameInfo} />}
-            <div>
-
-
             </div>
 
         </div>

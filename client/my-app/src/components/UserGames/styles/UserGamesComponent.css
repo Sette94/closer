@@ -1,0 +1,9 @@
+.crudgamescontainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 1;
+    margin-bottom: 1px;
+
+
+}

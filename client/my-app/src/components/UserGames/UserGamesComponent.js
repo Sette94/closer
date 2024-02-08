@@ -4,6 +4,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import UserGames from './UserGames';
 import AddNewGameForm from './AddNewGameForm'
+import "./styles/UserGamesComponent.css"
 
 
 
@@ -12,6 +13,8 @@ function UserGameContainer() {
     const isAuthenticated = useSelector((state) => state.isAuthenticated);
     const user = useSelector((state) => state.user);
     const [userGames, setuserGames] = useState([]);
+    const [userBallparks, setuserBallparks] = useState([]);
+
     const [open, setOpen] = React.useState(false);
 
 
@@ -20,6 +23,20 @@ function UserGameContainer() {
             try {
                 const response = await axios.get(`http://localhost:5555/users/${user.user_id}/games`);
                 setuserGames(response.data);
+            } catch (error) {
+                console.error('Error fetching user games:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://127.0.0.1:5555/ballparks/`);
+                setuserBallparks(response.data);
             } catch (error) {
                 console.error('Error fetching user games:', error);
             }
@@ -60,34 +77,34 @@ function UserGameContainer() {
         fetchData();
     }
 
+
+
+
     const handleOpen = () => {
         setOpen(!open);
     };
 
 
     return (
-        <div>
-            <div className="landingpage">
-                {isAuthenticated ? (
-                    <h1>{user.username} Profile</h1>
-                ) : (
-                    <p>Please log in.</p>
+        <div class="crudgamescontainer">
+
+            <div className="addgame">
+                <button onClick={handleOpen}>Add New Game Form</button>
+                {open ? <div><AddNewGameForm handleNewGame={handleNewGame} ballparks={userBallparks} /> </div> : <div></div>}
+            </div>
+
+            <div className="seengameslist">
+                {userGames && userGames.length > 0 && (
+                    userGames
+                        .sort((a, b) => new Date(b.games.date) - new Date(a.games.date))
+                        .map((game) => (
+                            <UserGames user_id={user.user_id} game={game} handleDelete={handleDelete} />
+                        ))
                 )}
             </div>
 
 
-            <div>
-                <button onClick={handleOpen}>Add New Game Form</button>
-                {open ? <div><AddNewGameForm handleNewGame={handleNewGame} /> </div> : <div></div>}
-            </div>
 
-            {userGames && userGames.length > 0 && (
-                userGames
-                    .sort((a, b) => new Date(b.games.date) - new Date(a.games.date))
-                    .map((game) => (
-                        <UserGames user_id={user.user_id} game={game} handleDelete={handleDelete} />
-                    ))
-            )}
         </div>
 
     )
