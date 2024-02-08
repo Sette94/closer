@@ -1,0 +1,76 @@
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+    /* Set the height to 100% of the viewport height */
+}
+
+.item {
+    flex: 1;
+    /* Let items grow to fill available space */
+}
+
+.mainContainer.h3 {
+    align-items: center;
+}
+
+
+.headers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 50%;
+
+}
+
+.temperature {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    width: 50%;
+}
+
+/* .daynight .css-66gjpw-MuiResponsiveChart-container {
+
+    display: none;
+} */
+
+.daynight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+
+}
+
+.teamsseen {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    max-height: calc(3 * (3vw + 10px) + 10px);
+    /* Height of 3 images plus margins */
+    width: 50%;
+    /* Center the content horizontally */
+}
+
+.teamsseen a {
+    flex: 0 0 calc(33% - 10px);
+    /* Adjusted width with some spacing */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Each team occupies one-third of the width with some spacing */
+    margin: 5px;
+    /* Added margin around each team */
+}
+
+.teamsseen img {
+    width: 3vw;
+    height: auto;
+    /* Make sure the images fill their container */
+}

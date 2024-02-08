@@ -333,8 +333,19 @@ def userinfo(id):
                      "id": game_data['venue']['id']})
 
                 home_win_list.append(home_team_info['isWinner'])
-                teams_seen.append(home_team_info['team']['name'])
-                teams_seen.append(away_team_info['team']['name'])
+                # teams_seen.append(home_team_info['team']['name'])
+                # teams_seen.append(away_team_info['team']['name'])
+
+                teams_seen.append({
+                    "name": home_team_info['team']['name'],
+                    "id": home_team_info['team']['id']
+                })
+
+                teams_seen.append({
+                    "name": away_team_info['team']['name'],
+                    "id": away_team_info['team']['id']
+                })
+
                 dates_list.append(Helpers.month(game_data['gameDate']))
 
             day_night_object = Helpers.count_info(day_night_list)
@@ -348,7 +359,7 @@ def userinfo(id):
                 "avgerage_temp": round(mean(temperature_list), 0),
                 "ballparks": Helpers.count_occurrences(venue_list),
                 "record_wins": Helpers.count_info(home_win_list),
-                "teams_seen": Helpers.count_info(teams_seen),
+                "teams_seen": Helpers.count_occurrences(teams_seen),
                 "months": Helpers.count_info(dates_list)
             }
             return jsonify(response_data), 200

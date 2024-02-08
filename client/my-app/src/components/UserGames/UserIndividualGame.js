@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';  // Import useParams
 import "./styles/IndividualGames.css"
 import 'react-tooltip/dist/react-tooltip.css'
 import Tooltip from '@mui/material/Tooltip';
-import Button from '@mui/material/Button';
 import ReactRoundedImage from "react-rounded-image"
 import moment from "moment-timezone";
 
