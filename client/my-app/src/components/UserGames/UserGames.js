@@ -17,7 +17,7 @@ function UserGames({ user_id, game, handleDelete }) {
     const away_team_score = game_object.teams.away.score
     const away_team_id = game_object.teams.away.team.id
     const away_team_logo = `https://www.mlbstatic.com/team-logos/${away_team_id}.svg`
-    const win = game_object.teams.home.isWinner == "true" ? "W" : "L"
+    const win = game_object.teams.home.isWinner == true ? "W" : "L"
 
 
 
