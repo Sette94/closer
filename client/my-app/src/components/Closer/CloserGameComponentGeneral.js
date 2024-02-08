@@ -167,21 +167,11 @@ function CloserGameComponentGeneral() {
 
                     <div className='teamseenContainer'>
                         <h3 className='headers'> Top 3 Teams Seen</h3>
-
                         {isTopVisible ? null : (
-
-
                             <button onClick={toggleVisibilityTop} className='revealtopbutton'>
                                 Click to Reveal
                             </button>
-
-
-
                         )}
-
-
-
-
 
                         {isTopVisible && (
                             <div className='teamsseen'>
@@ -195,7 +185,6 @@ function CloserGameComponentGeneral() {
                                 })}
                             </div>
                         )}
-
 
                         <h3 className='headers'> All Teams Seen</h3>
                         {isAllVisible ? null : (

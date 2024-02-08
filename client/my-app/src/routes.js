@@ -7,7 +7,7 @@ import UserIndividualGame from "./components/UserGames/UserIndividualGame";
 import CloserComponent from "./components/Closer/CloserComponent";
 import CloserGameComponent from "./components/Closer/CloserGameComponent";
 import CloserGameComponentGeneral from "./components/Closer/CloserGameComponentGeneral"
-
+import GeneralPageLanding from "./components/Closer/CloserWelcomeLanding"
 
 const routes = [
 
@@ -22,7 +22,8 @@ const routes = [
             { path: "/games/:userId/", element: <UserIndividualGame /> },
             { path: "/closer", element: <CloserComponent /> },
             { path: "/closer/:userId", element: <CloserGameComponent /> },
-            { path: "/closer/:userId/general", element: <CloserGameComponentGeneral /> }
+            { path: "/closer/:userId/generallanding", element: <GeneralPageLanding /> },
+            { path: "/closer/:userId/general/facts", element: <CloserGameComponentGeneral /> }
 
 
 

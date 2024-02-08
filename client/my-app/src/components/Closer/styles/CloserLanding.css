@@ -35,6 +35,16 @@
     /* Fade-in animation */
 }
 
+.greeting-fact {
+    opacity: 0;
+    /* Start with opacity 0 to hide */
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 7s;
+
+    /* Fade-in animation */
+}
+
+
 .greeting-close {
     opacity: 0;
     /* Start with opacity 0 to hide */
