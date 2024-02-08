@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import "./Home.css"
 
 const ConsolidatedHomeContainer = () => {
     const navigate = useNavigate()
@@ -9,21 +10,26 @@ const ConsolidatedHomeContainer = () => {
     const user = useSelector((state) => state.user);
 
     return (
-        <div className="landingpage">
+
+        <div>
             {isAuthenticated ? (
                 <h1>Welcome {user.username}</h1>
             ) : (
                 <p>Please log in.</p>
             )}
-            <button
-                onClick={() => { navigate('/mygames') }}
+            <div className="landingpage">
 
-            >Add New Game</button>
-            <button
-                onClick={() => { navigate('/closer') }}
+                <button className='homepagebuttons'
+                    onClick={() => { navigate('/mygames') }}
 
-            >MLB Closer</button>
+                >Add New Game</button>
+                <button className='homepagebuttons'
+                    onClick={() => { navigate('/closer') }}
+
+                >MLB Closer</button>
+            </div>
         </div>
+
     );
 };
 

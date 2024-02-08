@@ -11,7 +11,7 @@ h2 {
     justify-content: space-evenly;
     align-items: center;
     flex: 1;
-    margin-bottom: 16px;
+    margin-bottom: 1px;
 }
 
 .awayTeamLogo,
@@ -35,7 +35,7 @@ h2 {
 }
 
 .scoreContainer img {
-    width: 10vw;
+    width: 8vw;
     height: auto;
 }
 
@@ -61,7 +61,7 @@ h2 {
 
 .gameStory {
     width: 100%;
-    height: 100%;
+    height: 80%;
     box-sizing: border-box;
 }
 

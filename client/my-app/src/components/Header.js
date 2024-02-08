@@ -21,33 +21,15 @@ function Header() {
     return (
         <div class="container">
             <PrimeReactProvider>
-
                 <nav class="navbar">
                     <h2 className='title'>Closer</h2>
-                    <ul class="nav--list">
-                        <li class="item"> <NavLink to="/home" className="nav-link">Home</NavLink></li>
-                        <li class="item">  {isAuthenticated && (<NavLink to="/" className="nav-link" onClick={handleLogout}> Logout</NavLink>)}</li>
-                    </ul>
-                    {/* 
-                        <nav className='nav'>
-                            <NavLink
-                                to="/home"
-                                className="nav-link"
-                            >
-                                Home
-                            </NavLink>
-                            <br></br>
-                            {isAuthenticated && (
-                                <NavLink
-                                    to="/"
-                                    className="nav-link"
-                                    onClick={handleLogout}
-                                >
-                                    Logout
-                                </NavLink>
-                            )}
-                        </nav> */}
 
+                    {isAuthenticated ? (
+                        <ul class="nav--list">
+                            <li class="item"> <NavLink to="/home" className="nav-link">Home</NavLink></li>
+                            <li class="item">  {isAuthenticated && (<NavLink to="/" className="nav-link" onClick={handleLogout}> Logout</NavLink>)}</li>
+                        </ul>
+                    ) : null}
                 </nav>
             </PrimeReactProvider>
 

@@ -1,0 +1,16 @@
+.landingpage {
+    display: flex;
+    flex-direction: row;
+    align-items: space-between;
+    justify-content: center;
+}
+
+.homepagebuttons {
+    height: 10vh;
+
+}
+
+.landingpage button {
+    margin: 50px;
+    /* Adjust spacing between buttons */
+}
