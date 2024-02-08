@@ -2,10 +2,14 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-
     width: 100vw;
     height: 100vh;
     /* Set the height to 100% of the viewport height */
+}
+
+.headers {
+    font-family: 'Josefin Slab', sans-serif;
+    font-size: 30px;
 }
 
 .item {
@@ -13,49 +17,59 @@
     /* Let items grow to fill available space */
 }
 
-.mainContainer.h3 {
-    align-items: center;
-}
-
-
-.headers {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 50%;
-
-}
-
-.temperature {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    width: 50%;
-}
-
-/* .daynight .css-66gjpw-MuiResponsiveChart-container {
-
-    display: none;
-} */
 
 .daynight {
     display: flex;
+    justify-content: center;
+}
+
+.dayNightItem {
+    text-align: center;
+    font-size: 30px;
+    /* Adjust margin as needed */
+}
+
+.daynigthemoji {
+    font-size: 60px;
+
+}
+
+.recordContainer {
+    display: flex;
+    flex-direction: column;
+    /* Stack items vertically */
+    align-items: center;
+    /* Center items horizontally */
+    width: 50%;
+    justify-content: unset;
+}
+
+.flipNumbersContainer {
+    display: flex;
+    /* Use flexbox layout */
+    gap: 27px;
+    /* Add space between the FlipNumbers components */
+}
+
+.flipNumber {
+    flex: 1;
+    /* Allow the FlipNumbers components to grow and fill the container */
+}
+
+
+.teamseenContainer {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-
+    width: 50%;
 }
 
 .teamsseen {
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
-    max-height: calc(3 * (3vw + 10px) + 10px);
-    /* Height of 3 images plus margins */
+    max-height: calc(3 * (3vw + 10px) + 30px);
     width: 50%;
-    /* Center the content horizontally */
 }
 
 .teamsseen a {
@@ -64,7 +78,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Each team occupies one-third of the width with some spacing */
     margin: 5px;
     /* Added margin around each team */
 }
@@ -72,5 +85,101 @@
 .teamsseen img {
     width: 3vw;
     height: auto;
-    /* Make sure the images fill their container */
+}
+
+
+
+.top-seen {
+    opacity: 0;
+    /* Start with opacity 0 to hide */
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 1.5s;
+
+    /* Fade-in animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+:root {
+    --black: rgb(0 0 0);
+    --dark-navy: rgb(26 28 60);
+    --navy: rgb(45 54 77);
+    --navy-bg: rgb(86 94 115);
+    --gray: rgb(167 167 167);
+    --white: rgb(255 255 255);
+    --yellow: rgb(255 181 0);
+    --light-yellow: rgb(255 209 98);
+}
+
+
+.revealtopbutton {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    background-image: url("https://www.mlbstatic.com/team-logos/121.svg"),
+        url("https://www.mlbstatic.com/team-logos/147.svg");
+    background-repeat: no-repeat;
+    background-position: calc(0% - 100px), calc(100% - 12px);
+    background-color: white;
+    color: var(--dark-navy);
+    cursor: pointer;
+    display: block;
+    position: relative;
+    border: 4px solid var(--light-yellow);
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 14px 24px 12px 12px;
+    width: 250px;
+    text-align: center;
+    overflow: hidden;
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 1px rgb(0 0 0 / 20%), 0 1px 0 rgb(0 0 0 / 20%);
+    white-space: nowrap;
+    transition: background-position 2s ease;
+
+    &:hover {
+        background-position: calc(25% - 40px), calc(100% + 100px);
+    }
+}
+
+
+.revealallbutton {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    background-image: url("https://www.mlbstatic.com/team-logos/137.svg"),
+        url("https://www.mlbstatic.com/team-logos/119.svg");
+    background-repeat: no-repeat;
+    background-position: calc(0% - 100px), calc(100% - 12px);
+    background-color: white;
+    color: var(--dark-navy);
+    cursor: pointer;
+    display: block;
+    position: relative;
+    border: 4px solid var(--light-yellow);
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 14px 24px 12px 12px;
+    width: 250px;
+    text-align: center;
+    overflow: hidden;
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 1px rgb(0 0 0 / 20%), 0 1px 0 rgb(0 0 0 / 20%);
+    white-space: nowrap;
+    transition: background-position 2s ease;
+
+    &:hover {
+        background-position: calc(25% - 40px), calc(100% + 100px);
+    }
 }

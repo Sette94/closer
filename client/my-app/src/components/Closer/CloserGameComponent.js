@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 import IndividualGame from '../UserGames/UserIndividualGame';
 
+
 function CloserGameComponent() {
     const location = useLocation();
     const user = useSelector((state) => state.user);

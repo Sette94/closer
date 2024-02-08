@@ -332,7 +332,8 @@ def userinfo(id):
                     {"name": game_data['venue']['name'],
                      "id": game_data['venue']['id']})
 
-                home_win_list.append(home_team_info['isWinner'])
+                home_win_list.append(
+                    'win' if home_team_info['isWinner'] == 'true' else 'loss')
                 # teams_seen.append(home_team_info['team']['name'])
                 # teams_seen.append(away_team_info['team']['name'])
 
