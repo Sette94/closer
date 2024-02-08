@@ -362,7 +362,7 @@ def userinfo(id):
                 "ballparks": Helpers.count_occurrences(venue_list),
                 "record_wins": Helpers.count_info(home_win_list),
                 "teams_seen": Helpers.count_occurrences(teams_seen),
-                "months": Helpers.count_info(dates_list)
+                "months": Helpers.month_info(dates_list)
             }
             return jsonify(response_data), 200
 

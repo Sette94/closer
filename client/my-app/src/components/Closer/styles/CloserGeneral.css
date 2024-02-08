@@ -17,6 +17,15 @@
     /* Let items grow to fill available space */
 }
 
+
+
+.temperatureguage canvas {
+    width: 400px;
+    /* Adjust the width value as needed */
+    height: auto;
+    /* Maintain aspect ratio */
+}
+
 .tempandconditon {
     display: flex;
     flex-direction: column;
@@ -41,6 +50,16 @@
 .daynigthemoji {
     font-size: 60px;
 
+}
+
+.piechart {
+    height: 25%;
+    justify-content: center;
+
+}
+
+.linegraph {
+    align-items: center;
 }
 
 .recordContainer {

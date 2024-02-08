@@ -11,6 +11,19 @@ class Helpers():
 
         return name_counts
 
+    def month_info(month_list):
+        month_counts = Counter(month_list)
+
+        all_months = ["3", "4", "5", "6",
+                      "7", "8", "9", "10", "11"]
+
+        result = {month: 0 for month in all_months}
+        print(result)
+        print(month_counts)
+        result.update(month_counts)
+
+        return result
+
     def count_occurrences(players_list):
         names_list = [player['name'] for player in players_list]
 
@@ -53,7 +66,7 @@ class Helpers():
     def month(timestamp_str):
         timestamp = datetime.fromisoformat(
             timestamp_str[:-1])  # Remove 'Z' at the end
-        month_name = timestamp.strftime("%B")
+        month_name = timestamp.strftime("%-m")
 
         return month_name
 

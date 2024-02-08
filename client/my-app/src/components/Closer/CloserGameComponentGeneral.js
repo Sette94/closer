@@ -5,6 +5,11 @@ import { useSelector } from 'react-redux';
 import "./styles/CloserGeneral.css"
 import FlipNumbers from 'react-flip-numbers';
 import { PieChart } from 'react-minimal-pie-chart';
+import { RadialGauge } from 'react-canvas-gauges';
+import { LineChart } from '@mui/x-charts/LineChart';
+import { listClasses } from '@mui/material';
+
+
 
 
 function CloserGameComponentGeneral() {
@@ -17,10 +22,6 @@ function CloserGameComponentGeneral() {
     const [isTopVisible, setIsTopVisible] = useState(false);
     const [isAllVisible, setIsAllVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-
-    const [selected, setSelected] = useState(0);
-    const [hovered, setHovered] = useState(undefined);
-
 
 
     const toggleVisibilityTop = () => {
@@ -61,6 +62,7 @@ function CloserGameComponentGeneral() {
             <div>
                 <div className='mainContainer'>
 
+
                     <div className='recordContainer'>
                         <h3 className='headers'> Wins Losses</h3>
 
@@ -94,11 +96,11 @@ function CloserGameComponentGeneral() {
                             </div>
                         </div>
                         <br></br>
-                        <h3 className='headers'> Time At The Ballpark</h3>
                         <br></br>
 
+                        <h3 className='headers'> Time At The Ballpark</h3>
+                        <br></br>
                         <div className='winandloss'>
-
                             <h4 className='headers' >Hours</h4>
                             <div className="flipNumbersContainer">
                                 <div onClick={() => { setHourState(!hourState) }} className="flipNumber">
@@ -133,13 +135,25 @@ function CloserGameComponentGeneral() {
                                 </div>
 
                             </div>
-
-
                         </div>
                         <br></br>
+                        <h4 className='headers'>Average Temperature</h4>
 
-
+                        <div className="temperatureguage">
+                            <RadialGauge
+                                units='F°'
+                                title='Temperature'
+                                value={userInfo.avgerage_temp}
+                                minValue={0}
+                                maxValue={100}
+                                majorTicks={['0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100']}
+                                minorTicks={10}
+                            ></RadialGauge>
+                        </div>
                     </div>
+
+
+
 
                     <div className='tempandconditon'>
                         <h3 className='headers'>Day & Night</h3>
@@ -186,17 +200,56 @@ function CloserGameComponentGeneral() {
                                     ]}
                                     radius={35}
                                     segmentsStyle={{ transition: 'stroke .3s', cursor: 'pointer' }}
-                                    segmentsShift={(index) => (index === selected ? 6 : 1)}
+                                    segmentsShift={2}
                                     animate
                                     label={({ dataEntry }) => Math.round(dataEntry.percentage) + '%'}
 
                                     labelPosition={60}
                                     labelStyle={{
                                         fill: '#fff',
-                                        opacity: 0.75,
+                                        opacity: 1.75,
                                         pointerEvents: 'none',
                                     }}
+
+
                                 />
+                            </div>
+                            <div className='linegraph'>
+                                < LineChart
+                                    width={500}
+                                    height={300}
+                                    series={[{ data: Object.values(userInfo.months), connectNulls: true, label: 'Games By Month' }]}
+                                    xAxis={[{
+                                        scaleType: 'point', data: [
+                                            'March',
+                                            'April',
+                                            'May',
+                                            'June',
+                                            'July',
+                                            'August',
+                                            'September',
+                                            'October',
+                                            'November',
+                                        ]
+                                    }]}
+                                    sx={{
+
+                                        '.MuiLineElement-root': {
+                                            stroke: '#ffa700',
+                                            strokeWidth: 2,
+                                        },
+                                        '.MuiMarkElement-root': {
+                                            stroke: '#36454F',
+                                            scale: '0.6',
+                                            fill: '#fff',
+                                            strokeWidth: 6,
+                                        },
+                                        '.MuiChartsLegend-mark': {
+                                            fill: '#36454F',
+                                        }
+                                    }}
+                                />
+
                             </div>
                         </div>
                     </div>
