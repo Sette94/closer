@@ -47,10 +47,10 @@ def user_games(id):
             ballpark_id = ballpark.venue_id
 
             game = Games.query.filter(Games.date == form_data.get('data').get(
-                'date'), Games.venue_id == ballpark_id).first()
+                'date'), Games.venue_id == ballpark_id).all()
 
             new_attended = UserGames(
-                gamePk=game.gamePk,
+                gamePk=game[0].gamePk,
                 user_id=id
             )
 
@@ -59,9 +59,10 @@ def user_games(id):
 
             response_data = {
                 'response': f"New game at {ballpark.venue_name} on {form_data.get('data').get('date')} created!",
-                'gamePk': game.gamePk}
+                'gamePk': game[0].gamePk}
             return jsonify(response_data), 200
-        except:
+        except Exception as e:
+            print(e)
             response_data = {'response': "Failed to create game for user",
                              'gamePk': "No GamePk for this game"}
             return jsonify(response_data), 404
@@ -333,7 +334,7 @@ def userinfo(id):
                      "id": game_data['venue']['id']})
 
                 home_win_list.append(
-                    'win' if home_team_info['isWinner'] == 'true' else 'loss')
+                    'win' if home_team_info['isWinner'] == True else 'loss')
                 # teams_seen.append(home_team_info['team']['name'])
                 # teams_seen.append(away_team_info['team']['name'])
 

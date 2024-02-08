@@ -18,38 +18,6 @@ function IndividualGame({ game }) {
     const currentGame = game !== undefined ? game : location.state.games;
 
 
-    // Changing this block of code to accept state through the navigate link 
-
-    // const [game, setGame] = useState(null);
-    //  const [isLoading, setIsLoading] = useState(false);
-
-    // const searchParams = new URLSearchParams(useLocation().search);
-    // const gamePk = searchParams.get('gamePk');
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         setIsLoading(true);
-
-    //         try {
-    //             const response = await axios.get(`http://localhost:5555/users/${user.user_id}/games?gamePk=${gamePk}`);
-    //             setGame(response.data);
-    //         } catch (error) {
-    //             console.error('Error fetching user games:', error);
-    //         } finally {
-    //             setIsLoading(false);
-
-    //         }
-    //     };
-
-    //     fetchData();
-    // }, [gamePk]);
-
-    // if (isLoading) {
-    //     return <div style={{ color: 'black' }}>Loading...</div>;
-    // }
-
-
-
     if (currentGame) {
         const game_object = currentGame.games.game_data.dates[0].games[0];
         const date = currentGame.games.date

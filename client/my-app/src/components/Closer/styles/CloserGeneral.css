@@ -17,6 +17,15 @@
     /* Let items grow to fill available space */
 }
 
+.tempandconditon {
+    display: flex;
+    flex-direction: column;
+    /* Stack items vertically */
+    align-items: center;
+    /* Center items horizontally */
+    width: 50%;
+    justify-content: unset;
+}
 
 .daynight {
     display: flex;
