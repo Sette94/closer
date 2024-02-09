@@ -13,6 +13,8 @@ import { listClasses } from '@mui/material';
 
 
 function CloserGameComponentGeneral() {
+    const location = useLocation();
+
     const navigate = useNavigate();
 
     const user = useSelector((state) => state.user);
@@ -61,6 +63,17 @@ function CloserGameComponentGeneral() {
         return (
             <div>
                 <div className='mainContainer'>
+                    <div onClick={() => navigate(`/closer/${user.user_id}/generallanding`)} className="arrow" style={{ transform: 'rotate(90deg)', top: '15%', left: '5%' }}>
+                        <span ></span>
+                        <span ></span>
+                        <span ></span>
+                    </div>
+
+                    <div onClick={() => navigate(`/home`)} className="arrow" style={{ transform: 'rotate(-90deg)', top: '15%', left: '95%' }}>
+                        <span ></span>
+                        <span ></span>
+                        <span ></span>
+                    </div>
 
 
                     <div className='recordContainer'>
