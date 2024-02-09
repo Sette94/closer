@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import './styles/CloserLanding.css';
 
-function GeneralPageLanding() {
+function CloserFunFactsLanding() {
     const navigate = useNavigate();
 
     const user = useSelector((state) => state.user);
@@ -29,5 +29,5 @@ function GeneralPageLanding() {
         </div>
     );
 }
-export default GeneralPageLanding
+export default CloserFunFactsLanding
 

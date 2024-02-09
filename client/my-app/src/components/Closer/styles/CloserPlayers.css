@@ -1,0 +1,116 @@
+.closerinfocontainer {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+.closerplayerinfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    width: 100vw;
+    height: 100vh;
+
+}
+
+.closerhittersseen .closerpitchersseen .closerhomerunsseen {
+    display: flex;
+    flex-direction: column;
+
+    width: 100vw;
+    height: 100vh;
+
+}
+
+
+.players-container {
+    text-align: center;
+}
+
+.players-container p {
+    font-family: 'Josefin Slab', sans-serif;
+    font-size: 48px;
+
+}
+
+.players-open {
+    opacity: 0;
+    /* Start with opacity 0 to hide */
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 1s;
+
+    /* Fade-in animation */
+}
+
+.closerinfo>section>span {
+    width: 90px;
+    height: 70px;
+    perspective: 500px;
+    overflow: hidden;
+    display: inline-block;
+    text-align: left;
+    border-radius: 25px;
+    /* Adjust the border radius value */
+}
+
+.players-exact {
+    opacity: 0;
+    /* Start with opacity 0 to hide */
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 5s;
+
+    /* Fade-in animation */
+}
+
+.players-counter {
+    font-size: 48px;
+    font-weight: bold;
+    color: #007bff;
+    /* You can adjust the color as needed */
+    opacity: 0;
+    /* Start with opacity 0 to hide */
+    animation: countUpplayers 5ms ease forwards;
+    /* Delay the start of the animation by 4 seconds */
+}
+
+/* Count-up animation */
+@keyframes countUpplayers {
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.2;
+    }
+
+    40% {
+        opacity: 0.4;
+    }
+
+    60% {
+        opacity: 0.6;
+    }
+
+    80% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

@@ -22,7 +22,7 @@ function CloserGameComponent() {
         navigate('/closer');
         setGameIndex(0);
     } else if (gameIndex >= games.length) {
-        navigate(`/closer/${user.user_id}/generallanding`);
+        navigate(`/closer/${user.user_id}/general`);
         setGameIndex(0);
     }
 

@@ -26,14 +26,14 @@ const ConsolidatedHomeContainer = () => {
 
             <div className="homecardscontainer">
                 <div className="homecards">
-                    <Card className="homecardsindividual">
-                        <Card.Body onClick={() => { navigate('/mygames') }}>
+                    <Card onClick={() => { navigate('/mygames') }} className="homecardsindividual">
+                        <Card.Body >
                             <Card.Title>View Games Library</Card.Title>
                         </Card.Body>
                     </Card>
 
-                    <Card className="homecardsindividual">
-                        <Card.Body onClick={() => { navigate('/closer') }}>
+                    <Card onClick={() => { navigate('/closer') }} className="homecardsindividual">
+                        <Card.Body >
                             <Card.Title>MLB Closer</Card.Title>
                         </Card.Body>
                     </Card>
