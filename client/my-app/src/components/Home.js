@@ -2,6 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import "./Home.css"
+import Card from 'react-bootstrap/Card';
+
 
 const ConsolidatedHomeContainer = () => {
     const navigate = useNavigate()
@@ -13,20 +15,31 @@ const ConsolidatedHomeContainer = () => {
 
         <div>
             {isAuthenticated ? (
-                <h1>Welcome {user.username}</h1>
+                <div>
+                    <h1>Welcome {user.username}</h1>
+                    <h2>Please select an option below</h2>
+                </div>
             ) : (
                 <p>Please log in.</p>
             )}
-            <div className="landingpage">
 
-                <button className='homepagebuttons'
-                    onClick={() => { navigate('/mygames') }}
 
-                >Add New Game</button>
-                <button className='homepagebuttons'
-                    onClick={() => { navigate('/closer') }}
+            <div className="homecardscontainer">
+                <div className="homecards">
+                    <Card className="homecardsindividual">
+                        <Card.Body onClick={() => { navigate('/mygames') }}>
+                            <Card.Title>View Games Library</Card.Title>
+                        </Card.Body>
+                    </Card>
 
-                >MLB Closer</button>
+                    <Card className="homecardsindividual">
+                        <Card.Body onClick={() => { navigate('/closer') }}>
+                            <Card.Title>MLB Closer</Card.Title>
+                        </Card.Body>
+                    </Card>
+
+
+                </div>
             </div>
         </div>
 

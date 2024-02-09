@@ -1,16 +1,57 @@
-.landingpage {
+@import url('https://fonts.googleapis.com/css2?family=Lily+Script+One&display=swap');
+
+
+.card-body {
     display: flex;
-    flex-direction: row;
-    align-items: space-between;
+    /* Use flexbox layout */
+    flex-direction: column;
+    /* Arrange children elements vertically */
+    align-items: center;
+    /* Center children elements horizontally */
+    text-align: center;
+    /* Center text content */
+}
+
+.homecards {
+    display: flex;
+    /* Change display to flex to center the cards */
     justify-content: center;
+    /* Center the cards horizontally */
+    align-items: center;
+    /* Center the cards vertically */
+
 }
 
-.homepagebuttons {
-    height: 10vh;
 
-}
+.homecardsindividual {
+    border-radius: 40%;
+    /* Make the cards round */
+    border: none;
+    /* Remove border */
+    /* Set background color */
+    color: #ffffff;
+    /* Set text color */
+    width: 350px;
+    /* Set width of the cards */
+    height: 350px;
+    /* Set height of the cards */
+    display: flex;
+    /* Use flexbox to center content */
+    justify-content: center;
+    /* Center content horizontally */
+    align-items: center;
+    /* Center content vertically */
+    margin: 40px;
+    /* Add margin between cards */
 
-.landingpage button {
-    margin: 50px;
-    /* Adjust spacing between buttons */
+    font-family: 'Lily Script One', sans-serif;
+    /* Set font family */
+    font-size: xx-large;
+    text-shadow: rgb(0, 0, 0) 1px 0 10px;
+
+    background-image: url("/public/park.png");
+    opacity: 0.8;
+
+
+
 }

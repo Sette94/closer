@@ -90,7 +90,7 @@ function UserGameContainer() {
         <div class="crudgamescontainer">
 
             <div className="addgame">
-                <button onClick={handleOpen}>Add New Game Form</button>
+                <button className='form-container' onClick={handleOpen}>Add New Game Form</button>
                 {open ? <div><AddNewGameForm handleNewGame={handleNewGame} ballparks={userBallparks} /> </div> : <div></div>}
             </div>
 
