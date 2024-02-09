@@ -39,8 +39,10 @@ function UserGames({ user_id, game, handleDelete }) {
                         {game_object.weather.temp}°F
                     </Card.Text>
                 </Card.Body>
-                <Button className="view-button" variant="primary" onClick={() => { navigate(`/games/${user_id}?gamePk=${game_object.gamePk}`, { state: { games: game } }) }}><MdOutlineOndemandVideo /></Button>
-                <Button className="delete-button" onClick={() => handleDelete(game_object.gamePk, user_id)}><FaTrash /></Button>
+                <div className="icon-container">
+                    <MdOutlineOndemandVideo className="view-button" onClick={() => { navigate(`/games/${user_id}?gamePk=${game_object.gamePk}`, { state: { games: game } }) }} />
+                    <FaTrash className="delete-button" onClick={() => handleDelete(game_object.gamePk, user_id)} />
+                </div>
 
             </Card>
 

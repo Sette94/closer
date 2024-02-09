@@ -21,20 +21,22 @@
     /* Center text content */
 }
 
-
-
-.view-button {
-    padding: 5px 5px;
-    border-radius: 1px;
-    cursor: pointer;
-
+.icon-container {
+    display: flex;
+    justify-content: center;
+    /* Center icons horizontally */
 }
 
+.view-button,
 .delete-button {
-    padding: 5px 5px;
     cursor: pointer;
+    border: none;
+    font-size: 24px;
+    /* Adjust the size as needed */
+    margin-left: 10px;
+    /* Add margin for spacing */
+    /* Remove borders */
 }
-
 
 .seengameslist {
     width: 80%;
@@ -47,9 +49,13 @@
 }
 
 .cards {
-    border: 1px solid #ed0505;
-    background-color: #ede9da;
-    color: black;
+    border-radius: 25px;
+    border: 3px solid #9fc089;
+    background-color: #ffdc7c;
+    color: rgb(3, 3, 3);
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+
 }
 
 
