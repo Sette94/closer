@@ -8,6 +8,7 @@ import "./styles/UserGamesComponent.css"
 
 
 
+
 function UserGameContainer() {
     const navigate = useNavigate();
     const isAuthenticated = useSelector((state) => state.isAuthenticated);

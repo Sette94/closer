@@ -1,9 +1,60 @@
 .crudgamescontainer {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.addgame {
+    width: 10%
+}
+
+.card-body {
+    display: flex;
+    /* Use flexbox layout */
+    flex-direction: column;
+    /* Arrange children elements vertically */
     align-items: center;
-    flex: 1;
-    margin-bottom: 1px;
+    /* Center children elements horizontally */
+    justify-content: center;
+    /* Center children elements vertically */
+    text-align: center;
+    /* Center text content */
+}
 
 
+
+.view-button {
+    padding: 5px 5px;
+    border-radius: 1px;
+    cursor: pointer;
+
+}
+
+.delete-button {
+    padding: 5px 5px;
+    cursor: pointer;
+}
+
+
+.seengameslist {
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5%;
+    padding-left: 20%;
+    flex-wrap: wrap;
+
+}
+
+.cards {
+    border: 1px solid #ed0505;
+    background-color: #ede9da;
+    color: black;
+}
+
+
+
+.teamLogo {
+    width: 50px;
+    height: 50px;
 }

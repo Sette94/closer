@@ -9,7 +9,7 @@ if __name__ == "__main__":
     with app.app_context():
 
         print("Clearing data...")
-        # Users.query.delete()
+        Users.query.delete()
         # Games.query.delete()
         # UserGames.query.delete()
         # Ballparks.query.delete()
@@ -74,7 +74,17 @@ if __name__ == "__main__":
         user_4 = Users(username="Sanjay",
                        password="Sanjay")
 
-        db.session.add_all([user_1, user_2, user_3, user_4])
+        user_5 = Users(username="Joe Campbell",
+                       password="Joe")
+
+        user_6 = Users(username="Bailie",
+                       password="Bailie")
+
+        user_7 = Users(username="Grant",
+                       password="Grant")
+
+        db.session.add_all(
+            [user_1, user_2, user_3, user_4, user_5, user_6, user_7])
         db.session.commit()
 
         print("Creating user games")
@@ -142,14 +152,6 @@ if __name__ == "__main__":
         # db.session.commit()
 
         print("Creating Venues")
-
-        attended_game = UserGames(
-            gamePk=718276,
-            user_id=2
-        )
-        db.session.add(attended_game)
-        db.session.commit()
-
         venue_1 = Ballparks(
             venue_id=1,
             venue_name="Angel Stadium",
