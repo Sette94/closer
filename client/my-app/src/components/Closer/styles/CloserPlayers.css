@@ -6,24 +6,48 @@
 }
 
 
-.closerplayerinfo {
+
+.closerData {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-
-    width: 100vw;
-    height: 100vh;
-
 }
 
-.closerhittersseen .closerpitchersseen .closerhomerunsseen {
+.closerDataContainer {
     display: flex;
     flex-direction: column;
-
-    width: 100vw;
-    height: 100vh;
-
+    align-items: center;
+    width: 50%;
 }
+
+.playerimagecontainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.playerimages {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    /* Ensure the images do not overflow */
+}
+
+.playerimages a {
+    width: calc(33.33% - 10px);
+    /* Adjusted width with some spacing */
+    margin: 5px;
+    /* Adjust margin between images */
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width and height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    /* Remove underline from links */
+}
+
 
 
 .players-container {
