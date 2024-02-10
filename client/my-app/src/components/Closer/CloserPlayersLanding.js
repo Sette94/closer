@@ -13,7 +13,7 @@ function CloserPlayersLanding() {
     const navigate = useNavigate();
 
     const user = useSelector((state) => state.user);
-
+    const [countPlayers, setcountPlayers] = useState(0)
     const [userPlayers, setuserPlayers] = useState({
         "all_players": [],
         "starting_pitchers": []
@@ -23,6 +23,44 @@ function CloserPlayersLanding() {
     const [countedHitters, setCountedHitters] = useState(0);
     const [delayPassed, setDelayPassed] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+
+    const [isPlayerVisible, setIsPlayerVisible] = useState(false);
+    const [isPitcherVisible, setIsPitcherVisible] = useState(false);
+    const [isHomerunVisible, setIsHomerunVisible] = useState(false);
+
+
+    const toggleVisibilityTop = (e) => {
+        switch (e.target.className) {
+            case 'closerrevealplayerbutton':
+                setIsPlayerVisible((prevState) => !prevState);
+                break
+            case 'closerrevealpitcherbutton':
+                setIsPitcherVisible((prevState) => !prevState);
+                break
+            case 'closerrevealhomerunbutton':
+                setIsHomerunVisible((prevState) => !prevState);
+                break
+        }
+    };
+
+
+    function topData(list) {
+
+        let data
+        switch (list) {
+            case 'players':
+                data = userPlayers.all_players
+                break;
+            case 'pitchers':
+                data = userPlayers.starting_pitchers
+                break;
+            case 'homeruns':
+                data = userHomeruns.home_hitters
+                break;
+
+        }
+    }
+
 
 
     useEffect(() => {
@@ -35,6 +73,7 @@ function CloserPlayersLanding() {
                 setuserPlayers(playersResponse.data);
                 setuserHomeruns(homerunsResponse.data);
                 setCountedHitters(playersResponse.data.all_players.length)
+                setcountPlayers(playersResponse.data.total_players)
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
@@ -118,13 +157,14 @@ function CloserPlayersLanding() {
 
     return (
         <div className="closer-container">
+
             <div onClick={() => navigate(`/closer/${user.user_id}/general/facts`)} className="arrow" style={{ transform: 'rotate(90deg)', top: '15%', left: '5%' }}>
                 <span ></span>
                 <span ></span>
                 <span ></span>
             </div>
 
-            <div onClick={() => navigate(`/closer/${user.user_id}/general/players`)} className="arrow" style={{ transform: 'rotate(-90deg)', top: '15%', left: '95%' }}>
+            <div onClick={() => navigate(`/closer/${user.user_id}/ending`)} className="arrow" style={{ transform: 'rotate(-90deg)', top: '15%', left: '95%' }}>
                 <span ></span>
                 <span ></span>
                 <span ></span>
@@ -132,54 +172,89 @@ function CloserPlayersLanding() {
 
             <div className='closerinfocontainer'>
 
-                <div className="closerinfo">
-                    <h1>Closer: Players</h1>
-                    <br></br>
+                <h1>Closer: Players</h1>
+                <div className='players-open'>
                     <p >At the Ballpark you saw some of baseball's best players!</p>
-                    <br></br>
+                </div>
+
+
+                <div className="closerinfo">
+                    <p> To be exact </p>
                     <FlipNumbers className="playersseen"
                         height={70}
                         width={90}
                         color="white"
                         background="#136d15"
                         numberStyle={{ fontSize: '36px' }}
-                        numbers={countedHitters.toString()}
+                        numbers={countPlayers.toString()}
                         play
-                        duration={4}
-                        delay={4}
+                        duration={5}
+                        delay={5}
                     />
-                </div>
-                <br></br>
-                <p className="players-exact"> To be exact </p>
-                <br></br>
 
+                </div>
+
+                <br></br>
+                <p className="players-look"> Checkout your Top 5 in each</p>
+                <br></br>
 
 
                 <div className='closerData' >
 
-                    <div className='closerDataContainer'>
+                    <div className='closerDataContainer' id="playersreveal">
                         <p>All Players</p>
-                        <div className="playerimagecontainer">
-                            {topData('players')}
-                        </div>
+
+                        {isPlayerVisible ? null : (
+                            <button style={{ textAlign: "center" }} onClick={toggleVisibilityTop} className='closerrevealplayerbutton'>
+                                Click to Reveal
+                            </button>
+                        )}
+
+                        {isPlayerVisible && (
+                            <div className="playerimagecontainer">
+                                {topData('players')}
+                            </div>
+                        )}
+
+
+
                     </div>
-                    <div className='closerDataContainer'>
+
+                    <div className='closerDataContainer' id="pitcherreveal">
 
                         <p>Starting Pitchers</p>
-                        <div className="playerimagecontainer">
-                            {topData('pitchers')}
-                        </div>
+                        {isPitcherVisible ? null : (
+                            <button style={{ textAlign: "center" }} onClick={toggleVisibilityTop} className='closerrevealpitcherbutton'>
+                                Click to Reveal
+                            </button>
+                        )}
+
+                        {isPitcherVisible && (
+                            <div className="playerimagecontainer">
+                                {topData('pitchers')}
+                            </div>
+                        )}
+
                     </div>
 
-                    <div className='closerDataContainer'>
-                        <p>Homeruns</p>
-                        <div className="playerimagecontainer">
-                            {topData('homeruns')}
-                        </div>
+                    <div className='closerDataContainer' id="homerunsreveal">
+                        <p>Homerun Hitters</p>
+
+
+
+                        {isHomerunVisible ? null : (
+                            <button style={{ textAlign: "center" }} onClick={toggleVisibilityTop} className='closerrevealhomerunbutton'>
+                                Click to Reveal
+                            </button>
+                        )}
+
+                        {isHomerunVisible && (
+                            <div className="playerimagecontainer">
+                                {topData('homeruns')}
+                            </div>
+                        )}
+
                     </div>
-
-
-
                 </div>
             </div>
 

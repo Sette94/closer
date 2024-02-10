@@ -305,7 +305,8 @@ def user_players(id):
                 if top_number:
                     response_data = {"all_players": Helpers.top_filter(
                         players_seen, int(top_number)),
-                        "starting_pitchers": Helpers.top_filter(starting_pitchers, int(top_number))}
+                        "starting_pitchers": Helpers.top_filter(starting_pitchers, int(top_number)),
+                        "total_players": len(Helpers.count_occurrences(players_seen) + Helpers.count_occurrences(starting_pitchers))}
                 else:
                     response_data = {
                         "all_players": Helpers.count_occurrences(players_seen),
