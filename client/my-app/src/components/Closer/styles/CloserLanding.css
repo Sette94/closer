@@ -93,3 +93,19 @@
         opacity: 1;
     }
 }
+
+#closergoodbye {
+
+    background-image: url("/public/bryce-wave.gif");
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: transparent;
+    display: block;
+    position: relative;
+    border: 4px solid var(--red);
+
+    width: 475px;
+    height: 275px;
+
+}
