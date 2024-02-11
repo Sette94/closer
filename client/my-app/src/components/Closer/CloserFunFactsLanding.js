@@ -23,7 +23,7 @@ function CloserFunFactsLanding() {
             <br></br>
             <p className="greeting-fact"> Here are some fun facts on how you spent <br></br>your time at the Ballpark</p>
             <br></br>
-            <button className="greeting-close" onClick={() => { navigate(`/closer/${user.user_id}/general/facts`) }}>Fun Facts</button>
+            <button id="btn-23" className="greeting-close" onClick={() => { navigate(`/closer/${user.user_id}/general/facts`) }}>Fun Facts</button>
 
 
         </div>

@@ -6,8 +6,14 @@
 
 .addgame {
     width: 40%;
+    align-items: start;
+    text-align: center;
 
 }
+
+
+
+
 
 .card-body {
     display: flex;
@@ -69,4 +75,37 @@
 .teamLogo {
     width: 50px;
     height: 50px;
+}
+
+
+
+
+
+
+#btn-23 {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: button;
+    background-color: #01184a;
+    background-image: none;
+    color: #fff;
+    cursor: pointer;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+        Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-size: 100%;
+    font-weight: 900;
+    line-height: 1.5;
+    margin: 0;
+    -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+    padding: 0;
+    text-transform: uppercase;
+}
+
+
+#btn-23 {
+    border-radius: 88rem;
+    border-width: 2px;
+    overflow: hidden;
+    padding: 0.4rem 1rem;
+    position: relative;
 }

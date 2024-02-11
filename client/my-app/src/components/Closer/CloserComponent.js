@@ -86,7 +86,7 @@ function CloserComponent() {
             <br></br> <br></br>
             {message}
             <br></br>
-            <button className="greeting-close" onClick={() => { navigate(`/closer/${user.user_id}`, { state: { games: randomGames } }) }}>Games</button>
+            <button id="btn-23" className="greeting-close" onClick={() => { navigate(`/closer/${user.user_id}`, { state: { games: randomGames } }) }}>Games</button>
 
 
         </div>

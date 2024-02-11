@@ -88,32 +88,32 @@
 .players-exact {
     opacity: 0;
     animation: fadeIn 1s ease forwards;
-    animation-delay: 6.5s;
+    animation-delay: 4s;
 }
 
 .players-look {
     opacity: 0;
     animation: fadeIn 1s ease forwards;
-    animation-delay: 7s;
+    animation-delay: 5s;
 }
 
 
 #playersreveal {
     opacity: 0;
     animation: fadeIn 1s ease forwards;
-    animation-delay: 8s;
+    animation-delay: 6s;
 }
 
 #pitcherreveal {
     opacity: 0;
     animation: fadeIn 1s ease forwards;
-    animation-delay: 9s;
+    animation-delay: 7s;
 }
 
 #homerunsreveal {
     opacity: 0;
     animation: fadeIn 1s ease forwards;
-    animation-delay: 10s;
+    animation-delay: 8s;
 }
 
 

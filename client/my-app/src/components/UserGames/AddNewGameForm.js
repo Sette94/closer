@@ -16,6 +16,9 @@ function NewGameHandler({ handleNewGame, ballparks }) {
     const user = useSelector((state) => state.user);
     const [response, setResponse] = useState(null);
     const [startdate, setStartDate] = useState('2023-01-01');
+    const [filterValue, setFilterValue] = useState('');
+
+
 
     function handleDate(date) {
         const dateObject = new Date(date);
@@ -85,7 +88,8 @@ function NewGameHandler({ handleNewGame, ballparks }) {
         }
     }, [response]);
 
-
+    const filteredBallparks = Object.values(ballparks).filter(ballpark =>
+        ballpark.toLowerCase().includes(filterValue.toLowerCase()))
 
     return (
         <div>
@@ -106,17 +110,27 @@ function NewGameHandler({ handleNewGame, ballparks }) {
                             <p className="error">{formik.errors.date}</p>
                         )}
                     </div>
+
                     <div className="input-group">
+
+
                         <select
                             id="venue"
                             name="venue"
                             onChange={formik.handleChange}
                             value={formik.values.venue}>
-                            <option value="">Select MLB Ballpark</option>
-                            {Object.values(ballparks).map((ballpark, index) => (
+                            <input
+                                type="text"
+                                placeholder="Filter ballparks"
+                                value={filterValue}
+                                onChange={e => setFilterValue(e.target.value)}
+                            />
+                            {Object.values(filteredBallparks).map((ballpark, index) => (
                                 <option key={index} value={ballpark}>{ballpark}</option>
                             ))}
                         </select>
+
+
 
                         {formik.errors.venue && (
                             <p className="error">{formik.errors.venue}</p>
