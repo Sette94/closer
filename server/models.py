@@ -19,6 +19,7 @@ class Users(db.Model, SerializerMixin):
     username = db.Column(db.String)
     password = db.Column(db.String)
     first_year = db.Column(db.DateTime, server_default=db.func.now())
+    profile_image = db.Column(db.String)
 
     attended_games = db.relationship('UserGames', back_populates='users')
 
