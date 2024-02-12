@@ -10,6 +10,8 @@ import CloserFunFactsLanding from "./components/Closer/CloserFunFactsLanding"
 import CloserFunFacts from "./components/Closer/CloserFunFacts"
 import CloserPlayersLanding from "./components/Closer/CloserPlayersLanding"
 import CloserEnding from "./components/Closer/CloserEnding"
+import Profile from "./components/Profile/ProfileComponent"
+
 
 
 
@@ -31,7 +33,9 @@ const routes = [
             { path: "/closer/:userId/general", element: <CloserFunFactsLanding /> },
             { path: "/closer/:userId/general/facts", element: <CloserFunFacts /> },
             { path: "/closer/:userId/general/players", element: <CloserPlayersLanding /> },
-            { path: "/closer/:userId/ending", element: <CloserEnding /> }
+            { path: "/closer/:userId/ending", element: <CloserEnding /> },
+            { path: "/home/:userId/profile", element: <Profile /> }
+
 
 
 

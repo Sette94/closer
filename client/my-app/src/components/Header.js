@@ -11,6 +11,12 @@ function Header() {
     const isAuthenticated = useSelector((state) => state.isAuthenticated);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = useSelector((state) => state.user);
+
+    console.log(user)
+
+
+
 
     const handleLogout = () => {
         // Dispatch the logout action to clear user information
@@ -27,6 +33,7 @@ function Header() {
                     {isAuthenticated ? (
                         <ul class="nav--list">
                             <li class="item"> <NavLink to="/home" className="nav-link">Home</NavLink></li>
+                            <li class="item">  {isAuthenticated && (<NavLink to={`home/${user.user_id}/profile`} className="nav-link" > Profile</NavLink>)}</li>
                             <li class="item">  {isAuthenticated && (<NavLink to="/" className="nav-link" onClick={handleLogout}> Logout</NavLink>)}</li>
                         </ul>
                     ) : null}
