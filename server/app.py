@@ -175,8 +175,17 @@ def users(id=None):
     elif request.method == 'PATCH':
         # Handle PATCH for updating user information
         try:
-            focus_user = Users.query.filter(Users.user_id == id).first()
             form_data = request.get_json()
+            print(form_data)
+
+            focus_user = Users.query.filter(Users.user_id == id).first()
+            print(focus_user.username)
+            usernames = [user.username for user in Users.query.all(
+            ) if user.username == form_data.get('username') and user.user_id != form_data.get('user_id')]
+
+            if len(usernames) >= 1:
+                response_data = {'response': "Username already exists"}
+                return jsonify(response_data), 400
 
             for attr in form_data:
                 setattr(focus_user, attr, form_data[attr])

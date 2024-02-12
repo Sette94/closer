@@ -1,0 +1,71 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 60vh;
+}
+
+.profile-card {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-group-profile {
+    margin-bottom: 10px;
+}
+
+.error {
+    color: red;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/* Popup container */
+.mm-popup {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Show popup */
+.mm-popup--visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Popup content */
+.mm-popup-content {
+    text-align: center;
+}
+
+/* Close button */
+.mm-popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.mm-popup-close:hover {
+    color: #333;
+}

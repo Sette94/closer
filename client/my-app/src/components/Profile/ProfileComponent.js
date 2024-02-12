@@ -1,47 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../actions";
 import { useNavigate } from 'react-router-dom';
-
+import Popup from 'react-popup';
 
 import { useFormik } from "formik";
 import * as yup from "yup";
-
-
+import './styles/profile.css'
 
 function ProfileComponent() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // const matchedUser = {
-    //     "first_year": "2024-02-09 00:10:34",
-    //     "password": "Nick",
-    //     "profile_image": null,
-    //     "user_id": 1,
-    //     "username": "Sette94"
-    // }
-    // dispatch(loginSuccess(matchedUser));
-
-
     const user = useSelector((state) => state.user);
 
-
     function handlePatch() {
-        axios.patch(`http://localhost:5555/users/${user.user_id}`, {
+        const formUserData = {
+            user_id: user.user_id,
             username: formik.values.username,
             password: formik.values.password,
+            profile_image: formik.values.profile_image
+        }
+
+        axios.patch(`http://localhost:5555/users/${user.user_id}`, {
+            user_id: user.user_id,
+            username: formik.values.username,
+            password: formik.values.password,
+            profile_image: formik.values.profile_image
         })
             .then(response => {
-                console.log(response.data)
-            }
-            )
-            .catch(error => console.error(error));
+                Popup.alert(response.data.response);
+                dispatch(loginSuccess(formUserData));
+            })
+
+            .catch(error => {
+                console.log(error)
+                Popup.alert(error.response.data.response);
+                // Popup.alert({ error });
+            });
     }
-
-
-
 
     const formSchema = yup.object().shape({
         password: yup.string().required("Must enter a password"),
@@ -63,44 +62,47 @@ function ProfileComponent() {
         },
     });
 
-
-
-
-
     return (
-        <div className="profileform">
-            <form onSubmit={formik.handleSubmit}>
-                <div className="input-group-profile">
-                    <input
-                        id="username"
-                        name="username"
-                        placeholder={user.username}
-                        onChange={formik.handleChange}
-                        value={formik.values.username}
-                    />
-                    {formik.errors.username && (
-                        <p className="error">{formik.errors.username}</p>
-                    )}
+        <div>
+            <div className="profile-container">
+                <Popup />
+                <div className="profile-card">
+                    <h2>Edit Profile</h2>
+                    <form onSubmit={formik.handleSubmit}>
+                        <div className="input-group-profile">
+                            <input
+                                id="username"
+                                name="username"
+                                placeholder="Change username"
+                                onChange={formik.handleChange}
+                                value={formik.values.username}
+                            />
+                            {formik.errors.username && (
+                                <p className="error">{formik.errors.username}</p>
+                            )}
+                        </div>
+                        <div className="input-group-profile">
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                placeholder="Change password"
+                                onChange={formik.handleChange}
+                                value={formik.values.password}
+                            />
+                            {formik.errors.password && (
+                                <p className="error">{formik.errors.password}</p>
+                            )}
+                        </div>
+                        <div className="button-container">
+                            <button type="submit">Update Profile</button>
+                        </div>
+                    </form>
                 </div>
-                <div className="input-group-profile">
-                    <input
-                        id="password"
-                        name="password"
-                        placeholder={user.password}
-                        onChange={formik.handleChange}
-                        value={formik.values.password}
-                    />
-                    {formik.errors.password && (
-                        <p className="error">{formik.errors.password}</p>
-                    )}
-                    <div className="button-container">
-                        <button type="submit">Login</button>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
-    )
 
+    )
 }
 
-export default ProfileComponent
+export default ProfileComponent;

@@ -62,7 +62,7 @@
     color: rgb(58, 55, 55);
     font-family: 'Lato', sans-serif;
     font-weight: 600;
-    background-image: url("/public/grass.png");
+    background-image: url("/public/background-images/grass.png");
     /* Assuming the image is located in the public directory */
     background-size: cover;
     background-position: center;

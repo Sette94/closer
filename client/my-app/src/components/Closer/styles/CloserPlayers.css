@@ -158,7 +158,7 @@
 .closerrevealhomerunbutton {
     margin-top: 10px;
     margin-bottom: 10px;
-    background-image: url("/public/cespedes.gif");
+    background-image: url("/public/gifs/cespedes.gif");
     background-repeat: no-repeat;
     background-position: center center;
     /* Center the background image */
@@ -195,7 +195,7 @@
 .closerrevealpitcherbutton {
     margin-top: 10px;
     margin-bottom: 10px;
-    background-image: url("/public/nestor.gif");
+    background-image: url("/public/gifs/nestor.gif");
     background-repeat: no-repeat;
     background-position: center center;
     /* Center the background image */
@@ -230,7 +230,7 @@
 .closerrevealplayerbutton {
     margin-top: 10px;
     margin-bottom: 10px;
-    background-image: url("/public/allstars.gif");
+    background-image: url("/public/gifs/allstars.gif");
     background-repeat: no-repeat;
     background-position: center center;
     /* Center the background image */

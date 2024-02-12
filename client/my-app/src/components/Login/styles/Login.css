@@ -1,5 +1,5 @@
 .loginComponent {
-    background-image: url("/public/wrapped-image.jpg");
+    background-image: url("/public/background-images/wrapped-image.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     /* Ensure the image covers the entire element */

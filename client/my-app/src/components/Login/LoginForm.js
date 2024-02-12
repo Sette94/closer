@@ -35,10 +35,16 @@ function LoginHandler() {
                             currentUser.password === formik.values.password
                     );
 
-                    if (matchedUser) {
+                    const storageUser = {
+                        "username": matchedUser.username,
+                        "user_id": matchedUser.user_id,
+                        "profile_image": matchedUser.profile_image
+                    }
+
+                    if (storageUser) {
                         // Dispatch the loginSuccess action to update Redux state
-                        dispatch(loginSuccess(matchedUser));
-                        console.log(dispatch(loginSuccess(matchedUser)))
+                        dispatch(loginSuccess(storageUser));
+                        console.log(dispatch(loginSuccess(storageUser)))
                         navigate(`/home`);
                     } else {
                         console.log("Incorrect username or password");
