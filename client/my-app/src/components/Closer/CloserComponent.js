@@ -63,10 +63,10 @@ function CloserComponent() {
 
     switch (countedGames >= 0) {
         case countedGames < 10:
-            message = <p className="greeting-close">Let's take a look at those games</p>;
+            message = <p className="greeting-close">Lets look at some of those games that you maybe forgot about</p>;
             break;
         case countedGames >= 10:
-            message = <p className="greeting-close">Wow! double digits! <br></br> <br></br>Lets check in on some of those games that you maybe forgot about</p>;
+            message = <p className="greeting-close">Wow! double digits! <br></br>Lets check in on some of those games that you maybe forgot about</p>;
             break;
         default:
             message = null;

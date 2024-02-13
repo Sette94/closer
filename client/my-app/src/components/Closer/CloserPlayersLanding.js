@@ -164,13 +164,13 @@ function CloserPlayersLanding() {
     return (
         <div className="closer-container">
 
-            <div onClick={() => navigate(`/closer/${user.user_id}/general/facts`)} className="arrow" style={{ transform: 'rotate(90deg)', top: '15%', left: '5%' }}>
+            <div onClick={() => navigate(`/closer/${user.user_id}/general/facts`)} className="playerarrow" style={{ transform: 'rotate(90deg)', top: '15%', left: '5%' }}>
                 <span ></span>
                 <span ></span>
                 <span ></span>
             </div>
 
-            <div onClick={() => navigate(`/closer/${user.user_id}/ending`)} className="arrow" style={{ transform: 'rotate(-90deg)', top: '15%', left: '95%' }}>
+            <div onClick={() => navigate(`/closer/${user.user_id}/ending`)} className="playerarrow" style={{ transform: 'rotate(-90deg)', top: '15%', left: '95%' }}>
                 <span ></span>
                 <span ></span>
                 <span ></span>
