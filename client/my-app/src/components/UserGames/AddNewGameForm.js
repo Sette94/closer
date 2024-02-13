@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import es from 'date-fns/locale/es';
+import Popup from 'react-popup';
 
 registerLocale('es', es)
 
@@ -71,6 +72,8 @@ function NewGameHandler({ handleNewGame, ballparks }) {
                     setResponse(response.data.response);
                     handleNewGame(response.data.gamePk, user.user_id)
                     formik.resetForm();
+                    Popup.alert(response.data.response)
+
 
                 }
             }
@@ -79,6 +82,7 @@ function NewGameHandler({ handleNewGame, ballparks }) {
                 setResponse(error.response.data.response);
                 console.error("Response error:", error.response.data);
                 console.error("Status code:", error.response.status);
+                Popup.alert(error.response.data.response)
             }
         },
     });
@@ -93,6 +97,7 @@ function NewGameHandler({ handleNewGame, ballparks }) {
 
     return (
         <div>
+            <Popup />
             <div className="login">
                 <form onSubmit={formik.handleSubmit}>
                     <div className="input-group">
