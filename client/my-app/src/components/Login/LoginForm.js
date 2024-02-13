@@ -5,6 +5,8 @@ import * as yup from "yup";
 import { loginSuccess } from "../actions";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import Popup from 'react-popup';
+
 
 function LoginHandler() {
     const dispatch = useDispatch();
@@ -35,19 +37,18 @@ function LoginHandler() {
                             currentUser.password === formik.values.password
                     );
 
-                    const storageUser = {
-                        "username": matchedUser.username,
-                        "user_id": matchedUser.user_id,
-                        "profile_image": matchedUser.profile_image
-                    }
+                    if (matchedUser) {
+                        const storageUser = {
+                            "username": matchedUser.username,
+                            "user_id": matchedUser.user_id,
+                            "profile_image": matchedUser.profile_image
+                        };
 
-                    if (storageUser) {
                         // Dispatch the loginSuccess action to update Redux state
                         dispatch(loginSuccess(storageUser));
-                        console.log(dispatch(loginSuccess(storageUser)))
                         navigate(`/home`);
                     } else {
-                        console.log("Incorrect username or password");
+                        Popup.alert('Incorrect username or password');
                     }
                 } else {
                     throw new Error("Response is not in JSON format");
@@ -59,6 +60,7 @@ function LoginHandler() {
     });
 
     return (
+
         <div className="login">
             <form onSubmit={formik.handleSubmit}>
                 <div className="input-group">
@@ -89,7 +91,10 @@ function LoginHandler() {
                     </div>
                 </div>
             </form>
+
         </div>
+
+
     );
 }
 

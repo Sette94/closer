@@ -150,9 +150,15 @@ function CloserPlayersLanding() {
 
 
 
-
     if (isLoading) {
-        return <div style={{ color: 'black' }}>Loading...</div>;
+        return (
+            <div>
+                <h4> Loading Data...</h4>
+                <div className="loading-bar-container">
+                    <div className="loading-bar"></div>
+                </div>
+            </div>
+        );
     }
 
     return (

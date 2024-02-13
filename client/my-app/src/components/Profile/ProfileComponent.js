@@ -38,7 +38,6 @@ function ProfileComponent() {
             .catch(error => {
                 console.log(error)
                 Popup.alert(error.response.data.response);
-                // Popup.alert({ error });
             });
     }
 

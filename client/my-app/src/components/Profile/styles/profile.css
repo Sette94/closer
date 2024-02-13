@@ -69,3 +69,7 @@
 .mm-popup-close:hover {
     color: #333;
 }
+
+.mm-popup__close {
+    display: none;
+}

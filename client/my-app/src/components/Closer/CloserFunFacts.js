@@ -19,8 +19,8 @@ function CloserFunFacts() {
 
     const user = useSelector((state) => state.user);
     const [userInfo, setuserInfo] = useState(null);
-    const [minuteState, setMinuteState] = useState(false)
-    const [hourState, setHourState] = useState(false)
+    const [minuteState, setMinuteState] = useState(true)
+    const [hourState, setHourState] = useState(true)
     const [isTopVisible, setIsTopVisible] = useState(false);
     const [isAllVisible, setIsAllVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -54,10 +54,17 @@ function CloserFunFacts() {
         fetchData();
 
     }, []);
-
     if (isLoading) {
-        return <div style={{ color: 'black' }}>Loading...</div>;
+        return (
+            <div>
+                <h4> Loading Data...</h4>
+                <div className="loading-bar-container">
+                    <div className="loading-bar"></div>
+                </div>
+            </div>
+        );
     }
+
 
     if (userInfo) {
         return (
@@ -128,7 +135,6 @@ function CloserFunFacts() {
                                         duration={5}
                                     />
                                 </div>
-
                             </div>
                             <br></br>
 

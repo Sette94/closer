@@ -15,11 +15,11 @@ function CloserFunFactsLanding() {
         <div className="closer-container">
             <h1>Closer: Fun Facts</h1>
             <br></br>
-            <p className="greeting-open">Short Porches, Shea Bridges, Walls of Ivy</p>
+            <p className="greeting-open">The Short Porch, Shea Bridge, & Walls of Ivy</p>
             <br></br>
             <p className="greeting-seen">Peanuts, Popcorn, Ice Cream</p>
             <br></br>
-            <p className="greeting-exact">Summer nights that won't end</p>
+            <p className="greeting-exact">All the things that make games great</p>
             <br></br>
             <p className="greeting-fact"> Here are some fun facts on how you spent <br></br>your time at the Ballpark</p>
             <br></br>
