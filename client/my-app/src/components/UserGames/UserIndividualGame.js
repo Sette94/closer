@@ -189,7 +189,7 @@ function IndividualGame({ game }) {
 
                         </div>
 
-                        <div>
+                        <div className='homeruncontainer'>
                             <h3>Homerun Hitters</h3>
                             <div className='homeruns'>
                                 {homerunData()}

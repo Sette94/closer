@@ -77,6 +77,7 @@ function LoginHandler() {
                     <input
                         id="password"
                         name="password"
+                        type="password"
                         placeholder="password"
                         onChange={formikLogin.handleChange}
                         value={formikLogin.values.password}
