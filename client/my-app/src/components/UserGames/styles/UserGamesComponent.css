@@ -79,7 +79,22 @@
 
 
 
+.smooth-open {
+    transition: transform 1.6s ease;
+    /* Smooth transition for opening effect */
+}
 
+.form-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1.6s ease;
+    /* Smooth transition for opening effect */
+}
+
+.form-container.open {
+    max-height: 500px;
+    /* Adjust height as needed */
+}
 
 
 #btn-23 {
@@ -108,4 +123,116 @@
     overflow: hidden;
     padding: 0.4rem 1rem;
     position: relative;
+}
+
+
+
+
+/* Hide the default arrow on the dropdown */
+#venuedropdown::-ms-expand {
+    display: none;
+}
+
+#venuedropdown {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 10px 20px;
+    /* Adjust padding as needed */
+    border: 2px solid #ccc;
+    /* Dropdown border */
+    border-radius: 5px;
+    /* Rounded corners */
+    background-color: #fff;
+    /* Dropdown background color */
+    color: #333;
+    /* Dropdown text color */
+    font-size: 16px;
+    /* Dropdown text size */
+    cursor: pointer;
+    outline: none;
+    /* Remove outline */
+}
+
+/* Hover effect */
+#venuedropdown:hover {
+    border-color: #aaa;
+    /* Border color on hover */
+}
+
+/* Focus effect */
+#venuedropdown:focus {
+    border-color: #007bff;
+    /* Border color when focused */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    /* Add a subtle box shadow */
+}
+
+/* Dropdown arrow icon */
+#venuedropdown:after {
+    content: '\25BC';
+    /* Unicode character for down arrow */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #666;
+    /* Arrow color */
+    font-size: 14px;
+    /* Arrow size */
+}
+
+/* Styling for dropdown options */
+#venuedropdown option {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Styling for dropdown when disabled */
+#venuedropdown:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+
+.submit-button {
+    padding: 10px 20px;
+    /* Adjust padding as needed */
+    border: none;
+    /* Remove border */
+    border-radius: 5px;
+    /* Rounded corners */
+    background-color: #007bff;
+    /* Button background color */
+    color: #fff;
+    /* Button text color */
+    font-size: 16px;
+    /* Button text size */
+    cursor: pointer;
+    outline: none;
+    /* Remove outline */
+    transition: background-color 0.3s ease;
+    /* Smooth transition for background color */
+}
+
+/* Hover effect */
+.submit-button:hover {
+    background-color: #0056b3;
+    /* Change background color on hover */
+}
+
+/* Focus effect */
+.submit-button:focus {
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    /* Add a subtle box shadow when focused */
+}
+
+/* Disabled state */
+.submit-button:disabled {
+    opacity: 0.6;
+    /* Reduce opacity for disabled button */
+    cursor: not-allowed;
+    /* Change cursor to not-allowed for disabled button */
 }

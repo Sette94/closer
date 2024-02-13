@@ -3,7 +3,6 @@ import { form, useField, useFormik } from "formik";
 import * as yup from "yup";
 import { useSelector } from 'react-redux';
 import axios from "axios";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
@@ -68,6 +67,7 @@ function NewGameHandler({ handleNewGame, ballparks }) {
                 });
                 console.log(response)
                 if (response.status == 200) {
+
                     setResponse(response.data.response);
                     handleNewGame(response.data.gamePk, user.user_id)
                     formik.resetForm();
@@ -93,17 +93,13 @@ function NewGameHandler({ handleNewGame, ballparks }) {
 
     return (
         <div>
-            <p>{response}</p>
             <div className="login">
                 <form onSubmit={formik.handleSubmit}>
                     <div className="input-group">
-
-
                         <form>
                             <DatePicker
                                 selected={startdate}
                                 onChange={(date) => handleDate(date)}
-
                             />
                         </form>
                         {formik.errors.date && (
@@ -115,7 +111,7 @@ function NewGameHandler({ handleNewGame, ballparks }) {
 
 
                         <select
-                            id="venue"
+                            id="venuedropdown"
                             name="venue"
                             onChange={formik.handleChange}
                             value={formik.values.venue}>
@@ -136,7 +132,7 @@ function NewGameHandler({ handleNewGame, ballparks }) {
                             <p className="error">{formik.errors.venue}</p>
                         )}
                         <div className="button-container">
-                            <button type="submit">Submit</button>
+                            <button className='submit-button' type="submit">Submit</button>
                         </div>
                     </div>
                 </form>
