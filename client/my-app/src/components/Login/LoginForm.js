@@ -85,15 +85,13 @@ function LoginHandler() {
                     {formikLogin.errors.password && (
                         <p className="error">{formikLogin.errors.password}</p>
                     )}
+                </div>
+                <div className="input-group">
                     <div className="button-container">
                         <button type="submit">Login</button>
                     </div>
                 </div>
             </form>
-
-
-
-
         </div>
 
 

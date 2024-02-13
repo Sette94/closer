@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import LoginHandler from './LoginForm'; // Import the LoginHandler
+import LoginHandler from './LoginForm';
+import RegistrationHandler from './RegistrationForm';
 import "./styles/Login.css"
 import Popup from 'react-popup';
 
 
 const LoginComponent = () => {
     const dispatch = useDispatch();
+
+    const [open, setOpen] = useState(false);
+
+
+    const handleOpen = () => {
+        setOpen(!open);
+    };
 
 
     return (
@@ -26,6 +34,14 @@ const LoginComponent = () => {
                 <img className='riveragif' src="/gifs/rivera.gif" alt="Image" />
                 <Popup />
                 <LoginHandler />
+                <br></br>
+                <button id='createaccount' className={open ? 'smooth-open' : ''} onClick={handleOpen}> Create Account
+                </button>
+                <div className={open ? 'register-open' : 'register-container'}>
+                    <RegistrationHandler />
+                </div>
+            </div>
+            <div>
             </div>
         </div>
     );
