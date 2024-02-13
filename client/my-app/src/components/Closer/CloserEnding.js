@@ -21,7 +21,7 @@ function CloserEnding() {
             <br></br>
             <p className="greeting-open">That closes out your year!</p>
             <br></br>
-            <p className="greeting-seen">While the game ends now it will begin again the spring</p>
+            <p className="greeting-seen">The game begins again in the spring</p>
             <br></br>
             <p className="greeting-exact">When everything else begins again</p>
             <br></br>
