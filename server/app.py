@@ -45,7 +45,6 @@ def ballparks():
             return jsonify(response_data), 200
 
         except Exception as e:
-            print(e)
             response_data = {'response': "Failed to get parks"}
             return jsonify(response_data), 404
 
@@ -61,12 +60,9 @@ def user_games(id):
                 Ballparks.venue_name == form_data.get('data').get('venue')).first()
 
             ballpark_id = ballpark.venue_id
-            print(ballpark_id)
 
             game = Games.query.filter(Games.date == form_data.get('data').get(
                 'date'), Games.venue_id == ballpark_id).all()
-
-            print(game)
 
             new_attended = UserGames(
                 gamePk=game[0].gamePk,
@@ -81,7 +77,6 @@ def user_games(id):
                 'gamePk': game[0].gamePk}
             return jsonify(response_data), 200
         except Exception as e:
-            print(e)
             response_data = {'response': "Failed to create game for user",
                              'gamePk': "No GamePk for this game"}
             return jsonify(response_data), 404
@@ -176,10 +171,8 @@ def users(id=None):
         # Handle PATCH for updating user information
         try:
             form_data = request.get_json()
-            print(form_data)
 
             focus_user = Users.query.filter(Users.user_id == id).first()
-            print(focus_user.username)
             usernames = [user.username for user in Users.query.all(
             ) if user.username == form_data.get('username') and user.user_id != form_data.get('user_id')]
 

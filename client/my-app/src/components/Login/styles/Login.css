@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Lily+Script+One&display=swap');
+
+
 .loginComponent {
     background-image: url("/public/background-images/wrapped-image.jpg");
     background-repeat: no-repeat;
@@ -13,6 +16,7 @@
     height: 100%;
     z-index: -1;
     flex-direction: column;
+
 }
 
 .loginheader {
@@ -36,7 +40,7 @@
     position: absolute;
     top: 3em;
     left: 0;
-    animation: move-words 5s linear infinite;
+    animation: move-words 7s linear infinite;
     animation-iteration-count: infinite;
 }
 
@@ -85,23 +89,28 @@
 }
 
 
+.loginheader {
+    color: #0C2340;
+    font-family: 'Lily Script One', sans-serif;
+    font-size: x-large;
 
+
+}
 
 .loginForm {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
     max-width: 80%;
     /* Adjust max-width as needed */
     width: 400px;
     /* Set a fixed width */
-    border: 1px solid #ccc;
+    border: 1px solid #ad2929;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -111,7 +120,7 @@
 
 @media (min-width: 768px) {
     .loginForm {
-        width: 600px;
+        width: 400px;
         /* Increase width for larger monitors */
     }
 }
@@ -170,14 +179,14 @@
     top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #e5a0a0;
+    background-color: #ffffff;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0.0s ease;
 }
 
 
@@ -189,6 +198,11 @@
 /* Popup content */
 .loginForm .mm-popup-content {
     text-align: center;
+}
+
+.loginForm .mm-popup__close {
+    display: none;
+
 }
 
 /* Close button */

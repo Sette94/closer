@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import UserGames from './UserGames';
 import AddNewGameForm from './AddNewGameForm'
 import "./styles/UserGamesComponent.css"
+import Popup from 'react-popup';
 
 
 
@@ -52,11 +53,19 @@ function UserGameContainer() {
                 data: {
                     "gamePk": gamePk
                 }
+            }).then((res) => {
+
+                console.log(res)
+                Popup.alert("Successfully deleted game")
+                setTimeout(() => {
+                    Popup.close();
+                }, 1500);
             });
         }
         catch (error) {
             console.error("Response error:", error.response.data);
             console.error("Status code:", error.response.status);
+
         }
         setuserGames(userGames.filter(game =>
             game.games.game_data.dates[0].games[0].gamePk !== gamePk))
@@ -87,6 +96,7 @@ function UserGameContainer() {
 
 
     return (
+
         <div class="crudgamescontainer">
             <div className="addgame">
                 <button id='btn-23' className={open ? 'smooth-open' : ''} onClick={handleOpen}>Add New Game</button>

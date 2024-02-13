@@ -73,6 +73,9 @@ function NewGameHandler({ handleNewGame, ballparks }) {
                     handleNewGame(response.data.gamePk, user.user_id)
                     formik.resetForm();
                     Popup.alert(response.data.response)
+                    setTimeout(() => {
+                        Popup.close();
+                    }, 1500);
 
 
                 }
@@ -83,6 +86,9 @@ function NewGameHandler({ handleNewGame, ballparks }) {
                 console.error("Response error:", error.response.data);
                 console.error("Status code:", error.response.status);
                 Popup.alert(error.response.data.response)
+                setTimeout(() => {
+                    Popup.close();
+                }, 1500);
             }
         },
     });

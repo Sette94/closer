@@ -16,7 +16,7 @@ class Users(db.Model, SerializerMixin):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String)
+    username = db.Column(db.String,  unique=True)
     password = db.Column(db.String)
     first_year = db.Column(db.DateTime, server_default=db.func.now())
     profile_image = db.Column(db.String)

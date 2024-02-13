@@ -1,11 +1,11 @@
 import React from "react";
-import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import * as yup from "yup";
 import { loginSuccess } from "../actions";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import Popup from 'react-popup';
+import { useFormik } from "formik";
 
 
 function LoginHandler() {
@@ -18,7 +18,7 @@ function LoginHandler() {
         username: yup.string().required("Must enter a username"),
     });
 
-    const formik = useFormik({
+    const formikLogin = useFormik({
         initialValues: {
             password: "",
             username: "",
@@ -33,8 +33,8 @@ function LoginHandler() {
                     const data = response.data;
                     const matchedUser = data.find(
                         (currentUser) =>
-                            currentUser.username === formik.values.username &&
-                            currentUser.password === formik.values.password
+                            currentUser.username === formikLogin.values.username &&
+                            currentUser.password === formikLogin.values.password
                     );
 
                     if (matchedUser) {
@@ -43,8 +43,6 @@ function LoginHandler() {
                             "user_id": matchedUser.user_id,
                             "profile_image": matchedUser.profile_image
                         };
-
-                        // Dispatch the loginSuccess action to update Redux state
                         dispatch(loginSuccess(storageUser));
                         navigate(`/home`);
                     } else {
@@ -62,17 +60,17 @@ function LoginHandler() {
     return (
 
         <div className="login">
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formikLogin.handleSubmit}>
                 <div className="input-group">
                     <input
                         id="username"
                         name="username"
                         placeholder="username"
-                        onChange={formik.handleChange}
-                        value={formik.values.username}
+                        onChange={formikLogin.handleChange}
+                        value={formikLogin.values.username}
                     />
-                    {formik.errors.username && (
-                        <p className="error">{formik.errors.username}</p>
+                    {formikLogin.errors.username && (
+                        <p className="error">{formikLogin.errors.username}</p>
                     )}
                 </div>
                 <div className="input-group">
@@ -80,17 +78,20 @@ function LoginHandler() {
                         id="password"
                         name="password"
                         placeholder="password"
-                        onChange={formik.handleChange}
-                        value={formik.values.password}
+                        onChange={formikLogin.handleChange}
+                        value={formikLogin.values.password}
                     />
-                    {formik.errors.password && (
-                        <p className="error">{formik.errors.password}</p>
+                    {formikLogin.errors.password && (
+                        <p className="error">{formikLogin.errors.password}</p>
                     )}
                     <div className="button-container">
                         <button type="submit">Login</button>
                     </div>
                 </div>
             </form>
+
+
+
 
         </div>
 
