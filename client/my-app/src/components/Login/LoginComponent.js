@@ -31,7 +31,7 @@ const LoginComponent = () => {
                 </div>
                 <h2 className='loginheader'> Closer </h2>
                 <br></br>
-                <img className='riveragif' src="/gifs/rivera.gif" alt="Image" />
+                <img className='riveragif' src="/gifs/closer.gif" alt="Image" />
                 <Popup />
                 <LoginHandler />
                 <br></br>
