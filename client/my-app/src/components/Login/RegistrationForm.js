@@ -34,6 +34,7 @@ function RegistrationHandler() {
                     .then((response) => {
                         console.log(response);
                         Popup.alert('Successfully created account!');
+                        formikRegistration.resetForm(); // Reset form values
                     });
             } catch (error) {
                 console.log(error.response.data.response);

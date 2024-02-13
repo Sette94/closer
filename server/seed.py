@@ -9,7 +9,7 @@ if __name__ == "__main__":
     with app.app_context():
 
         print("Clearing data...")
-        Users.query.delete()
+        # Users.query.delete()
         # Games.query.delete()
         # UserGames.query.delete()
         # Ballparks.query.delete()
@@ -90,66 +90,6 @@ if __name__ == "__main__":
         print("Creating user games")
 
         print("Creating attended game")
-
-        # attended_game_1 = UserGames(
-        #     gamePk=716595,
-        #     user_id=1
-        # )
-
-        # attended_game_2 = UserGames(
-        #     gamePk=716840,
-        #     user_id=1
-        # )
-
-        # attended_game_3 = UserGames(
-        #     gamePk=716877,
-        #     user_id=1
-        # )
-
-        # attended_game_4 = UserGames(
-        #     gamePk=717142,
-        #     user_id=1
-        # )
-
-        # attended_game_5 = UserGames(
-        #     gamePk=717655,
-        #     user_id=1
-        # )
-
-        # attended_game_6 = UserGames(
-        #     gamePk=717934,
-        #     user_id=1
-        # )
-
-        # attended_game_7 = UserGames(
-        #     gamePk=718099,
-        #     user_id=1
-        # )
-
-        # attended_game_8 = UserGames(
-        #     gamePk=718219,
-        #     user_id=1
-        # )
-
-        # attended_game_9 = UserGames(
-        #     gamePk=718303,
-        #     user_id=1
-        # )
-
-        # attended_game_10 = UserGames(
-        #     gamePk=718496,
-        #     user_id=1
-        # )
-
-        # attended_game_11 = UserGames(
-        #     gamePk=718610,
-        #     user_id=1
-        # )
-
-        # db.session.add_all([
-        #     attended_game_1, attended_game_2, attended_game_3, attended_game_4, attended_game_5, attended_game_6, attended_game_7, attended_game_8,
-        #     attended_game_9, attended_game_10, attended_game_11])
-        # db.session.commit()
 
         print("Creating Venues")
         venue_1 = Ballparks(
@@ -780,67 +720,67 @@ if __name__ == "__main__":
             }
         )
 
-        # db.session.add_all([
-        #     venue_1,
-        #     venue_2,
-        #     venue_3,
-        #     venue_4,
-        #     venue_5380,
-        #     venue_5,
-        #     venue_5381,
-        #     venue_7,
-        #     venue_5000,
-        #     venue_10,
-        #     venue_12,
-        #     venue_2700,
-        #     venue_14,
-        #     venue_15,
-        #     venue_17,
-        #     venue_19,
-        #     venue_4629,
-        #     venue_22,
-        #     venue_4249,
-        #     venue_31,
-        #     venue_32,
-        #     venue_2856,
-        #     venue_680,
-        #     venue_2602,
-        #     venue_2603,
-        #     venue_5421,
-        #     venue_2862,
-        #     venue_2735,
-        #     venue_2500,
-        #     venue_2504,
-        #     venue_2889,
-        #     venue_4169,
-        #     venue_2507,
-        #     venue_2508,
-        #     venue_5325,
-        #     venue_2511,
-        #     venue_4309,
-        #     venue_2518,
-        #     venue_2392,
-        #     venue_2520,
-        #     venue_3289,
-        #     venue_2394,
-        #     venue_2395,
-        #     venue_2523,
-        #     venue_5340,
-        #     venue_2526,
-        #     venue_3809,
-        #     venue_4705,
-        #     venue_2530,
-        #     venue_2532,
-        #     venue_2536,
-        #     venue_5355,
-        #     venue_3309,
-        #     venue_3312,
-        #     venue_3313,
-        #     venue_2680,
-        #     venue_2681,
-        #     venue_3834
-        # ]
-        # )
-        # db.session.commit()
+        db.session.add_all([
+            venue_1,
+            venue_2,
+            venue_3,
+            venue_4,
+            venue_5380,
+            venue_5,
+            venue_5381,
+            venue_7,
+            venue_5000,
+            venue_10,
+            venue_12,
+            venue_2700,
+            venue_14,
+            venue_15,
+            venue_17,
+            venue_19,
+            venue_4629,
+            venue_22,
+            venue_4249,
+            venue_31,
+            venue_32,
+            venue_2856,
+            venue_680,
+            venue_2602,
+            venue_2603,
+            venue_5421,
+            venue_2862,
+            venue_2735,
+            venue_2500,
+            venue_2504,
+            venue_2889,
+            venue_4169,
+            venue_2507,
+            venue_2508,
+            venue_5325,
+            venue_2511,
+            venue_4309,
+            venue_2518,
+            venue_2392,
+            venue_2520,
+            venue_3289,
+            venue_2394,
+            venue_2395,
+            venue_2523,
+            venue_5340,
+            venue_2526,
+            venue_3809,
+            venue_4705,
+            venue_2530,
+            venue_2532,
+            venue_2536,
+            venue_5355,
+            venue_3309,
+            venue_3312,
+            venue_3313,
+            venue_2680,
+            venue_2681,
+            venue_3834
+        ]
+        )
+        db.session.commit()
 
         print("Seeding complete...")
