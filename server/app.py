@@ -1,5 +1,5 @@
 from server.models import db, Users, Games, UserGames, Ballparks
-from server.config.helpers import Helpers
+from server.config import Helpers
 from flask import Flask
 from flask_migrate import Migrate
 from flask import Flask, jsonify, request
