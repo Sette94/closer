@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
 
 h1,
@@ -54,25 +55,16 @@ h2 {
     height: auto;
 }
 
-
-
-
-
 .mainContainer {
     display: flex;
     flex-direction: row;
     width: 100vw;
     height: 100vh;
-    /* Set the height to 100% of the viewport height */
 }
 
 .item {
     flex: 1;
-    /* Let items grow to fill available space */
 }
-
-
-
 
 .gameStory {
     width: 100%;
@@ -80,7 +72,6 @@ h2 {
     box-sizing: border-box;
 }
 
-/* Style the iframe to fill its container */
 .gameStory iframe {
     width: 100%;
     height: 100%;
@@ -91,7 +82,6 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* overflow: scroll; */
 
 
 }
@@ -130,7 +120,6 @@ h2 {
 .gameData>div {
     flex: 1;
     margin: 0 vh;
-    /* Add margin between the two divs */
 
 }
 
@@ -149,17 +138,89 @@ h2 {
     flex: 1;
 }
 
+.pitchervs {
+    padding: 3%;
+}
+
+.pitchersummaryContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.pitchersummary {
+    margin-top: 10px;
+    font-family: 'Caveat', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    background: linear-gradient(to bottom, white 29px, #00b0d7 1px);
+    background-size: 100%;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow: hidden;
+    border-radius: 5px;
+    -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, .2), 0px 0px 6px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, .2), 0px 0px 6px rgba(0, 0, 0, .2);
+    -ms-box-shadow: 3px 3px 3px rgba(0, 0, 0, .2), 0px 0px 6px rgba(0, 0, 0, .2);
+    -o-box-shadow: 3px 3px 3px rgba(0, 0, 0, .2), 0px 0px 6px rgba(0, 0, 0, .2);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, .2), 0px 0px 6px rgba(0, 0, 0, .2);
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 70px;
+        height: 100%;
+        width: 1px;
+        background: #db4034;
+    }
+
+    header {
+        height: 150px;
+        width: 100%;
+        background: white;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        h1 {
+            font-size: 60px;
+            line-height: 60px;
+            padding: 127px 20px 0 160px;
+        }
+    }
+
+    #content {
+        margin-top: 67px;
+        font-size: 20px;
+        line-height: 30px;
+
+        p {
+            margin: 0 0 30px 0;
+        }
+    }
+
+}
 .awayTeamPitcher .homeTeamPitcher {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.awayTeamPitcher a,
+.homeTeamPitcher a {
+    align-items: center;
+
+}
 .awayTeamPitcher img,
 .homeTeamPitcher img {
     width: 10vw;
     height: auto;
 }
+
 
 
 .homeruns {

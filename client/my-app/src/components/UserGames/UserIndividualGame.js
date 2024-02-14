@@ -26,12 +26,18 @@ function IndividualGame({ game }) {
         const home_team_id = game_object.teams.home.team.id
         const home_team_logo = `https://www.mlbstatic.com/team-logos/${home_team_id}.svg`
         const homePitcher = game_object.teams.home.probablePitcher;
+        const homePitcherSummary = game_object.teams.home.probablePitcher.stats[1].stats.summary
+        console.log(homePitcherSummary)
 
 
         const away_team_score = game_object.teams.away.score
         const away_team_id = game_object.teams.away.team.id
         const away_team_logo = `https://www.mlbstatic.com/team-logos/${away_team_id}.svg`
         const awayPitcher = game_object.teams.away.probablePitcher;
+        const awayPitcherSummary = game_object.teams.away.probablePitcher.stats[1].stats.summary
+        console.log(awayPitcherSummary)
+
+
         const win = game_object.teams.home.isWinner == "true" ? "W" : "L"
 
         const firstPitch = game_object.gameInfo.firstPitch
@@ -87,7 +93,7 @@ function IndividualGame({ game }) {
 
         function gameData() {
             const attendance = game_object.gameInfo.attendance
-            const time = `${Math.floor(game_object.gameInfo.gameDurationMinutes / 60)}:${game_object.gameInfo.gameDurationMinutes % 60}`
+            const formattedDuration = `${Math.floor(game_object.gameInfo.gameDurationMinutes / 60)}:${game_object.gameInfo.gameDurationMinutes % 60 < 10 ? '0' : ''}${game_object.gameInfo.gameDurationMinutes % 60}`;
             const series = game_object.gamesInSeries
 
 
@@ -95,7 +101,7 @@ function IndividualGame({ game }) {
                 <div>
                     <i><b>Attendance</b>: {attendance}</i>
                     <br />
-                    <i><b>Time of Game</b>: {time}</i>
+                    <i><b>Time of Game</b>: {formattedDuration}</i>
                     <br />
                     <i><b>Game In Series</b>: {series}</i>
 
@@ -159,9 +165,13 @@ function IndividualGame({ game }) {
                                                 />
 
                                             </a>
+
+
                                         </Tooltip>
+
                                     </div>
-                                    <div>
+
+                                    <div className='pitchervs'>
                                         VS
                                     </div>
                                     <div className='homeTeamPitcher'>
@@ -179,15 +189,30 @@ function IndividualGame({ game }) {
                                                 />
                                             </a>
 
-
                                         </Tooltip>
+
+
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div className='pitchersummaryContainer'>
+                            <div className='pitchersummary'>
+                                {/* {awayPitcher.fullName} */}
 
+                                {awayPitcherSummary}
+                            </div>
+                            <div className='pitchersummary'>
+                                {/* {homePitcher.fullName} */}
+                                {homePitcherSummary}
+                            </div>
+                            <div>
 
                         </div>
 
+
+                        </div>
+                        <br></br>
                         <div className='homeruncontainer'>
                             <h3>Homerun Hitters</h3>
                             <div className='homeruns'>
