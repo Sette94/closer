@@ -22,7 +22,7 @@ function NewGameHandler({ handleNewGame, ballparks }) {
 
     function handleDate(date) {
         const dateObject = new Date(date);
-        dateObject.setDate(dateObject.getDate() + 1); // Add a day to the date
+        dateObject.setDate(dateObject.getDate() + 1);
 
         const year = dateObject.getFullYear();
         const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
@@ -36,14 +36,14 @@ function NewGameHandler({ handleNewGame, ballparks }) {
 
     function handleForm(formDate) {
         const dateObject = new Date(formDate);
-        dateObject.setDate(dateObject.getDate()); // Add a day to the date
+        dateObject.setDate(dateObject.getDate());
 
         const year = dateObject.getFullYear();
         const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
         const day = dateObject.getDate().toString().padStart(2, "0");
 
         const formattedformDate = `${year}-${month}-${day}`;
-        formik.setFieldValue('date', formattedformDate); // Update formik values
+        formik.setFieldValue('date', formattedformDate); 
 
     }
 

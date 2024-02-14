@@ -17,21 +17,15 @@
 
 .card-body {
     display: flex;
-    /* Use flexbox layout */
     flex-direction: column;
-    /* Arrange children elements vertically */
     align-items: center;
-    /* Center children elements horizontally */
     justify-content: center;
-    /* Center children elements vertically */
     text-align: center;
-    /* Center text content */
 }
 
 .icon-container {
     display: flex;
     justify-content: center;
-    /* Center icons horizontally */
 }
 
 .view-button,
@@ -39,10 +33,7 @@
     cursor: pointer;
     border: none;
     font-size: 24px;
-    /* Adjust the size as needed */
     margin-left: 10px;
-    /* Add margin for spacing */
-    /* Remove borders */
 }
 
 .seengameslist {
@@ -63,7 +54,6 @@
     font-family: 'Lato', sans-serif;
     font-weight: 600;
     background-image: url("/public/background-images/grass.png");
-    /* Assuming the image is located in the public directory */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -81,19 +71,16 @@
 
 .smooth-open {
     transition: transform 1.6s ease;
-    /* Smooth transition for opening effect */
 }
 
 .form-container {
     max-height: 0;
     overflow: hidden;
     transition: max-height 1.6s ease;
-    /* Smooth transition for opening effect */
 }
 
 .form-container.open {
     max-height: 500px;
-    /* Adjust height as needed */
 }
 
 
@@ -128,7 +115,6 @@
 
 
 
-/* Hide the default arrow on the dropdown */
 #venuedropdown::-ms-expand {
     display: none;
 }
@@ -138,58 +124,40 @@
     -moz-appearance: none;
     appearance: none;
     padding: 10px 20px;
-    /* Adjust padding as needed */
     border: 2px solid #ccc;
-    /* Dropdown border */
     border-radius: 5px;
-    /* Rounded corners */
     background-color: #fff;
-    /* Dropdown background color */
     color: #333;
-    /* Dropdown text color */
     font-size: 16px;
-    /* Dropdown text size */
     cursor: pointer;
     outline: none;
-    /* Remove outline */
 }
 
-/* Hover effect */
 #venuedropdown:hover {
     border-color: #aaa;
-    /* Border color on hover */
 }
 
-/* Focus effect */
 #venuedropdown:focus {
     border-color: #007bff;
-    /* Border color when focused */
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-    /* Add a subtle box shadow */
 }
 
-/* Dropdown arrow icon */
 #venuedropdown:after {
     content: '\25BC';
-    /* Unicode character for down arrow */
     position: absolute;
     top: 50%;
     right: 10px;
     transform: translateY(-50%);
     pointer-events: none;
     color: #666;
-    /* Arrow color */
     font-size: 14px;
-    /* Arrow size */
 }
 
-/* Styling for dropdown options */
 #venuedropdown option {
     background-color: #fff;
     color: #333;
 }
 
-/* Styling for dropdown when disabled */
 #venuedropdown:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -221,24 +189,17 @@
     width: 25%
 }
 
-/* Hover effect */
 .submit-button:hover {
     background-color: #0056b3;
-    /* Change background color on hover */
 }
 
-/* Focus effect */
 .submit-button:focus {
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-    /* Add a subtle box shadow when focused */
 }
 
-/* Disabled state */
 .submit-button:disabled {
     opacity: 0.6;
-    /* Reduce opacity for disabled button */
     cursor: not-allowed;
-    /* Change cursor to not-allowed for disabled button */
 }
 
 

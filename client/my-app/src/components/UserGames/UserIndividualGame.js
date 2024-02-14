@@ -22,7 +22,6 @@ function IndividualGame({ game }) {
         const game_object = currentGame.games.game_data.dates[0].games[0];
         const date = currentGame.games.date
 
-        // Team Data
         const home_team_score = game_object.teams.home.score
         const home_team_id = game_object.teams.home.team.id
         const home_team_logo = `https://www.mlbstatic.com/team-logos/${home_team_id}.svg`
@@ -145,7 +144,6 @@ function IndividualGame({ game }) {
                                 <h3>Starting Pitchers</h3>
                                 <div className="pitchersContainer">
                                     <div className='awayTeamPitcher'>
-                                        {/* <h4>{game_object.teams.away.team.name}</h4> */}
                                         <Tooltip title={awayPitcher.fullName} placement="bottom">
                                             <a href={`https://www.mlb.com/player/${awayPitcher.id}`} target="_blank">
                                                 <ReactRoundedImage
@@ -165,7 +163,6 @@ function IndividualGame({ game }) {
                                         VS
                                     </div>
                                     <div className='homeTeamPitcher'>
-                                        {/* <h4>{game_object.teams.home.team.name}</h4> */}
                                         <Tooltip title={homePitcher.fullName} placement="bottom">
                                             <a href={`https://www.mlb.com/player/${homePitcher.id}`} target="_blank">
 
