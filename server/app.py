@@ -1,26 +1,27 @@
-from server.models import db, Users, Games, UserGames, Ballparks
-from server.config import Helpers
-from flask import Flask
-from flask_migrate import Migrate
-from flask import Flask, jsonify, request
-from flask import Flask, redirect, url_for
-from statistics import mean
-from flask_cors import CORS
-from flask import jsonify
-import os
+# from server.models import db, Users, Games, UserGames, Ballparks
+# from server.config import Helpers
 import sys
-sys.path.append(os.path.abspath(
-    os.path.join(os.path.dirname(__file__), 'server')))
+import os
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+from flask_migrate import Migrate
+from statistics import mean
+from config import Helpers
+from models import db, Users, Games, UserGames, Ballparks
 
+# Add the directory to the Python path if it's not already there
+server_dir = '/home/sette94/Development/Sette94-Github/mlb-wrapped/server'
+if server_dir not in sys.path:
+    sys.path.insert(0, server_dir)
 
 # create a Flask application object
 app = Flask(__name__)
 CORS(app)
 
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # create a Migrate object to manage schema modifications
