@@ -1,4 +1,4 @@
-from models import db, Users, Games, UserGames, Ballparks
+from server.models import db, Users, Games, UserGames, Ballparks
 from server.config.helpers import Helpers
 from flask import Flask
 from flask_migrate import Migrate
