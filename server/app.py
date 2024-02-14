@@ -1,33 +1,31 @@
-# from server.models import db, Users, Games, UserGames, Ballparks
-# from server.config import Helpers
-import sys
+
 import os
+import sys
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_migrate import Migrate
 from statistics import mean
-from config import Helpers
-from models import db, Users, Games, UserGames, Ballparks
+from server.models import db, Users, Games, UserGames, Ballparks
+from server.config import Helpers
 
-# Add the directory to the Python path if it's not already there
-server_dir = '/home/sette94/Development/Sette94-Github/mlb-wrapped/server'
-if server_dir not in sys.path:
-    sys.path.insert(0, server_dir)
 
-# create a Flask application object
+print(sys.path)
+
+
 app = Flask(__name__)
 CORS(app)
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# create a Migrate object to manage schema modifications
 migrate = Migrate(app, db)
-
-# initialize the Flask application to use the database
 db.init_app(app)
 
 
@@ -395,4 +393,5 @@ def userinfo(id):
 
 
 if __name__ == '__main__':
+    print(app)
     app.run(port=5555, debug=True)
