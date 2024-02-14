@@ -5,7 +5,6 @@
     background-image: url("/public/background-images/wrapped-image.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    /* Ensure the image covers the entire element */
     opacity: 0.5;
     color: transparent;
     display: block;
@@ -85,7 +84,6 @@
     max-width: 100%;
     margin-bottom: 20px;
     border-radius: 15px;
-    /* Apply border-radius to the image */
 }
 
 
@@ -107,9 +105,7 @@
     padding: 20px;
     z-index: 1000;
     max-width: 80%;
-    /* Adjust max-width as needed */
     width: 400px;
-    /* Set a fixed width */
     border: 1px solid #ad2929;
     overflow: hidden;
     display: flex;
@@ -121,7 +117,6 @@
 @media (min-width: 768px) {
     .loginForm {
         width: 400px;
-        /* Increase width for larger monitors */
     }
 }
 
@@ -137,7 +132,6 @@
 
 .loginForm .form-group {
     width: 100%;
-    /* Make form groups full width */
     margin-bottom: 20px;
 }
 
@@ -149,7 +143,6 @@
 .loginForm input[type="text"],
 .loginForm input[type="password"] {
     width: 100%;
-    /* Make inputs full width */
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -207,7 +200,6 @@
     visibility: visible;
 }
 
-/* Popup content */
 .loginForm .mm-popup-content {
     text-align: center;
 }
@@ -217,7 +209,6 @@
 
 }
 
-/* Close button */
 .loginForm .mm-popup-close {
     position: absolute;
     top: 10px;
@@ -242,13 +233,11 @@
     transition: border-color 0.3s ease;
 }
 
-/* Input field focus style */
 .input-group input:focus {
     border-color: #007bff;
     outline: none;
 }
 
-/* Error message */
 .input-group .error {
     color: red;
     font-size: 14px;
@@ -262,7 +251,6 @@
 
 .smooth-open {
     transition: transform 1.0s ease;
-    /* Smooth transition for opening effect */
 }
 
 .register-container {
@@ -274,6 +262,4 @@
 .register-open {
     max-height: 500px;
     transition: max-height 2.0s ease;
-
-    /* Adjust height as needed */
 }
