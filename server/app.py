@@ -1,3 +1,5 @@
+from models import db, Users, Games, UserGames, Ballparks
+from server.config.helpers import Helpers
 from flask import Flask
 from flask_migrate import Migrate
 from flask import Flask, jsonify, request
@@ -7,17 +9,13 @@ from flask_cors import CORS
 from flask import jsonify
 import os
 import sys
+sys.path.append(os.path.abspath(
+    os.path.join(os.path.dirname(__file__), 'server')))
 
-from config import Helpers
-
-from models import db, Users, Games, UserGames, Ballparks
 
 # create a Flask application object
 app = Flask(__name__)
 CORS(app)
-
-sys.path.append(os.path.abspath(
-    os.path.join(os.path.dirname(__file__), 'server')))
 
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
