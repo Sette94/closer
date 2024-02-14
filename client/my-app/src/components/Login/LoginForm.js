@@ -7,11 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import Popup from 'react-popup';
 import { useFormik } from "formik";
 
-
 function LoginHandler() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
 
     const formSchema = yup.object().shape({
         password: yup.string().required("Must enter a password"),
@@ -39,9 +37,9 @@ function LoginHandler() {
 
                     if (matchedUser) {
                         const storageUser = {
-                            "username": matchedUser.username,
-                            "user_id": matchedUser.user_id,
-                            "profile_image": matchedUser.profile_image
+                            username: matchedUser.username,
+                            user_id: matchedUser.user_id,
+                            profile_image: matchedUser.profile_image
                         };
                         dispatch(loginSuccess(storageUser));
                         navigate(`/home`);
@@ -58,7 +56,6 @@ function LoginHandler() {
     });
 
     return (
-
         <div className="login">
             <form onSubmit={formikLogin.handleSubmit}>
                 <div className="input-group">
@@ -93,8 +90,6 @@ function LoginHandler() {
                 </div>
             </form>
         </div>
-
-
     );
 }
 
