@@ -5,7 +5,7 @@ from flask import Flask, redirect, url_for
 from statistics import mean
 from flask_cors import CORS
 from flask import jsonify
-
+import os
 
 from config import Helpers
 
@@ -16,10 +16,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-# configure a database connection to the local file app.db
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-
-# disable modification tracking to use less memory
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # create a Migrate object to manage schema modifications
