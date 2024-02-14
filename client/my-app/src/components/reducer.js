@@ -1,4 +1,3 @@
-// reducer.js
 import { LOGIN_SUCCESS, LOGOUT } from './actions';
 
 const initialState = {

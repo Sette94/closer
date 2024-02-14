@@ -19,9 +19,8 @@ function Header() {
 
 
     const handleLogout = () => {
-        // Dispatch the logout action to clear user information
         dispatch(logout());
-        navigate(`/`); // Redirect to login page or any other page after logout
+        navigate(`/`); 
     };
 
     return (

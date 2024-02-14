@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import "./styles/CloserPlayers.css"

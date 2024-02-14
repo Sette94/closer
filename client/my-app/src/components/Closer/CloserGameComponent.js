@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './styles/CloserGame.css';
 import { useSelector } from 'react-redux';
 

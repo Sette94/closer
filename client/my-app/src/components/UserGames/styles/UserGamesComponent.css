@@ -11,10 +11,6 @@
 
 }
 
-
-
-
-
 .card-body {
     display: flex;
     flex-direction: column;
@@ -60,14 +56,10 @@
 
 }
 
-
-
 .teamLogo {
     width: 50px;
     height: 50px;
 }
-
-
 
 .smooth-open {
     transition: transform 1.6s ease;
@@ -82,7 +74,6 @@
 .form-container.open {
     max-height: 500px;
 }
-
 
 #btn-23 {
     -webkit-tap-highlight-color: transparent;
@@ -103,7 +94,6 @@
     text-transform: uppercase;
 }
 
-
 #btn-23 {
     border-radius: 88rem;
     border-width: 2px;
@@ -111,9 +101,6 @@
     padding: 0.4rem 1rem;
     position: relative;
 }
-
-
-
 
 #venuedropdown::-ms-expand {
     display: none;
@@ -163,8 +150,6 @@
     cursor: not-allowed;
 }
 
-
-
 .submit-button {
     -webkit-tap-highlight-color: transparent;
     -webkit-appearance: button;
@@ -201,7 +186,6 @@
     opacity: 0.6;
     cursor: not-allowed;
 }
-
 
 .form-container.open .mm-popup.mm-popup--visible {
     background-color: #ffffff;

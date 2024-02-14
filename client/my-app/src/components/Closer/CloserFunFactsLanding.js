@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './styles/CloserLanding.css';
 

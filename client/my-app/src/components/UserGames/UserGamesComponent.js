@@ -78,7 +78,7 @@ function UserGameContainer() {
                 const response = await axios.get(`http://localhost:5555/users/${user_id}/games?gamePk=${gamePk}`);
                 setuserGames((prevUserGames) => [
                     ...prevUserGames,
-                    response.data // Assuming the data property contains the new game
+                    response.data
                 ]);
             } catch (error) {
                 console.error('Error fetching user games:', error);
