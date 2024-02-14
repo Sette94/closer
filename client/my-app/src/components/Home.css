@@ -19,7 +19,7 @@
 .homecardsindividual {
     border-radius: 40%;
     border: none;
-    color: #ffffff;
+    color: #0C2340;
     width: 350px;
     height: 350px;
     display: flex;
@@ -28,7 +28,7 @@
     margin: 40px;
     font-family: 'Lily Script One', sans-serif;
     font-size: xx-large;
-    text-shadow: rgb(0, 0, 0) 1px 0 10px;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px rgb(255, 149, 0), 0 0 70px rgb(255, 149, 0), 0 0 80px rgb(255, 149, 0), 0 0 100px rgb(255, 149, 0), 0 0 150px rgb(255, 149, 0);
     background-image: url("/public/background-images/park.png");
     opacity: 0.8;
 }

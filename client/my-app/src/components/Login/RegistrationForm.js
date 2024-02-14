@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import * as yup from "yup";
-import { loginSuccess } from "../actions";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import Popup from 'react-popup';

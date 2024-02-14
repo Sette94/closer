@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../actions";
-import { useNavigate } from 'react-router-dom';
 import Popup from 'react-popup';
 
 import { useFormik } from "formik";
@@ -12,7 +11,6 @@ import './styles/profile.css'
 
 function ProfileComponent() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const user = useSelector((state) => state.user);
 
