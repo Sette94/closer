@@ -114,8 +114,10 @@ function IndividualGame({ game }) {
                         <img src={away_team_logo} alt={`Away Team Logo`} />
                         <p>{away_team_score}</p>
                     </div>
+                    <div className='vs'>-</div>
                     <div className='homeTeamLogo'>
-                        <img src={home_team_logo} alt={`Home Team Logo`} /> <p>{home_team_score}</p>
+                        <p>{home_team_score}</p>
+                        <img src={home_team_logo} alt={`Home Team Logo`} /> 
 
                     </div>
                 </div>

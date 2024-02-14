@@ -10,23 +10,39 @@ h2 {
     justify-content: space-evenly;
     align-items: center;
     flex: 1;
-    margin-bottom: 1px;
+    margin-bottom: 5px;
+        padding-left: 30%;
+        padding-right: 30%;
 }
 
 .awayTeamLogo,
 .homeTeamLogo {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
 }
 
-.awayTeamLogo img,
+.awayTeamLogo img {
+    width: 100px;
+    height: 100px;
+    padding-right: 10%;
+}
 .homeTeamLogo img {
     width: 100px;
     height: 100px;
+    padding-left: 10%;
 }
 
-.awayTeamLogo p,
+.vs {
+    font-size: 6vw;
+
+}
+
+.awayTeamLogo p {
+    margin-top: 10px;
+    font-family: 'Changa One', sans-serif;
+    font-size: 4vw;
+}
 .homeTeamLogo p {
     margin-top: 10px;
     font-family: 'Changa One', sans-serif;
