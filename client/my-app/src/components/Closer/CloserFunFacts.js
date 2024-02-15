@@ -140,23 +140,7 @@ function CloserFunFacts() {
                                     />
                                 </div>
                             </div>
-                            {/* <h4 className='headers' >Average Game</h4>
-                            <div className="flipNumbersContainer">
-                                <div onClick={() => { setHourState(!hourState) }} className="flipNumber">
-                                    <FlipNumbers
-                                        height={40}
-                                        width={30}
-                                        color="#333"
-                                        background="#ecbf36"
-                                        numberStyle={{ fontSize: '24px' }}
-                                        numbers={minutesToHHMM(userInfo.minutes_at_games, userInfo.day_games + userInfo.night_games)}
-                                        play={hourState}
-                                        duration={5}
-                                    />
-                                </div>
-                            </div> */}
                             <br></br>
-
                             <h4 className='headers'> Total Minutes</h4>
                             <div className="flipNumbersContainer">
                                 <div onClick={() => { setMinuteState(!minuteState) }} className="flipNumber">

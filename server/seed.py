@@ -24,9 +24,7 @@ if __name__ == "__main__":
                     # Now you can use game_pk in your request URL
                     print(game_pk)
                     try:
-                        r = requests.get(
-                            f"https://statsapi.mlb.com/api/v1/schedule?gamePk={game_pk}&useLatestGames=true&hydrate=homeRuns,story,stats,gameInfo,lineups,weather,probablePitcher(all),scoringplays")
-                        game_data_return = r.json()
+
 
                         # Assuming Games is your SQLAlchemy model
                         game = Games(

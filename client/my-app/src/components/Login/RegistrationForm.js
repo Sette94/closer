@@ -30,7 +30,7 @@ function RegistrationHandler() {
 
                 console.log(response);
                 Popup.alert('Successfully created account!');
-                formikRegistration.resetForm(); // Reset form values
+                formikRegistration.resetForm();
             } catch (error) {
                 console.log(error.response.data.response);
                 Popup.alert(error.response.data.response);
