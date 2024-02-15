@@ -85,7 +85,7 @@ function LoginHandler() {
                 </div>
                 <div className="input-group">
                     <div className="button-container">
-                        <button type="submit">Login</button>
+                        <button className="submitbuttons" type="submit">Login</button>
                     </div>
                 </div>
             </form>

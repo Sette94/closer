@@ -67,7 +67,7 @@ function RegistrationHandler() {
                     )}
                 </div>
                 <div className="button-container">
-                    <button type="submit">Register</button>
+                    <button className="submitbuttons" type="submit">Register</button>
                 </div>
             </form>
         </div>
