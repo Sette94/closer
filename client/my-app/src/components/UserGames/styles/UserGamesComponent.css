@@ -30,6 +30,13 @@
     border: none;
     font-size: 24px;
     margin-left: 10px;
+    transition: color 0.3s, text-shadow 0.3s;
+    }
+    
+    .view-button:hover,
+    .delete-button:hover {
+        background-color: #b9b4b4;
+        /* Add a shadow effect on hover */
 }
 
 .seengameslist {
