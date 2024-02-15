@@ -27,7 +27,6 @@ function IndividualGame({ game }) {
         const home_team_logo = `https://www.mlbstatic.com/team-logos/${home_team_id}.svg`
         const homePitcher = game_object.teams.home.probablePitcher;
         const homePitcherSummary = game_object.teams.home.probablePitcher.stats[1].stats.summary
-        console.log(homePitcherSummary)
 
 
         const away_team_score = game_object.teams.away.score
@@ -35,10 +34,11 @@ function IndividualGame({ game }) {
         const away_team_logo = `https://www.mlbstatic.com/team-logos/${away_team_id}.svg`
         const awayPitcher = game_object.teams.away.probablePitcher;
         const awayPitcherSummary = game_object.teams.away.probablePitcher.stats[1].stats.summary
-        console.log(awayPitcherSummary)
+
+        const hWin = game_object.teams.home.isWinner == true ? "W" : "L"
+        const aWin = game_object.teams.away.isWinner == true ? "W" : "L"
 
 
-        const win = game_object.teams.home.isWinner == "true" ? "W" : "L"
 
         const firstPitch = game_object.gameInfo.firstPitch
         const dayNight = game_object.dayNight == "night" ? <div >First Pitch: {UTCtimeconverter(firstPitch)} 🌇</div> : <div >First Pitch: {UTCtimeconverter(firstPitch)} ☀️</div>;
@@ -64,14 +64,16 @@ function IndividualGame({ game }) {
         function homerunData() {
             return game_object.homeRuns.map((homerun) => {
                 const headshot = `https://img.mlbstatic.com/mlb/images/players/head_shot/${homerun.matchup.batter.id}.jpg`;
-                const description = homerun.result.description;
                 const name = homerun.matchup.batter.fullName;
+                const homerun_number = homerun.result.description.match(/\((\d+)\)/)[1]
+                console.log(homerun_number)
+
 
                 return (
+                    <div>
                     <Tooltip title={name} placement="bottom">
                         <div className="homerunitems" key={homerun.matchup.batter.id}>
-                            <a href={`https://www.mlb.com/player/${homerun.matchup.batter.id}`} target="_blank">
-                                {/* <img className='homerunheadshot' src={headshot} alt={`headshot`} /> */}
+                                <a href={`https://www.mlb.com/player/${homerun.matchup.batter.id}`} target="_blank">
                                 <ReactRoundedImage
                                     image={headshot}
                                     roundedColor="#66A5CC"
@@ -84,6 +86,12 @@ function IndividualGame({ game }) {
                             </a>
                         </div>
                     </Tooltip>
+                        <div className='homerunNumber'>
+                            Homerun: {homerun_number}
+                        </div>
+
+                    </div>
+
 
 
                 );
@@ -136,7 +144,7 @@ function IndividualGame({ game }) {
                     <div className='individualInfo'>
                         <div className='nongameData'>
                             <div className='weather'>
-                                <h3>Weather</h3>
+                                <h3>☀️Weather🌇</h3>
                                 {weatherData()}
                             </div>
 
@@ -198,13 +206,10 @@ function IndividualGame({ game }) {
                         </div>
                         <div className='pitchersummaryContainer'>
                             <div className='pitchersummary'>
-                                {/* {awayPitcher.fullName} */}
-
                                 {awayPitcherSummary}
                             </div>
                             <div className='pitchersummary'>
-                                {/* {homePitcher.fullName} */}
-                                {homePitcherSummary}
+                                {homePitcherSummary}       
                             </div>
                             <div>
 
