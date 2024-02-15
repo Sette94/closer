@@ -83,7 +83,7 @@ function CloserComponent() {
             <p className="greeting-exact">I wonder how many?</p>
             <br></br>
             {countedGames == 0 ? "" : <span className="counter">{countedGames}</span>}
-            <br></br> <br></br>
+            <br></br>
             {message}
             <br></br>
             <button id="btn-23" className="greeting-close" onClick={() => { navigate(`/closer/${user.user_id}`, { state: { games: randomGames } }) }}>Games</button>

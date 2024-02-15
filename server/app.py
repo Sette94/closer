@@ -377,8 +377,8 @@ def userinfo(id):
             response_data = {
                 "minutes_at_games": sum(minutes_list),
                 "hours_at_games": round(sum(minutes_list) / 60, 0),
-                "day_games": day_night_object.get('day'),
-                "night_games": day_night_object.get('night'),
+                "day_games":  day_night_object.get('day', 0),
+                "night_games": day_night_object.get('night', 0),
                 "weather_condition": Helpers.count_info(weather_condition_list),
                 "avgerage_temp": round(mean(temperature_list), 0),
                 "ballparks": Helpers.count_occurrences(venue_list),

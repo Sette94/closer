@@ -34,6 +34,12 @@ function CloserFunFacts() {
     };
 
 
+    function minutesToHHMM(totalMinutes, games) {
+        const averageMinutesPerGame = totalMinutes / games;
+        const hours = Math.floor(averageMinutesPerGame / 60);
+        const minutes = Math.round(averageMinutesPerGame % 60);
+        return `${hours.toString().padStart(1, '0')}:${minutes.toString().padStart(2, '0')}`;
+    }
 
 
     useEffect(() => {
@@ -119,7 +125,7 @@ function CloserFunFacts() {
                         <h3 className='headers'> Time At The Ballpark</h3>
                         <br></br>
                         <div className='winandloss'>
-                            <h4 className='headers' >Hours</h4>
+                            <h4 className='headers' >Average Time Of Game</h4>
                             <div className="flipNumbersContainer">
                                 <div onClick={() => { setHourState(!hourState) }} className="flipNumber">
                                     <FlipNumbers
@@ -128,15 +134,30 @@ function CloserFunFacts() {
                                         color="#333"
                                         background="#ecbf36"
                                         numberStyle={{ fontSize: '24px' }}
-                                        numbers={userInfo.hours_at_games?.toString()}
+                                        numbers={minutesToHHMM(userInfo.minutes_at_games, userInfo.day_games + userInfo.night_games)}
                                         play={hourState}
                                         duration={5}
                                     />
                                 </div>
                             </div>
+                            {/* <h4 className='headers' >Average Game</h4>
+                            <div className="flipNumbersContainer">
+                                <div onClick={() => { setHourState(!hourState) }} className="flipNumber">
+                                    <FlipNumbers
+                                        height={40}
+                                        width={30}
+                                        color="#333"
+                                        background="#ecbf36"
+                                        numberStyle={{ fontSize: '24px' }}
+                                        numbers={minutesToHHMM(userInfo.minutes_at_games, userInfo.day_games + userInfo.night_games)}
+                                        play={hourState}
+                                        duration={5}
+                                    />
+                                </div>
+                            </div> */}
                             <br></br>
 
-                            <h4 className='headers'>Minutes</h4>
+                            <h4 className='headers'> Total Minutes</h4>
                             <div className="flipNumbersContainer">
                                 <div onClick={() => { setMinuteState(!minuteState) }} className="flipNumber">
                                     <FlipNumbers
