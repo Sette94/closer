@@ -149,7 +149,7 @@ function IndividualGame({ game }) {
                             </div>
 
                             <div className='gameInfo'>
-                                <h3>Game Info</h3>
+                                <h3>✏️Game Info🗒️</h3>
                                 {gameData()}
                             </div>
 

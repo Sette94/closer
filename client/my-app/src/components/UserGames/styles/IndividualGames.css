@@ -16,6 +16,9 @@ h2 {
         padding-right: 30%;
 }
 
+.awayContainer {
+    width: 100%;
+}
 .awayTeamLogo,
 .homeTeamLogo {
     display: flex;
